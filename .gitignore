@@ -1,0 +1,36 @@
+/node_modules
+.pnp
+.pnp.*
+/.next/
+/.next-*/
+/out/
+/build
+/dist
+/coverage
+next-env.d.ts
+# env files - NEVER commit
+.env
+.env*.local
+.env.development
+.env.production
+!.env.example
+# prisma
+/prisma/*.db
+/prisma/*.db-journal
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+# os / editor
+.DS_Store
+Thumbs.db
+*.pem
+.idea
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+# misc
+/tmp
+.turbo
+.vercel
+*.tsbuildinfo

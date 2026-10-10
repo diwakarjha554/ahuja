@@ -1,0 +1,328 @@
+/* =============================================================================
+   Ahuja PA World - design tokens (Tailwind v4 + shadcn/ui)
+   System: "Specified by institutions" (navy + graphite, one marigold signal),
+   grafted with the parts-catalogue mechanics, IBM Plex Mono numerals and the
+   borders-first elevation that the judges asked us to carry over.
+
+   THREE SURFACES:
+     1. Storefront  - LIGHT, cool near-white. Default (:root).
+     2. Admin console - LIGHT, WARM LINEN (the chosen console mode). [data-console]
+     3. Admin console - optional operator DARK mode. .dark / [data-console].dark
+
+   All contrast pairs verified with ./contrast_final.py (python -I). Every body
+   pair >= 4.5:1, every large/non-text pair >= 3:1. Numbers are in BRAND_GUIDELINES.md.
+
+   NAMING NOTE (read before touching the accent):
+   - shadcn reserves `--accent` for NEUTRAL hover surfaces (dropdown item hover,
+     ghost button hover). We keep it neutral so shadcn components copied from the
+     reference projects work UNCHANGED.
+   - Our brand MARIGOLD signal is a separate token: `--brand-accent`
+     (utilities: bg-brand-accent / text-brand-accent). It is a FILL colour only,
+     used at most once per view. It never sets text on white (3.19:1, fails body).
+   ============================================================================= */
+
+/* ----------------------------------------------------------------------------
+   1. STATIC THEME TOKENS (mode-independent): fonts, radius, shadow, motion.
+   These register the Tailwind utility namespaces (font-display, rounded-*, etc).
+   ---------------------------------------------------------------------------- */
+@theme {
+  /* Fonts. Self-host variable WOFF2 subsets, font-display: swap. Preload
+     Archivo + Inter + IBM Plex Mono (latin, latin-ext). Load Noto Sans
+     Devanagari (devanagari + latin) only when a Devanagari string is present. */
+  --font-display: "Archivo", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-sans:    "Inter", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-mono:    "IBM Plex Mono", "Noto Sans Devanagari", ui-monospace, monospace;
+
+  /* Radius - house radius is 6px. 4px for tiny chips/checkbox inner.
+     Full (9999px) ONLY for genuine circles (avatars, count dots, radio dots). */
+  --radius-xs:   4px;
+  --radius-sm:   6px;
+  --radius-md:   6px;
+  --radius-lg:   6px;
+  --radius-xl:   6px;
+  --radius-full: 9999px;
+
+  /* Elevation - prefer borders. Shadows are quiet and cool (navy-tinted). */
+  --shadow-xs:   0 1px 2px rgba(22, 32, 46, 0.06);
+  --shadow-sm:   0 1px 3px rgba(22, 32, 46, 0.08);   /* card hover */
+  --shadow-md:   0 8px 24px rgba(22, 32, 46, 0.12);  /* menu, popover, modal */
+  --shadow-lg:   0 10px 30px rgba(22, 32, 46, 0.06); /* PDP hero contact shadow */
+
+  /* Motion. Nothing exceeds 300ms. */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);  /* enter / move */
+  --ease-exit:     cubic-bezier(0.4, 0, 1, 1);  /* exit */
+  --duration-fast:  120ms;  /* hover, press, checkbox */
+  --duration-menu:  180ms;  /* dropdown, tooltip, chip */
+  --duration-panel: 240ms;  /* drawer, mega-menu, modal */
+}
+
+/* ----------------------------------------------------------------------------
+   2. STOREFRONT (LIGHT) - the default. Raw values live here under shadcn names
+   plus our extended brand names. This is the single source of truth per mode.
+   ---------------------------------------------------------------------------- */
+:root {
+  /* --- shadcn/ui variables (components reference these) --- */
+  --background:            #F7F8FA;  /* oklch(97.9% 0.003 264.5) */
+  --foreground:            #16202E;  /* oklch(24.1% 0.031 256.9) */
+  --card:                  #FFFFFF;
+  --card-foreground:       #16202E;
+  --popover:               #FFFFFF;
+  --popover-foreground:    #16202E;
+  --primary:               #163B5C;  /* brand navy - oklch(34.3% 0.072 248.4) */
+  --primary-foreground:    #FFFFFF;
+  --secondary:             #EEF1F5;  /* sunken - secondary/ghost surfaces */
+  --secondary-foreground:  #16202E;
+  --muted:                 #EEF1F5;
+  --muted-foreground:      #5F6A78;  /* oklch(52.0% 0.026 254.5) */
+  --accent:                #EEF1F5;  /* NEUTRAL hover surface (shadcn), NOT marigold */
+  --accent-foreground:     #16202E;
+  --destructive:           #B42318;  /* danger - oklch(50.0% 0.182 29.5) */
+  --destructive-foreground:#FFFFFF;
+  --border:                #D6DCE4;  /* hairline */
+  --input:                 #7E8896;  /* control border, meets 3:1 */
+  --ring:                  #1E63C4;  /* focus ring - oklch(51.4% 0.166 258.2) */
+  --radius:                6px;
+
+  /* shadcn sidebar block (admin rail + storefront navy chrome) */
+  --sidebar:                    #0F2234;  /* oklch(24.6% 0.043 248.8) */
+  --sidebar-foreground:         #AEBDCC;  /* oklch(79.2% 0.027 248.2) */
+  --sidebar-primary:            #F59E0B;  /* marigold active marker/bar */
+  --sidebar-primary-foreground: #0F2234;
+  --sidebar-accent:             #1C4365;  /* active row fill - oklch(37.2% 0.073 247.6) */
+  --sidebar-accent-foreground:  #FFFFFF;
+  --sidebar-border:             #27323D;
+  --sidebar-ring:               #5B9BF0;
+
+  /* --- extended brand tokens (raw) --- */
+  --surface-raised:        #FFFFFF;  /* elevated panels (shadow-distinguished) */
+  --surface-sunken:        #EEF1F5;  /* spec-table zebra, inset wells, disabled */
+  --ink:                   #16202E;
+  --ink-secondary:         #49566A;  /* oklch(45.0% 0.037 258.9) */
+  --ink-muted:             #5F6A78;
+  --brand:                 #163B5C;
+  --brand-hover:           #0F2B45;  /* oklch(28.2% 0.059 249.2) */
+  --brand-ink:             #FFFFFF;
+  --brand-soft:            #E7EEF5;  /* selected filter chip, active table row */
+  --brand-accent:          #D97706;  /* MARIGOLD signal (fill only) oklch(66.6% 0.157 58.3) */
+  --brand-accent-ink:      #1C1407;  /* near-black label on marigold */
+  --success:               #157347;  --success-tint: #E7F4EC;
+  --warning:               #9A4E0C;  --warning-tint: #FBEEDD;  /* text/strip only - distinct from brand-accent */
+  --danger:                #B42318;  --danger-tint:  #FBEAE8;
+  --info:                  #175CD3;  --info-tint:    #E8F0FD;
+  --border-hairline:       #D6DCE4;
+  --border-strong:         #7E8896;
+  --sidebar-muted:         #8294A6;  /* sidebar section labels */
+}
+
+/* ----------------------------------------------------------------------------
+   3. ADMIN CONSOLE (LIGHT, WARM LINEN) - the chosen console mode.
+   Warm, low-chroma paper chrome for all-day comfort; data stays on crisp white
+   surfaces for maximum legibility; navy rail keeps it clearly "console, not shop".
+   Apply with <html data-console> (or <body data-console>) on admin routes.
+   ---------------------------------------------------------------------------- */
+[data-console] {
+  --background:            #F4F1E9;  /* warm linen - oklch(95.8% 0.011 89.7) */
+  --foreground:            #211C14;  /* warm charcoal - oklch(23.0% 0.017 79.4) */
+  --card:                  #FFFFFF;  /* tables, forms, cards stay white */
+  --card-foreground:       #211C14;
+  --popover:               #FFFFFF;
+  --popover-foreground:    #211C14;
+  --primary:               #163B5C;  /* brand navy stays constant across surfaces */
+  --primary-foreground:    #FFFFFF;
+  --secondary:             #ECE6D8;  /* warm sunken */
+  --secondary-foreground:  #211C14;
+  --muted:                 #ECE6D8;
+  --muted-foreground:      #6C6456;  /* oklch(50.7% 0.024 81.7) */
+  --accent:                #ECE6D8;  /* NEUTRAL hover (warm), not marigold */
+  --accent-foreground:     #211C14;
+  --destructive:           #B42318;
+  --destructive-foreground:#FFFFFF;
+  --border:                #DED7C7;  /* warm hairline */
+  --input:                 #8C8475;  /* warm control border, meets 3:1 */
+  --ring:                  #1E63C4;
+  --radius:                6px;
+
+  --sidebar:                    #0F2234;  /* same navy rail as storefront */
+  --sidebar-foreground:         #AEBDCC;
+  --sidebar-primary:            #F59E0B;
+  --sidebar-primary-foreground: #0F2234;
+  --sidebar-accent:             #1C4365;
+  --sidebar-accent-foreground:  #FFFFFF;
+  --sidebar-border:             #27323D;
+  --sidebar-ring:               #5B9BF0;
+
+  --surface-raised:        #FFFFFF;
+  --surface-sunken:        #ECE6D8;
+  --ink:                   #211C14;
+  --ink-secondary:         #4C463B;  /* oklch(39.7% 0.020 82.7) */
+  --ink-muted:             #6C6456;
+  --brand:                 #163B5C;
+  --brand-hover:           #0F2B45;
+  --brand-ink:             #FFFFFF;
+  --brand-soft:            #E7EEF5;
+  --brand-accent:          #D97706;
+  --brand-accent-ink:      #1C1407;
+  --accent-text:           #9A560F;  /* marigold as TEXT on warm paper, 5.01:1 - KPI emphasis */
+  --success:               #157347;  --success-tint: #E7F4EC;
+  --warning:               #9A4E0C;  --warning-tint: #FBEEDD;
+  --danger:                #B42318;  --danger-tint:  #FBEAE8;
+  --info:                  #175CD3;  --info-tint:    #E8F0FD;
+  --border-hairline:       #DED7C7;
+  --border-strong:         #8C8475;
+  --sidebar-muted:         #8294A6;
+}
+
+/* ----------------------------------------------------------------------------
+   4. ADMIN CONSOLE (OPTIONAL OPERATOR DARK MODE) - not the house default.
+   Ships so an operator can opt into charcoal for night back-office sessions.
+   Add `dark` on the admin root alongside data-console.
+   ---------------------------------------------------------------------------- */
+.dark,
+[data-console].dark {
+  --background:            #0E141B;  /* oklch(18.9% 0.017 252.6) */
+  --foreground:            #E7EDF3;  /* oklch(94.3% 0.010 247.9) */
+  --card:                  #161E27;  /* oklch(23.1% 0.021 251.7) */
+  --card-foreground:       #E7EDF3;
+  --popover:               #161E27;
+  --popover-foreground:    #E7EDF3;
+  --primary:               #4E8CC2;  /* lightened navy for dark bg */
+  --primary-foreground:    #08121C;
+  --secondary:             #0A0F15;
+  --secondary-foreground:  #E7EDF3;
+  --muted:                 #0A0F15;
+  --muted-foreground:      #8491A0;
+  --accent:                #1D2733;  /* neutral dark hover */
+  --accent-foreground:     #E7EDF3;
+  --destructive:           #F0776B;
+  --destructive-foreground:#1A0C0A;
+  --border:                #27323D;
+  --input:                 #3A4652;
+  --ring:                  #5B9BF0;
+  --radius:                6px;
+
+  --sidebar:                    #0A1017;
+  --sidebar-foreground:         #AEBAC6;
+  --sidebar-primary:            #F59E0B;
+  --sidebar-primary-foreground: #0A1017;
+  --sidebar-accent:             #17304A;
+  --sidebar-accent-foreground:  #FFFFFF;
+  --sidebar-border:             #27323D;
+  --sidebar-ring:               #5B9BF0;
+
+  --surface-raised:        #1C2630;
+  --surface-sunken:        #0A0F15;
+  --ink:                   #E7EDF3;
+  --ink-secondary:         #AEBAC6;
+  --ink-muted:             #8491A0;
+  --brand:                 #4E8CC2;
+  --brand-hover:           #6FA8DC;
+  --brand-ink:             #08121C;
+  --brand-link:            #6FA8DC;  /* links/active text on dark */
+  --brand-soft:            #17304A;
+  --brand-accent:          #F59E0B;  /* brighter marigold for dark */
+  --brand-accent-ink:      #1A1203;
+  --accent-text:           #F59E0B;
+  --success:               #4ECB80;  --success-tint: #12271B;
+  --warning:               #E7A93A;  --warning-tint: #2A2008;
+  --danger:                #F0776B;  --danger-tint:  #2C1310;
+  --info:                  #6FA8DC;  --info-tint:    #0F2233;
+  --border-hairline:       #27323D;
+  --border-strong:         #3A4652;
+  --sidebar-muted:         #8491A0;
+}
+
+/* ----------------------------------------------------------------------------
+   5. @theme inline - expose every raw var above as a Tailwind color utility.
+   `inline` means the utilities resolve the vars at use-site, so they switch
+   automatically under [data-console] and .dark. Nothing here holds a literal
+   colour; all literals live in blocks 2-4.
+   ---------------------------------------------------------------------------- */
+@theme inline {
+  /* shadcn-named utilities (bg-background, text-foreground, bg-primary, ...) */
+  --color-background:            var(--background);
+  --color-foreground:            var(--foreground);
+  --color-card:                  var(--card);
+  --color-card-foreground:       var(--card-foreground);
+  --color-popover:               var(--popover);
+  --color-popover-foreground:    var(--popover-foreground);
+  --color-primary:               var(--primary);
+  --color-primary-foreground:    var(--primary-foreground);
+  --color-secondary:             var(--secondary);
+  --color-secondary-foreground:  var(--secondary-foreground);
+  --color-muted:                 var(--muted);
+  --color-muted-foreground:      var(--muted-foreground);
+  --color-accent:                var(--accent);            /* neutral hover (shadcn) */
+  --color-accent-foreground:     var(--accent-foreground);
+  --color-destructive:           var(--destructive);
+  --color-destructive-foreground:var(--destructive-foreground);
+  --color-border:                var(--border);
+  --color-input:                 var(--input);
+  --color-ring:                  var(--ring);
+
+  --color-sidebar:                    var(--sidebar);
+  --color-sidebar-foreground:         var(--sidebar-foreground);
+  --color-sidebar-primary:            var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent:             var(--sidebar-accent);
+  --color-sidebar-accent-foreground:  var(--sidebar-accent-foreground);
+  --color-sidebar-border:             var(--sidebar-border);
+  --color-sidebar-ring:               var(--sidebar-ring);
+
+  /* brand-semantic utilities (bg-brand, text-ink, bg-brand-accent, ...) */
+  --color-surface:          var(--card);
+  --color-surface-raised:   var(--surface-raised);
+  --color-surface-sunken:   var(--surface-sunken);
+  --color-ink:              var(--ink);
+  --color-ink-secondary:    var(--ink-secondary);
+  --color-ink-muted:        var(--ink-muted);
+  --color-brand:            var(--brand);
+  --color-brand-hover:      var(--brand-hover);
+  --color-brand-ink:        var(--brand-ink);
+  --color-brand-soft:       var(--brand-soft);
+  --color-brand-accent:     var(--brand-accent);      /* MARIGOLD, fill only */
+  --color-brand-accent-ink: var(--brand-accent-ink);
+  --color-success:          var(--success);
+  --color-success-tint:     var(--success-tint);
+  --color-warning:          var(--warning);
+  --color-warning-tint:     var(--warning-tint);
+  --color-danger:           var(--danger);
+  --color-danger-tint:      var(--danger-tint);
+  --color-info:             var(--info);
+  --color-info-tint:        var(--info-tint);
+  --color-border-strong:    var(--border-strong);
+  --color-sidebar-muted:    var(--sidebar-muted);
+
+  /* radius scale derived from --radius so shadcn rounded-* stays 6px */
+  --radius-xs: calc(var(--radius) - 2px);  /* 4px */
+  --radius-sm: var(--radius);              /* 6px */
+  --radius-md: var(--radius);              /* 6px */
+  --radius-lg: var(--radius);              /* 6px */
+  --radius-xl: var(--radius);              /* 6px */
+}
+
+/* ----------------------------------------------------------------------------
+   6. Base element defaults.
+   ---------------------------------------------------------------------------- */
+@layer base {
+  * { border-color: var(--border); }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "tnum" 1, "cv05" 1;  /* tabular figures, unambiguous l */
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); }
+  /* model numbers, SKUs, watt/impedance/tap values, prices */
+  .mono, .tnum { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

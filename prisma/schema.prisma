@@ -1,0 +1,848 @@
+// Ahuja PA World — storefront + staff console.
+// Migrations are hand-written SQL applied with `prisma migrate deploy`, never
+// `migrate dev` (which needs shadow-DB rights). Money is Decimal(12,2) in the
+// database and a string on the wire. All ids are uuid; columns are snake_case.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================================================
+// ENUMS
+// ============================================================================
+
+enum UserKind {
+  STAFF
+  CUSTOMER
+}
+
+enum ProductStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PAID
+  PACKED
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  RETURNED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  ONLINE
+  COD
+}
+
+enum PaymentStatus {
+  CREATED
+  AUTHORIZED
+  CAPTURED
+  FAILED
+  REFUNDED
+}
+
+enum CouponKind {
+  PERCENT
+  FLAT
+}
+
+enum ReviewStatus {
+  PENDING
+  PUBLISHED
+  REJECTED
+}
+
+enum InquiryStatus {
+  NEW
+  OPEN
+  RESOLVED
+}
+
+enum QuoteStatus {
+  NEW
+  OPEN
+  QUOTED
+  WON
+  LOST
+}
+
+enum ContentStatus {
+  DRAFT
+  SCHEDULED
+  PUBLISHED
+}
+
+enum SubscriberStatus {
+  SUBSCRIBED
+  UNSUBSCRIBED
+}
+
+enum CampaignStatus {
+  SENDING
+  PAUSED
+  SENT
+}
+
+enum DeliveryStatus {
+  PENDING
+  SENT
+  FAILED
+}
+
+// ============================================================================
+// ACCESS CONTROL
+// ============================================================================
+
+model User {
+  id                 String   @id @default(uuid()) @db.Uuid
+  kind               UserKind @default(CUSTOMER)
+  email              String   @unique
+  passwordHash       String?  @map("password_hash")
+  name               String?
+  phone              String?
+  marketingOptIn     Boolean  @default(false) @map("marketing_opt_in")
+  mustChangePassword Boolean  @default(false) @map("must_change_password")
+  // Copied into the session at sign-in; bumping it ends older sessions.
+  sessionVersion     Int      @default(0) @map("session_version")
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  roles     UserRole[]
+  addresses Address[]
+  orders    Order[]
+  reviews   Review[]
+  auditLogs AuditLog[]
+  visitors  Visitor[]
+
+  @@index([kind])
+  @@index([createdAt])
+  @@map("users")
+}
+
+model Role {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  users       UserRole[]
+  permissions RolePermission[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id        String   @id @default(uuid()) @db.Uuid
+  scope     String   @unique
+  module    String
+  label     String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  roles RolePermission[]
+
+  @@index([module])
+  @@map("permissions")
+}
+
+model UserRole {
+  userId String @map("user_id") @db.Uuid
+  roleId String @map("role_id") @db.Uuid
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+  @@index([roleId])
+  @@map("user_roles")
+}
+
+model RolePermission {
+  roleId       String @map("role_id") @db.Uuid
+  permissionId String @map("permission_id") @db.Uuid
+
+  role       Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@index([permissionId])
+  @@map("role_permissions")
+}
+
+// ============================================================================
+// CATALOGUE
+// ============================================================================
+
+model Brand {
+  id          String    @id @default(uuid()) @db.Uuid
+  slug        String    @unique
+  name        String
+  description String?
+  logoKey     String?   @map("logo_key")
+  sort        Int       @default(0)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  products Product[]
+
+  @@map("brands")
+}
+
+/// Self-referential tree. A product belongs to one primary category and may be
+/// cross-listed in others through ProductCategory.
+model Category {
+  id          String    @id @default(uuid()) @db.Uuid
+  slug        String    @unique
+  name        String
+  description String?
+  parentId    String?   @map("parent_id") @db.Uuid
+  imageKey    String?   @map("image_key")
+  sort        Int       @default(0)
+  featured    Boolean   @default(false)
+  seoTitle    String?   @map("seo_title")
+  seoDesc     String?   @map("seo_desc")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children Category[] @relation("CategoryTree")
+
+  products      Product[]
+  crossListings ProductCategory[]
+
+  @@index([parentId, sort])
+  @@index([featured])
+  @@map("categories")
+}
+
+model Product {
+  id          String        @id @default(uuid()) @db.Uuid
+  slug        String        @unique
+  name        String
+  modelNumber String?       @map("model_number")
+  sku         String?       @unique
+  strapline   String?
+  shortDesc   String?       @map("short_desc")
+  description String?
+  /// Key/value spec rows, ordered: [{ "key": "Power", "value": "75 W RMS" }].
+  specs       Json          @default("[]")
+  /// The selling price and the printed MRP (for the strike-through).
+  price       Decimal       @db.Decimal(12, 2)
+  mrp         Decimal?      @db.Decimal(12, 2)
+  /// Product-level stock when it has no variants; a variant's own stock wins.
+  stock       Int           @default(0)
+  weightGrams Int?          @map("weight_grams")
+  warranty    String?
+  status      ProductStatus @default(DRAFT)
+  featured    Boolean       @default(false)
+  categoryId  String?       @map("category_id") @db.Uuid
+  brandId     String?       @map("brand_id") @db.Uuid
+  seoTitle    String?       @map("seo_title")
+  seoDesc     String?       @map("seo_desc")
+  views       Int           @default(0)
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  category      Category?         @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  brand         Brand?            @relation(fields: [brandId], references: [id], onDelete: SetNull)
+  images        ProductImage[]
+  variants      Variant[]
+  crossListings ProductCategory[]
+  reviews       Review[]
+  cartItems     CartItem[]
+  orderItems    OrderItem[]
+
+  @@index([status, featured])
+  @@index([categoryId])
+  @@index([brandId])
+  @@index([createdAt])
+  @@map("products")
+}
+
+/// Extra categories a product is cross-listed in, beyond its primary one.
+model ProductCategory {
+  productId  String @map("product_id") @db.Uuid
+  categoryId String @map("category_id") @db.Uuid
+
+  product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([productId, categoryId])
+  @@index([categoryId])
+  @@map("product_categories")
+}
+
+/// Optional: for the few products sold in variants (e.g. with or without stand).
+/// A product with no variant rows is sold at its own price and stock.
+model Variant {
+  id        String   @id @default(uuid()) @db.Uuid
+  productId String   @map("product_id") @db.Uuid
+  name      String
+  sku       String?  @unique
+  price     Decimal  @db.Decimal(12, 2)
+  mrp       Decimal? @db.Decimal(12, 2)
+  stock     Int      @default(0)
+  sort      Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  product    Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  cartItems  CartItem[]
+  orderItems OrderItem[]
+
+  @@index([productId, sort])
+  @@map("variants")
+}
+
+model ProductImage {
+  id        String   @id @default(uuid()) @db.Uuid
+  productId String   @map("product_id") @db.Uuid
+  /// The object key under /public/catalog or a storage key, never a signed URL.
+  key       String
+  alt       String
+  sort      Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId, sort])
+  @@map("product_images")
+}
+
+/// Generic media library (blog covers, category banners, loose uploads).
+model MediaAsset {
+  id          String   @id @default(uuid()) @db.Uuid
+  key         String   @unique
+  alt         String?
+  folder      String   @default("library")
+  contentType String   @map("content_type")
+  width       Int?
+  height      Int?
+  bytes       Int?
+  createdById String?  @map("created_by_id") @db.Uuid
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@index([folder, createdAt])
+  @@map("media_assets")
+}
+
+// ============================================================================
+// CART + ORDERS
+// ============================================================================
+
+/// Server copy of a browser cart, written by the visit tracker so the console
+/// can see abandoned baskets. The live cart lives in the browser.
+model Cart {
+  id          String    @id @default(uuid()) @db.Uuid
+  userId      String?   @map("user_id") @db.Uuid
+  anonymousId String?   @map("anonymous_id")
+  visitorId   String?   @unique @map("visitor_id") @db.Uuid
+  checkoutAt  DateTime? @map("checkout_at")
+  expiresAt   DateTime  @map("expires_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  visitor Visitor?   @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  items   CartItem[]
+
+  @@index([anonymousId])
+  @@index([expiresAt])
+  @@index([updatedAt])
+  @@map("carts")
+}
+
+model CartItem {
+  id        String   @id @default(uuid()) @db.Uuid
+  cartId    String   @map("cart_id") @db.Uuid
+  productId String   @map("product_id") @db.Uuid
+  variantId String?  @map("variant_id") @db.Uuid
+  qty       Int      @default(1)
+  unitPrice Decimal  @map("unit_price") @db.Decimal(12, 2)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  cart    Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  variant Variant? @relation(fields: [variantId], references: [id], onDelete: Restrict)
+
+  @@index([cartId])
+  @@index([productId])
+  @@map("cart_items")
+}
+
+model Address {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String?  @map("user_id") @db.Uuid
+  name      String
+  line1     String
+  line2     String?
+  city      String
+  state     String
+  pincode   String
+  phone     String
+  isDefault Boolean  @default(false) @map("is_default")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("addresses")
+}
+
+model Order {
+  id              String        @id @default(uuid()) @db.Uuid
+  number          String        @unique
+  userId          String?       @map("user_id") @db.Uuid
+  status          OrderStatus   @default(PENDING)
+  paymentMethod   PaymentMethod @default(ONLINE) @map("payment_method")
+  dueOnDelivery   Decimal       @default(0) @map("due_on_delivery") @db.Decimal(12, 2)
+  email           String
+  phone           String
+  customerName    String        @map("customer_name")
+  company         String?
+  gstin           String?
+  shippingAddress Json          @map("shipping_address")
+  subtotal        Decimal       @db.Decimal(12, 2)
+  discount        Decimal       @default(0) @db.Decimal(12, 2)
+  shipping        Decimal       @default(0) @db.Decimal(12, 2)
+  tax             Decimal       @default(0) @db.Decimal(12, 2)
+  total           Decimal       @db.Decimal(12, 2)
+  couponId        String?       @map("coupon_id") @db.Uuid
+  notes           String?
+
+  shiprocketOrderId    String? @unique @map("shiprocket_order_id")
+  shiprocketShipmentId String? @map("shiprocket_shipment_id")
+
+  invoiceNumber    String?   @unique @map("invoice_number")
+  invoicedAt       DateTime? @map("invoiced_at")
+  invoiceEmailedAt DateTime? @map("invoice_emailed_at")
+  creditNoteNumber String?   @unique @map("credit_note_number")
+  creditedAt       DateTime? @map("credited_at")
+
+  visitorId String?   @map("visitor_id") @db.Uuid
+  placedAt  DateTime? @map("placed_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+
+  user     User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  coupon   Coupon?     @relation(fields: [couponId], references: [id], onDelete: SetNull)
+  visitor  Visitor?    @relation(fields: [visitorId], references: [id], onDelete: SetNull)
+  items    OrderItem[]
+  payments Payment[]
+  shipment Shipment?
+
+  @@index([userId])
+  @@index([status, createdAt])
+  @@index([email])
+  @@index([couponId])
+  @@index([visitorId])
+  @@index([placedAt])
+  @@map("orders")
+}
+
+model OrderItem {
+  id           String   @id @default(uuid()) @db.Uuid
+  orderId      String   @map("order_id") @db.Uuid
+  productId    String?  @map("product_id") @db.Uuid
+  variantId    String?  @map("variant_id") @db.Uuid
+  qty          Int
+  unitPrice    Decimal  @map("unit_price") @db.Decimal(12, 2)
+  nameSnapshot String   @map("name_snapshot")
+  skuSnapshot  String?  @map("sku_snapshot")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  order   Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  variant Variant? @relation(fields: [variantId], references: [id], onDelete: SetNull)
+
+  @@index([orderId])
+  @@index([productId])
+  @@map("order_items")
+}
+
+model Payment {
+  id               String        @id @default(uuid()) @db.Uuid
+  orderId          String        @map("order_id") @db.Uuid
+  gateway          String
+  gatewayOrderId   String        @map("gateway_order_id")
+  gatewayPaymentId String?       @map("gateway_payment_id")
+  status           PaymentStatus @default(CREATED)
+  amount           Decimal       @db.Decimal(12, 2)
+  mode             String?
+  createdAt        DateTime      @default(now()) @map("created_at")
+  updatedAt        DateTime      @updatedAt @map("updated_at")
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@unique([gateway, gatewayOrderId])
+  @@index([orderId])
+  @@index([status])
+  @@map("payments")
+}
+
+model Shipment {
+  id                String    @id @default(uuid()) @db.Uuid
+  orderId           String    @unique @map("order_id") @db.Uuid
+  courier           String
+  awb               String?
+  status            String
+  provider          String    @default("manual")
+  labelUrl          String?   @map("label_url")
+  manifestUrl       String?   @map("manifest_url")
+  pickupScheduledAt DateTime? @map("pickup_scheduled_at")
+  etd               DateTime?
+  statusAt          DateTime? @map("status_at")
+  shippedAt         DateTime? @map("shipped_at")
+  deliveredAt       DateTime? @map("delivered_at")
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([awb])
+  @@map("shipments")
+}
+
+model Coupon {
+  id          String     @id @default(uuid()) @db.Uuid
+  code        String     @unique
+  kind        CouponKind
+  value       Decimal    @db.Decimal(12, 2)
+  minSubtotal Decimal    @default(0) @map("min_subtotal") @db.Decimal(12, 2)
+  maxUses     Int?       @map("max_uses")
+  usedCount   Int        @default(0) @map("used_count")
+  expiresAt   DateTime?  @map("expires_at")
+  archivedAt  DateTime?  @map("archived_at")
+  showInCart  Boolean    @default(false) @map("show_in_cart")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  orders Order[]
+
+  @@index([expiresAt])
+  @@index([showInCart, archivedAt])
+  @@map("coupons")
+}
+
+// ============================================================================
+// ENGAGEMENT
+// ============================================================================
+
+model Review {
+  id         String       @id @default(uuid()) @db.Uuid
+  productId  String       @map("product_id") @db.Uuid
+  userId     String?      @map("user_id") @db.Uuid
+  authorName String       @map("author_name")
+  city       String?
+  rating     Int
+  title      String
+  body       String
+  status     ReviewStatus @default(PENDING)
+  createdAt  DateTime     @default(now()) @map("created_at")
+  updatedAt  DateTime     @updatedAt @map("updated_at")
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user    User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([productId, status])
+  @@index([userId])
+  @@map("reviews")
+}
+
+model Inquiry {
+  id          String        @id @default(uuid()) @db.Uuid
+  name        String
+  email       String
+  phone       String?
+  topic       String
+  orderNumber String?       @map("order_number")
+  message     String
+  status      InquiryStatus @default(NEW)
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  @@index([status, createdAt])
+  @@index([email])
+  @@map("inquiries")
+}
+
+/// A bulk / B2B quote request raised from the quote cart.
+model QuoteRequest {
+  id        String      @id @default(uuid()) @db.Uuid
+  number    String      @unique
+  name      String
+  email     String
+  phone     String
+  company   String?
+  gstin     String?
+  message   String?
+  /// [{ productSlug, name, modelNumber, qty }]
+  items     Json
+  status    QuoteStatus @default(NEW)
+  staffNote String?     @map("staff_note")
+  createdAt DateTime    @default(now()) @map("created_at")
+  updatedAt DateTime    @updatedAt @map("updated_at")
+
+  @@index([status, createdAt])
+  @@index([email])
+  @@map("quote_requests")
+}
+
+// ============================================================================
+// CONTENT (DB-backed blog + CMS pages)
+// ============================================================================
+
+model Post {
+  id          String        @id @default(uuid()) @db.Uuid
+  slug        String        @unique
+  title       String
+  excerpt     String?
+  /// Tiptap JSON document.
+  body        Json          @default("{}")
+  /// Plain-text rendering of body, for search and llms.txt.
+  bodyText    String        @default("") @map("body_text")
+  coverKey    String?       @map("cover_key")
+  authorName  String        @map("author_name")
+  tags        String[]      @default([])
+  status      ContentStatus @default(DRAFT)
+  publishedAt DateTime?     @map("published_at")
+  seoTitle    String?       @map("seo_title")
+  seoDesc     String?       @map("seo_desc")
+  createdById String?       @map("created_by_id") @db.Uuid
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  @@index([status, publishedAt])
+  @@map("posts")
+}
+
+/// Editable CMS pages (about, custom landing pages). Legal policies also live
+/// here so staff can edit them; the storefront falls back to code templates.
+model Page {
+  id          String        @id @default(uuid()) @db.Uuid
+  slug        String        @unique
+  title       String
+  body        Json          @default("{}")
+  bodyText    String        @default("") @map("body_text")
+  status      ContentStatus @default(DRAFT)
+  seoTitle    String?       @map("seo_title")
+  seoDesc     String?       @map("seo_desc")
+  updatedById String?       @map("updated_by_id") @db.Uuid
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  @@map("pages")
+}
+
+model Subscriber {
+  id             String           @id @default(uuid()) @db.Uuid
+  email          String           @unique
+  status         SubscriberStatus @default(SUBSCRIBED)
+  source         String
+  token          String           @unique
+  subscribedAt   DateTime         @default(now()) @map("subscribed_at")
+  unsubscribedAt DateTime?        @map("unsubscribed_at")
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+
+  deliveries NewsletterDelivery[]
+
+  @@index([status, subscribedAt])
+  @@map("newsletter_subscribers")
+}
+
+model NewsletterCampaign {
+  id          String         @id @default(uuid()) @db.Uuid
+  subject     String
+  body        String
+  content     Json?
+  ctaLabel    String?        @map("cta_label")
+  ctaUrl      String?        @map("cta_url")
+  status      CampaignStatus @default(SENDING)
+  recipients  Int
+  note        String?
+  sentById    String?        @map("sent_by_id") @db.Uuid
+  sentByEmail String?        @map("sent_by_email")
+  createdAt   DateTime       @default(now()) @map("created_at")
+  updatedAt   DateTime       @updatedAt @map("updated_at")
+  finishedAt  DateTime?      @map("finished_at")
+
+  deliveries NewsletterDelivery[]
+
+  @@index([createdAt])
+  @@map("newsletter_campaigns")
+}
+
+model NewsletterDelivery {
+  id           String         @id @default(uuid()) @db.Uuid
+  campaignId   String         @map("campaign_id") @db.Uuid
+  subscriberId String         @map("subscriber_id") @db.Uuid
+  status       DeliveryStatus @default(PENDING)
+  error        String?
+  createdAt    DateTime       @default(now()) @map("created_at")
+  updatedAt    DateTime       @updatedAt @map("updated_at")
+
+  campaign   NewsletterCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  subscriber Subscriber         @relation(fields: [subscriberId], references: [id], onDelete: Cascade)
+
+  @@unique([campaignId, subscriberId])
+  @@index([campaignId, status])
+  @@index([subscriberId])
+  @@map("newsletter_deliveries")
+}
+
+// ============================================================================
+// SYSTEM
+// ============================================================================
+
+/// Last invoice/quote number per financial year, claimed one at a time.
+model Counter {
+  key  String @id
+  last Int
+
+  @@map("counters")
+}
+
+/// Console settings, one row per section; .env is the fallback. Secrets in
+/// `value` are sealed with AES-256-GCM.
+model Setting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt @map("updated_at")
+  updatedBy String?  @map("updated_by") @db.Uuid
+
+  @@map("settings")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  actorId   String?  @map("actor_id") @db.Uuid
+  action    String
+  module    String
+  entityId  String?  @map("entity_id")
+  meta      Json?
+  ip        String?
+  userAgent String?  @map("user_agent")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  actor User? @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([actorId])
+  @@index([module, createdAt])
+  @@index([entityId])
+  @@map("audit_logs")
+}
+
+// ============================================================================
+// VISITORS (privacy-aware analytics; consent decides what is kept)
+// ============================================================================
+
+model Visitor {
+  id             String    @id @default(uuid()) @db.Uuid
+  anonymous      Boolean   @default(true)
+  anonKey        String?   @unique @map("anon_key") @db.Uuid
+  consentAt      DateTime? @map("consent_at")
+  firstSeenAt    DateTime  @default(now()) @map("first_seen_at")
+  lastSeenAt     DateTime  @default(now()) @map("last_seen_at")
+  visitCount     Int       @default(0) @map("visit_count")
+  pageviews      Int       @default(0)
+  engagedSeconds Int       @default(0) @map("engaged_seconds")
+
+  ip         String?
+  country    String?
+  region     String?
+  city       String?
+  postalCode String? @map("postal_code")
+
+  userAgent  String? @map("user_agent")
+  deviceType String? @map("device_type")
+  os         String?
+  browser    String?
+  referrer   String?
+  source     String?
+  medium     String?
+  campaign   String?
+  landingPage String? @map("landing_page")
+
+  email  String?
+  phone  String?
+  name   String?
+  userId String? @map("user_id") @db.Uuid
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user     User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+  sessions VisitorSession[]
+  events   VisitorEvent[]
+  cart     Cart?
+  orders   Order[]
+
+  @@index([lastSeenAt])
+  @@index([userId])
+  @@index([email])
+  @@map("visitors")
+}
+
+model VisitorSession {
+  id             String   @id @default(uuid()) @db.Uuid
+  visitorId      String   @map("visitor_id") @db.Uuid
+  key            String   @db.Uuid
+  startedAt      DateTime @default(now()) @map("started_at")
+  lastSeenAt     DateTime @default(now()) @map("last_seen_at")
+  pageviews      Int      @default(0)
+  engagedSeconds Int      @default(0) @map("engaged_seconds")
+  landingPage    String?  @map("landing_page")
+  exitPage       String?  @map("exit_page")
+  referrer       String?
+  source         String?
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  visitor Visitor        @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  events  VisitorEvent[]
+
+  @@unique([visitorId, key])
+  @@index([visitorId, startedAt])
+  @@map("visitor_sessions")
+}
+
+model VisitorEvent {
+  id        String   @id @default(uuid()) @db.Uuid
+  visitorId String   @map("visitor_id") @db.Uuid
+  sessionId String   @map("session_id") @db.Uuid
+  type      String
+  path      String?
+  seconds   Int      @default(0)
+  data      Json?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  visitor Visitor        @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  session VisitorSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([visitorId, createdAt])
+  @@index([sessionId, createdAt])
+  @@map("visitor_events")
+}
+
+/// India Post district/state per pincode, looked up once and cached.
+model PincodePlace {
+  pincode    String   @id
+  district   String?
+  state      String?
+  lookedUpAt DateTime @default(now()) @map("looked_up_at")
+
+  @@map("pincode_places")
+}

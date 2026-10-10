@@ -1,0 +1,3093 @@
+{
+  "brands": [
+    {
+      "slug": "ahuja",
+      "name": "Ahuja Radios",
+      "description": "Ahuja Radios is India's leading manufacturer and exporter of public-address equipment, established in 1940 by A. N. Ahuja with production starting in 1942. It operates factories in Delhi, Noida and the Mumbai SEZ, supplies more than 400 retailers across India and exports to over 50 countries. Ahuja PA World is an authorised dealer of the full Ahuja Radios range."
+    }
+  ],
+  "categories": [
+    {
+      "slug": "speakers",
+      "name": "Speakers",
+      "parentSlug": null,
+      "description": "Public-address speakers for ceilings, walls, outdoors and portable use.",
+      "sort": 10
+    },
+    {
+      "slug": "portable-pa-speaker",
+      "name": "Portable PA Speakers",
+      "parentSlug": "speakers",
+      "description": "Active portable loudspeakers with built-in amplification for events, performances and gatherings.",
+      "sort": 11
+    },
+    {
+      "slug": "bluetooth-portable-speakers",
+      "name": "Bluetooth Portable Speakers",
+      "parentSlug": "speakers",
+      "description": "Battery-operated trolley speakers with Bluetooth, USB and wireless microphones for mobile use.",
+      "sort": 12
+    },
+    {
+      "slug": "ahuja-ceiling-speaker",
+      "name": "Ceiling Speakers",
+      "parentSlug": "speakers",
+      "description": "Flush-mount ceiling speakers for background music and announcements on 100 V lines.",
+      "sort": 13
+    },
+    {
+      "slug": "ahuja-2-way-ceiling-speaker",
+      "name": "2-Way Ceiling Speakers",
+      "parentSlug": "speakers",
+      "description": "Two-way flush-mount ceiling speakers with adjustable tweeters for clear speech and music.",
+      "sort": 14
+    },
+    {
+      "slug": "ahuja-wall-mount-speaker",
+      "name": "Wall Mount Speakers",
+      "parentSlug": "speakers",
+      "description": "Compact wall-mount box speakers for offices, schools, shops and hospitals.",
+      "sort": 15
+    },
+    {
+      "slug": "2-way-wall-mount-speaker",
+      "name": "2-Way Wall Mount Speakers",
+      "parentSlug": "speakers",
+      "description": "High-fidelity two-way wall speakers with selectable 100 V power taps.",
+      "sort": 16
+    },
+    {
+      "slug": "outdoor-waterproof-speakers",
+      "name": "Outdoor Waterproof Speakers",
+      "parentSlug": "speakers",
+      "description": "Weather-resistant speakers for outdoor and semi-outdoor public-address coverage.",
+      "sort": 17
+    },
+    {
+      "slug": "line-array-speaker",
+      "name": "Line Array Speakers",
+      "parentSlug": "speakers",
+      "description": "High-power line array loudspeakers for large indoor and outdoor venues.",
+      "sort": 18
+    },
+    {
+      "slug": "neckband-speakers",
+      "name": "Neckband Speakers",
+      "parentSlug": "speakers",
+      "description": "Lightweight hands-free neckband PA systems for teachers, tour guides and presenters.",
+      "sort": 19
+    },
+    {
+      "slug": "projector-speakers",
+      "name": "Projector Speakers",
+      "parentSlug": "speakers",
+      "description": "Directional sound projector speakers for focused outdoor and corridor coverage.",
+      "sort": 20
+    },
+    {
+      "slug": "amplifier",
+      "name": "Amplifiers",
+      "parentSlug": null,
+      "description": "Power amplifiers and mixer amplifiers for public-address systems.",
+      "sort": 30
+    },
+    {
+      "slug": "pa-power-amplifiers",
+      "name": "Power Amplifiers",
+      "parentSlug": "amplifier",
+      "description": "Booster and power amplifiers for driving 100 V line and low-impedance speaker networks.",
+      "sort": 31
+    },
+    {
+      "slug": "digital-player-mixer-amplifier",
+      "name": "Mixer Amplifiers with Digital Player",
+      "parentSlug": "amplifier",
+      "description": "Mixer amplifiers with built-in digital players, multiple mic inputs and tone controls.",
+      "sort": 32
+    },
+    {
+      "slug": "mixers",
+      "name": "Mixers",
+      "parentSlug": null,
+      "description": "Audio mixing consoles and PA mixers with digital players and effects.",
+      "sort": 40
+    },
+    {
+      "slug": "microphones",
+      "name": "Microphones",
+      "parentSlug": null,
+      "description": "Wired and wireless microphones for speech and performance.",
+      "sort": 50
+    },
+    {
+      "slug": "ahuja-pa-wired-microphones",
+      "name": "Wired Microphones",
+      "parentSlug": "microphones",
+      "description": "Dynamic wired microphones for PA and karaoke use.",
+      "sort": 51
+    },
+    {
+      "slug": "ahuja-pa-wireless-microphone",
+      "name": "Wireless Microphones",
+      "parentSlug": "microphones",
+      "description": "VHF wireless handheld and headband microphone systems.",
+      "sort": 52
+    },
+    {
+      "slug": "classroom-teaching",
+      "name": "Classroom Teaching",
+      "parentSlug": null,
+      "description": "Portable amplification for classrooms, coaching and field use.",
+      "sort": 60
+    },
+    {
+      "slug": "classroom-teaching-systems",
+      "name": "Classroom Teaching Systems",
+      "parentSlug": "classroom-teaching",
+      "description": "Neckband and portable PA systems designed for teaching and presenting.",
+      "sort": 61
+    },
+    {
+      "slug": "handheld-megaphones",
+      "name": "Handheld Megaphones",
+      "parentSlug": "classroom-teaching",
+      "description": "Portable megaphones with siren for crowd control, events and announcements.",
+      "sort": 62
+    },
+    {
+      "slug": "counter-communication-systems",
+      "name": "Counter Communication Systems",
+      "parentSlug": null,
+      "description": "Two-way hands-free communication systems for ticket counters, banks and hospitals.",
+      "sort": 70
+    },
+    {
+      "slug": "audio-interface",
+      "name": "Audio Interfaces",
+      "parentSlug": null,
+      "description": "USB audio interfaces for recording, streaming and podcasting.",
+      "sort": 80
+    },
+    {
+      "slug": "accessories",
+      "name": "Accessories",
+      "parentSlug": null,
+      "description": "Stands, brackets and controls that support PA installations.",
+      "sort": 90
+    },
+    {
+      "slug": "stands-and-brackets",
+      "name": "Stands and Brackets",
+      "parentSlug": "accessories",
+      "description": "Microphone stands and speaker mounting brackets for secure installation.",
+      "sort": 91
+    },
+    {
+      "slug": "volume-controls",
+      "name": "Volume Controls",
+      "parentSlug": "accessories",
+      "description": "Attenuators and volume controls for 100 V line speaker zones.",
+      "sort": 92
+    }
+  ],
+  "products": [
+    {
+      "slug": "ahuja-uba-500dp-power-amplifier",
+      "name": "Ahuja UBA-500DP Power Amplifier",
+      "modelNumber": "UBA-500DP",
+      "sku": "UBA-500DP",
+      "categorySlug": "pa-power-amplifiers",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 23538,
+      "mrp": 28185,
+      "shortDescription": "500 W RMS DJ and PA power amplifier with a built-in digital player and Bluetooth.",
+      "description": "The Ahuja UBA-500DP is a 500 W RMS DJ and PA amplifier with a built-in digital player offering USB, SD/MMC and Bluetooth connectivity plus remote control. It accepts a wide range of sources including microphones, PA or DJ mixers, CD and cassette players and keyboards. Bass and treble tone controls, a line input and a line output for chaining additional boosters are provided.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "500 W RMS"
+        },
+        {
+          "key": "Digital Player",
+          "value": "USB, SD/MMC, Bluetooth"
+        },
+        {
+          "key": "Remote Control",
+          "value": "Yes"
+        },
+        {
+          "key": "Tone Control",
+          "value": "Bass and Treble"
+        },
+        {
+          "key": "DC Backup",
+          "value": "24 V"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-uba-500dp-power-amplifier/0.jpg",
+          "alt": "Ahuja UBA-500DP Power Amplifier"
+        },
+        {
+          "key": "catalog/ahuja-uba-500dp-power-amplifier/1.jpg",
+          "alt": "Ahuja UBA-500DP Power Amplifier view 2"
+        },
+        {
+          "key": "catalog/ahuja-uba-500dp-power-amplifier/2.jpg",
+          "alt": "Ahuja UBA-500DP Power Amplifier view 3"
+        }
+      ],
+      "tags": [
+        "power amplifier",
+        "dj amplifier",
+        "bluetooth",
+        "high power"
+      ],
+      "isFeatured": true,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja UBA-500DP Power Amplifier | Ahuja PA World",
+        "description": "500 W RMS DJ and PA power amplifier with a built-in digital player and Bluetooth."
+      }
+    },
+    {
+      "slug": "ahuja-apa-240-power-amplifier",
+      "name": "Ahuja APA-240 Power Amplifier",
+      "modelNumber": "APA-240",
+      "sku": "APA-240",
+      "categorySlug": "pa-power-amplifiers",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 23113,
+      "mrp": 26885,
+      "shortDescription": "325 W RMS rack-mountable installation booster amplifier for fixed PA systems.",
+      "description": "The Ahuja APA-240 is a rack-mountable booster amplifier delivering up to 325 W RMS (415 W peak), suited to fixed installations in schools, hospitals and stores. It provides one unbalanced and two balanced line inputs, a dedicated 100 V input, ground-lift, a resettable breaker, a loop-through output and automatic switching to 24 V DC on mains failure.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "325 W RMS (415 W peak)"
+        },
+        {
+          "key": "Inputs",
+          "value": "1 unbalanced, 2 balanced line, 100 V input"
+        },
+        {
+          "key": "Protection",
+          "value": "Ground-lift, resettable breaker"
+        },
+        {
+          "key": "DC Backup",
+          "value": "24 V"
+        },
+        {
+          "key": "Mounting",
+          "value": "Rack"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-apa-240-power-amplifier/0.jpg",
+          "alt": "Ahuja APA-240 Power Amplifier"
+        },
+        {
+          "key": "catalog/ahuja-apa-240-power-amplifier/1.jpg",
+          "alt": "Ahuja APA-240 Power Amplifier view 2"
+        },
+        {
+          "key": "catalog/ahuja-apa-240-power-amplifier/2.jpg",
+          "alt": "Ahuja APA-240 Power Amplifier view 3"
+        }
+      ],
+      "tags": [
+        "power amplifier",
+        "installation",
+        "booster"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja APA-240 Power Amplifier | Ahuja PA World",
+        "description": "325 W RMS rack-mountable installation booster amplifier for fixed PA systems."
+      }
+    },
+    {
+      "slug": "ahuja-br-250m-power-amplifier",
+      "name": "Ahuja BR-250M Power Amplifier",
+      "modelNumber": "BR-250M",
+      "sku": "BR-250M",
+      "categorySlug": "pa-power-amplifiers",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 18270,
+      "mrp": 21010,
+      "shortDescription": "250 W high-wattage PA power amplifier with switchable inputs and DC backup.",
+      "description": "The Ahuja BR-250M delivers 250 W of power with switchable line inputs (200 mV or 1 V) and a resettable breaker for protection. It automatically switches to DC car-battery power on mains failure and offers a selectable driver-unit mode that disables bass boost to protect horn speakers. Up to four units can be linked to an SSA-250M for a 1250 W mono system.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "250 W"
+        },
+        {
+          "key": "Line Inputs",
+          "value": "200 mV / 1 V switchable"
+        },
+        {
+          "key": "DC Backup",
+          "value": "Car battery"
+        },
+        {
+          "key": "Expansion",
+          "value": "Linkable to SSA-250M for 1250 W"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-br-250m-power-amplifier/0.jpg",
+          "alt": "Ahuja BR-250M Power Amplifier"
+        },
+        {
+          "key": "catalog/ahuja-br-250m-power-amplifier/1.jpg",
+          "alt": "Ahuja BR-250M Power Amplifier view 2"
+        },
+        {
+          "key": "catalog/ahuja-br-250m-power-amplifier/2.jpg",
+          "alt": "Ahuja BR-250M Power Amplifier view 3"
+        }
+      ],
+      "tags": [
+        "power amplifier",
+        "high power",
+        "horn"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja BR-250M Power Amplifier | Ahuja PA World",
+        "description": "250 W high-wattage PA power amplifier with switchable inputs and DC backup."
+      }
+    },
+    {
+      "slug": "ahuja-alx-11000-line-array-speaker",
+      "name": "Ahuja ALX-11000 Line Array Speaker",
+      "modelNumber": "ALX-11000",
+      "sku": "ALX-11000",
+      "categorySlug": "line-array-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 68526,
+      "mrp": 68826,
+      "shortDescription": "1000 W RMS dual 12-inch line array loudspeaker for large indoor and outdoor venues.",
+      "description": "The Ahuja ALX-11000 is a rugged, high-performance line array loudspeaker. Each cabinet uses two high-power 30.48 cm (12 inch) neodymium LF drivers together with a high-performance HF driver to deliver loud, clear and coherent sound across a variety of indoor and outdoor applications. Cabinets can be arrayed for scalable coverage in large venues.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "1000 W RMS"
+        },
+        {
+          "key": "LF Drivers",
+          "value": "2 x 30.48 cm (12 inch) neodymium"
+        },
+        {
+          "key": "HF Driver",
+          "value": "High-performance compression driver"
+        },
+        {
+          "key": "Application",
+          "value": "Indoor and outdoor line array"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-alx-11000-line-array-speaker/0.jpg",
+          "alt": "Ahuja ALX-11000 Line Array Speaker"
+        },
+        {
+          "key": "catalog/ahuja-alx-11000-line-array-speaker/1.jpg",
+          "alt": "Ahuja ALX-11000 Line Array Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-alx-11000-line-array-speaker/2.jpg",
+          "alt": "Ahuja ALX-11000 Line Array Speaker view 3"
+        }
+      ],
+      "tags": [
+        "line array",
+        "concert",
+        "high power",
+        "neodymium"
+      ],
+      "isFeatured": true,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja ALX-11000 Line Array Speaker | Ahuja PA World",
+        "description": "1000 W RMS dual 12-inch line array loudspeaker for large indoor and outdoor venues."
+      }
+    },
+    {
+      "slug": "ahuja-sp-5251t-projector-speaker",
+      "name": "Ahuja SP-5251T Sound Projector Speaker",
+      "modelNumber": "SP-5251T",
+      "sku": "SP-5251T",
+      "categorySlug": "projector-speakers",
+      "extraCategorySlugs": [
+        "outdoor-waterproof-speakers"
+      ],
+      "brandSlug": "ahuja",
+      "price": 2319,
+      "mrp": 2630,
+      "shortDescription": "25 W RMS directional sound projector with selectable power taps and weather resistance.",
+      "description": "The Ahuja SP-5251T is a compact 25 W RMS sound projector in a sleek white plastic cabinet designed for controlled directivity and water resistance, making it suitable for outdoor use. It carries a 4.5 inch full-range speaker, a rotary power-tap selector (25/20/15/10/5 W) and a durable U-type powder-coated mounting bracket.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "25 W RMS"
+        },
+        {
+          "key": "Driver",
+          "value": "4.5 inch full-range"
+        },
+        {
+          "key": "Power Taps",
+          "value": "25/20/15/10/5 W"
+        },
+        {
+          "key": "Weather Resistant",
+          "value": "Yes"
+        },
+        {
+          "key": "Mounting",
+          "value": "U-type bracket"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-sp-5251t-projector-speaker/0.jpg",
+          "alt": "Ahuja SP-5251T Sound Projector Speaker"
+        },
+        {
+          "key": "catalog/ahuja-sp-5251t-projector-speaker/1.jpg",
+          "alt": "Ahuja SP-5251T Sound Projector Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-sp-5251t-projector-speaker/2.jpg",
+          "alt": "Ahuja SP-5251T Sound Projector Speaker view 3"
+        }
+      ],
+      "tags": [
+        "sound projector",
+        "outdoor",
+        "directional"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja SP-5251T Sound Projector Speaker | Ahuja PA World",
+        "description": "25 W RMS directional sound projector with selectable power taps and weather resistance."
+      }
+    },
+    {
+      "slug": "ahuja-osx-999t-outdoor-waterproof-speaker",
+      "name": "Ahuja OSX-999T Outdoor Waterproof Speaker",
+      "modelNumber": "OSX-999T",
+      "sku": "OSX-999T",
+      "categorySlug": "outdoor-waterproof-speakers",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 11925,
+      "mrp": 13715,
+      "shortDescription": "90 W weather-resistant PA wall speaker for indoor and outdoor use.",
+      "description": "The Ahuja OSX-999T is a weather-resistant PA wall speaker rated at 90 W, housed in a durable weather-resistant plastic cabinet with clear sound reproduction. It is suitable for both indoor and outdoor installations where dependable coverage is needed in exposed locations.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "90 W"
+        },
+        {
+          "key": "Cabinet",
+          "value": "Weather-resistant plastic"
+        },
+        {
+          "key": "Application",
+          "value": "Indoor and outdoor"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-osx-999t-outdoor-waterproof-speaker/0.jpg",
+          "alt": "Ahuja OSX-999T Outdoor Waterproof Speaker"
+        },
+        {
+          "key": "catalog/ahuja-osx-999t-outdoor-waterproof-speaker/1.jpg",
+          "alt": "Ahuja OSX-999T Outdoor Waterproof Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-osx-999t-outdoor-waterproof-speaker/2.jpg",
+          "alt": "Ahuja OSX-999T Outdoor Waterproof Speaker view 3"
+        }
+      ],
+      "tags": [
+        "outdoor",
+        "waterproof",
+        "wall speaker"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja OSX-999T Outdoor Waterproof Speaker | Ahuja PA World",
+        "description": "90 W weather-resistant PA wall speaker for indoor and outdoor use."
+      }
+    },
+    {
+      "slug": "ahuja-osx-666t-outdoor-waterproof-speaker",
+      "name": "Ahuja OSX-666T Outdoor Waterproof Speaker",
+      "modelNumber": "OSX-666T",
+      "sku": "OSX-666T",
+      "categorySlug": "outdoor-waterproof-speakers",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 9898,
+      "mrp": 10890,
+      "shortDescription": "60 W weather-resistant PA wall speaker for indoor and outdoor use.",
+      "description": "The Ahuja OSX-666T is a weather-resistant PA wall speaker rated at 60 W in a durable weather-resistant plastic cabinet with clear sound output. It is designed for both indoor and outdoor use where reliable all-weather performance is required.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "60 W"
+        },
+        {
+          "key": "Cabinet",
+          "value": "Weather-resistant plastic"
+        },
+        {
+          "key": "Application",
+          "value": "Indoor and outdoor"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-osx-666t-outdoor-waterproof-speaker/0.jpg",
+          "alt": "Ahuja OSX-666T Outdoor Waterproof Speaker"
+        },
+        {
+          "key": "catalog/ahuja-osx-666t-outdoor-waterproof-speaker/1.jpg",
+          "alt": "Ahuja OSX-666T Outdoor Waterproof Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-osx-666t-outdoor-waterproof-speaker/2.jpg",
+          "alt": "Ahuja OSX-666T Outdoor Waterproof Speaker view 3"
+        }
+      ],
+      "tags": [
+        "outdoor",
+        "waterproof",
+        "wall speaker"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja OSX-666T Outdoor Waterproof Speaker | Ahuja PA World",
+        "description": "60 W weather-resistant PA wall speaker for indoor and outdoor use."
+      }
+    },
+    {
+      "slug": "ahuja-ps-500tm-2-way-wall-mount-speaker",
+      "name": "Ahuja PS-500TM 2-Way Wall Mount Speaker",
+      "modelNumber": "PS-500TM",
+      "sku": "PS-500TM",
+      "categorySlug": "2-way-wall-mount-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 4379,
+      "mrp": 4990,
+      "shortDescription": "32 W RMS two-way PA wall speaker with selectable 100 V taps and 8 ohm option.",
+      "description": "The Ahuja PS-500TM is a high-fidelity two-way PA wall speaker offering 32 W RMS (48 W maximum) with selectable 100 V power taps (32/16/8 W) and an optional 8 ohm low-impedance connection. It covers 80 to 20000 Hz through a 130 mm woofer and a 47 mm tweeter and uses a movable bracket for vertical or horizontal mounting.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "32 W RMS (48 W max)"
+        },
+        {
+          "key": "Power Taps",
+          "value": "100 V: 32/16/8 W, 8 ohm option"
+        },
+        {
+          "key": "Frequency Response",
+          "value": "80-20000 Hz"
+        },
+        {
+          "key": "Drivers",
+          "value": "130 mm woofer, 47 mm tweeter"
+        },
+        {
+          "key": "Sensitivity",
+          "value": "87 dB (1 W/1 m)"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-ps-500tm-2-way-wall-mount-speaker/0.jpg",
+          "alt": "Ahuja PS-500TM 2-Way Wall Mount Speaker"
+        },
+        {
+          "key": "catalog/ahuja-ps-500tm-2-way-wall-mount-speaker/1.jpg",
+          "alt": "Ahuja PS-500TM 2-Way Wall Mount Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-ps-500tm-2-way-wall-mount-speaker/2.jpg",
+          "alt": "Ahuja PS-500TM 2-Way Wall Mount Speaker view 3"
+        }
+      ],
+      "tags": [
+        "wall speaker",
+        "2-way",
+        "100v line"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja PS-500TM 2-Way Wall Mount Speaker | Ahuja PA World",
+        "description": "32 W RMS two-way PA wall speaker with selectable 100 V taps and 8 ohm option."
+      }
+    },
+    {
+      "slug": "ahuja-ps-400tm-2-way-wall-mount-speaker",
+      "name": "Ahuja PS-400TM 2-Way Wall Mount Speaker",
+      "modelNumber": "PS-400TM",
+      "sku": "PS-400TM",
+      "categorySlug": "2-way-wall-mount-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 3249,
+      "mrp": 3349,
+      "shortDescription": "16 W RMS two-way PA wall speaker with selectable 100 V taps and 8 ohm option.",
+      "description": "The Ahuja PS-400TM is a high-fidelity two-way PA wall speaker delivering 16 W RMS (24 W maximum) with selectable 100 V power taps (16/8/4 W) and an optional 8 ohm low-impedance connection. It offers an 85 to 20000 Hz response and includes a movable mounting bracket for vertical or horizontal installation.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "16 W RMS (24 W max)"
+        },
+        {
+          "key": "Power Taps",
+          "value": "100 V: 16/8/4 W, 8 ohm option"
+        },
+        {
+          "key": "Frequency Response",
+          "value": "85-20000 Hz"
+        },
+        {
+          "key": "Sensitivity",
+          "value": "86 dB (1 W/1 m)"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-ps-400tm-2-way-wall-mount-speaker/0.jpg",
+          "alt": "Ahuja PS-400TM 2-Way Wall Mount Speaker"
+        },
+        {
+          "key": "catalog/ahuja-ps-400tm-2-way-wall-mount-speaker/1.jpg",
+          "alt": "Ahuja PS-400TM 2-Way Wall Mount Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-ps-400tm-2-way-wall-mount-speaker/2.jpg",
+          "alt": "Ahuja PS-400TM 2-Way Wall Mount Speaker view 3"
+        }
+      ],
+      "tags": [
+        "wall speaker",
+        "2-way",
+        "100v line"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja PS-400TM 2-Way Wall Mount Speaker | Ahuja PA World",
+        "description": "16 W RMS two-way PA wall speaker with selectable 100 V taps and 8 ohm option."
+      }
+    },
+    {
+      "slug": "ahuja-ps-300tm-2-way-wall-mount-speaker",
+      "name": "Ahuja PS-300TM 2-Way Wall Mount Speaker",
+      "modelNumber": "PS-300TM",
+      "sku": "PS-300TM",
+      "categorySlug": "2-way-wall-mount-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 2070,
+      "mrp": 2499,
+      "shortDescription": "10 W RMS compact two-way PA wall speaker with selectable 100 V taps.",
+      "description": "The Ahuja PS-300TM is a compact high-fidelity two-way wall-mount speaker for versatile indoor audio, rated at 10 W RMS (15 W peak) with selectable 100 V taps (6/3/1.5 W) and an optional 8 ohm low-impedance connection. It uses a 3 inch woofer and a 1.2 inch tweeter, and the movable bracket supports both vertical and horizontal mounting.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "10 W RMS (15 W peak)"
+        },
+        {
+          "key": "Power Taps",
+          "value": "100 V: 6/3/1.5 W, 8 ohm option"
+        },
+        {
+          "key": "Drivers",
+          "value": "3 inch woofer, 1.2 inch tweeter"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-ps-300tm-2-way-wall-mount-speaker/0.jpg",
+          "alt": "Ahuja PS-300TM 2-Way Wall Mount Speaker"
+        },
+        {
+          "key": "catalog/ahuja-ps-300tm-2-way-wall-mount-speaker/1.jpg",
+          "alt": "Ahuja PS-300TM 2-Way Wall Mount Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-ps-300tm-2-way-wall-mount-speaker/2.jpg",
+          "alt": "Ahuja PS-300TM 2-Way Wall Mount Speaker view 3"
+        }
+      ],
+      "tags": [
+        "wall speaker",
+        "2-way",
+        "compact"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja PS-300TM 2-Way Wall Mount Speaker | Ahuja PA World",
+        "description": "10 W RMS compact two-way PA wall speaker with selectable 100 V taps."
+      }
+    },
+    {
+      "slug": "ahuja-wsx-684t-wall-mount-speaker",
+      "name": "Ahuja WSX-684T Wall Mount Speaker",
+      "modelNumber": "WSX-684T",
+      "sku": "WSX-684T",
+      "categorySlug": "ahuja-wall-mount-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 1640,
+      "mrp": null,
+      "shortDescription": "8 W RMS wall-mount box speaker for offices, schools, shops and hospitals.",
+      "description": "This Ahuja WSX-684T wall-mount box speaker combines solid construction with an attractive housing that suits interiors in schools, offices, BPOs, hospitals, banks, restaurants, showrooms and hotels. It delivers dependable sound for speech and background music while blending with its surroundings.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "8 W RMS"
+        },
+        {
+          "key": "Type",
+          "value": "Wall-mount box speaker"
+        },
+        {
+          "key": "Application",
+          "value": "Offices, schools, shops, hospitals"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-wsx-684t-wall-mount-speaker/0.jpg",
+          "alt": "Ahuja WSX-684T Wall Mount Speaker"
+        },
+        {
+          "key": "catalog/ahuja-wsx-684t-wall-mount-speaker/1.jpg",
+          "alt": "Ahuja WSX-684T Wall Mount Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-wsx-684t-wall-mount-speaker/2.jpg",
+          "alt": "Ahuja WSX-684T Wall Mount Speaker view 3"
+        }
+      ],
+      "tags": [
+        "wall speaker",
+        "box speaker",
+        "indoor"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja WSX-684T Wall Mount Speaker | Ahuja PA World",
+        "description": "8 W RMS wall-mount box speaker for offices, schools, shops and hospitals."
+      }
+    },
+    {
+      "slug": "ahuja-wsx-681t-wall-mount-speaker",
+      "name": "Ahuja WSX-681T Wall Mount Speaker",
+      "modelNumber": "WSX-681T",
+      "sku": "WSX-681T",
+      "categorySlug": "ahuja-wall-mount-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 1199,
+      "mrp": 1299,
+      "shortDescription": "8 W RMS wall-mount box speaker for speech and background music.",
+      "description": "The Ahuja WSX-681T is a wall-mount box speaker with an attractive housing designed to enhance interiors in schools, offices, BPOs, hospitals, banks, restaurants, showrooms and hotels. Its elegant design blends with a range of environments while delivering clear audio for both speech and music.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "8 W RMS"
+        },
+        {
+          "key": "Type",
+          "value": "Wall-mount box speaker"
+        },
+        {
+          "key": "Application",
+          "value": "Offices, schools, shops, hospitals"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-wsx-681t-wall-mount-speaker/0.jpg",
+          "alt": "Ahuja WSX-681T Wall Mount Speaker"
+        },
+        {
+          "key": "catalog/ahuja-wsx-681t-wall-mount-speaker/1.jpg",
+          "alt": "Ahuja WSX-681T Wall Mount Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-wsx-681t-wall-mount-speaker/2.jpg",
+          "alt": "Ahuja WSX-681T Wall Mount Speaker view 3"
+        }
+      ],
+      "tags": [
+        "wall speaker",
+        "box speaker",
+        "indoor"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja WSX-681T Wall Mount Speaker | Ahuja PA World",
+        "description": "8 W RMS wall-mount box speaker for speech and background music."
+      }
+    },
+    {
+      "slug": "ahuja-wsx-551t-wall-mount-speaker",
+      "name": "Ahuja WSX-551T Wall Mount Speaker",
+      "modelNumber": "WSX-551T",
+      "sku": "WSX-551T",
+      "categorySlug": "ahuja-wall-mount-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 1247,
+      "mrp": 1347,
+      "shortDescription": "5 W RMS compact wall-mount box speaker for clear speech and music.",
+      "description": "The Ahuja WSX-551T is a compact wall-mount box speaker aesthetically designed to complement interiors in schools, offices, BPOs, hospitals, banks, restaurants, showrooms and hotels. It delivers clear, crisp sound for both speech and music in a sleek form that suits modern spaces.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "5 W RMS"
+        },
+        {
+          "key": "Type",
+          "value": "Wall-mount box speaker"
+        },
+        {
+          "key": "Application",
+          "value": "Offices, schools, shops, hospitals"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-wsx-551t-wall-mount-speaker/0.jpg",
+          "alt": "Ahuja WSX-551T Wall Mount Speaker"
+        },
+        {
+          "key": "catalog/ahuja-wsx-551t-wall-mount-speaker/1.jpg",
+          "alt": "Ahuja WSX-551T Wall Mount Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-wsx-551t-wall-mount-speaker/2.jpg",
+          "alt": "Ahuja WSX-551T Wall Mount Speaker view 3"
+        }
+      ],
+      "tags": [
+        "wall speaker",
+        "box speaker",
+        "compact"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja WSX-551T Wall Mount Speaker | Ahuja PA World",
+        "description": "5 W RMS compact wall-mount box speaker for clear speech and music."
+      }
+    },
+    {
+      "slug": "ahuja-csd-8401t-2-way-ceiling-speaker",
+      "name": "Ahuja CSD-8401T 2-Way Ceiling Speaker",
+      "modelNumber": "CSD-8401T",
+      "sku": "CSD-8401T",
+      "categorySlug": "ahuja-2-way-ceiling-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 4369,
+      "mrp": 4569,
+      "shortDescription": "40 W RMS two-way flush-mount ceiling speaker with adjustable tweeter.",
+      "description": "This Ahuja CSD-8401T is a 40 W RMS two-way flush-mount ceiling speaker that delivers clear reproduction of both speech and music. An adjustable tweeter allows the high frequencies to be aimed where they are needed, giving balanced, well-covered sound suited to a wide range of spaces.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "40 W RMS"
+        },
+        {
+          "key": "Type",
+          "value": "2-way flush-mount ceiling"
+        },
+        {
+          "key": "Tweeter",
+          "value": "Adjustable"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-csd-8401t-2-way-ceiling-speaker/0.jpg",
+          "alt": "Ahuja CSD-8401T 2-Way Ceiling Speaker"
+        },
+        {
+          "key": "catalog/ahuja-csd-8401t-2-way-ceiling-speaker/1.jpg",
+          "alt": "Ahuja CSD-8401T 2-Way Ceiling Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-csd-8401t-2-way-ceiling-speaker/2.jpg",
+          "alt": "Ahuja CSD-8401T 2-Way Ceiling Speaker view 3"
+        }
+      ],
+      "tags": [
+        "ceiling speaker",
+        "2-way",
+        "100v line"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja CSD-8401T 2-Way Ceiling Speaker | Ahuja PA World",
+        "description": "40 W RMS two-way flush-mount ceiling speaker with adjustable tweeter."
+      }
+    },
+    {
+      "slug": "ahuja-csd-6303t-2-way-ceiling-speaker",
+      "name": "Ahuja CSD-6303T 2-Way Ceiling Speaker",
+      "modelNumber": "CSD-6303T",
+      "sku": "CSD-6303T",
+      "categorySlug": "ahuja-2-way-ceiling-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 3220,
+      "mrp": 3750,
+      "shortDescription": "30 W RMS two-way flush-mount ceiling speaker with adjustable tweeter.",
+      "description": "The Ahuja CSD-6303T is a high-power 30 W RMS two-way flush-mount ceiling speaker offering clear speech and music across a wide frequency response. Its adjustable tweeter lets the installer direct the high frequencies for optimised coverage in professional installations.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "30 W RMS"
+        },
+        {
+          "key": "Type",
+          "value": "2-way flush-mount ceiling"
+        },
+        {
+          "key": "Tweeter",
+          "value": "Adjustable"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-csd-6303t-2-way-ceiling-speaker/0.jpg",
+          "alt": "Ahuja CSD-6303T 2-Way Ceiling Speaker"
+        },
+        {
+          "key": "catalog/ahuja-csd-6303t-2-way-ceiling-speaker/1.jpg",
+          "alt": "Ahuja CSD-6303T 2-Way Ceiling Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-csd-6303t-2-way-ceiling-speaker/2.jpg",
+          "alt": "Ahuja CSD-6303T 2-Way Ceiling Speaker view 3"
+        }
+      ],
+      "tags": [
+        "ceiling speaker",
+        "2-way",
+        "100v line"
+      ],
+      "isFeatured": true,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja CSD-6303T 2-Way Ceiling Speaker | Ahuja PA World",
+        "description": "30 W RMS two-way flush-mount ceiling speaker with adjustable tweeter."
+      }
+    },
+    {
+      "slug": "ahuja-csd-5201t-2-way-ceiling-speaker",
+      "name": "Ahuja CSD-5201T 2-Way Ceiling Speaker",
+      "modelNumber": "CSD-5201T",
+      "sku": "CSD-5201T",
+      "categorySlug": "ahuja-2-way-ceiling-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 2450,
+      "mrp": 2950,
+      "shortDescription": "20 W RMS two-way flush-mount ceiling speaker with 5-inch woofer and adjustable tweeter.",
+      "description": "The Ahuja CSD-5201T is a 20 W RMS two-way flush-mount ceiling speaker with a 5 inch woofer and an adjustable 1 inch tweeter for precise sound direction. It runs on a 100 V line with selectable 20/10/5 W taps and covers 90 to 18000 Hz, with a moulded frame and grille suited to discreet commercial installation.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "20 W RMS"
+        },
+        {
+          "key": "Drivers",
+          "value": "5 inch woofer, adjustable 1 inch tweeter"
+        },
+        {
+          "key": "Power Taps",
+          "value": "100 V: 20/10/5 W"
+        },
+        {
+          "key": "Frequency Response",
+          "value": "90-18000 Hz"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-csd-5201t-2-way-ceiling-speaker/0.jpg",
+          "alt": "Ahuja CSD-5201T 2-Way Ceiling Speaker"
+        },
+        {
+          "key": "catalog/ahuja-csd-5201t-2-way-ceiling-speaker/1.jpg",
+          "alt": "Ahuja CSD-5201T 2-Way Ceiling Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-csd-5201t-2-way-ceiling-speaker/2.jpg",
+          "alt": "Ahuja CSD-5201T 2-Way Ceiling Speaker view 3"
+        }
+      ],
+      "tags": [
+        "ceiling speaker",
+        "2-way",
+        "100v line"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja CSD-5201T 2-Way Ceiling Speaker | Ahuja PA World",
+        "description": "20 W RMS two-way flush-mount ceiling speaker with 5-inch woofer and adjustable tweeter."
+      }
+    },
+    {
+      "slug": "ahuja-csx-3081t-ceiling-speaker",
+      "name": "Ahuja CSX-3081T Ceiling Speaker",
+      "modelNumber": "CSX-3081T",
+      "sku": "CSX-3081T",
+      "categorySlug": "ahuja-ceiling-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 1350,
+      "mrp": 1550,
+      "shortDescription": "8 W RMS 3-inch rimless ceiling speaker with spring-clamp mounting.",
+      "description": "The Ahuja CSX-3081T is a sleek 3 inch rimless ceiling speaker delivering 8 W RMS with selectable 100 V taps (8/4/2 W). It offers a wide 65 to 15000 Hz response and 88 dB sensitivity, with quick spring-clamp mounting and a compact body suited to offices, hotels and commercial spaces.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "8 W RMS"
+        },
+        {
+          "key": "Driver",
+          "value": "3 inch rimless"
+        },
+        {
+          "key": "Power Taps",
+          "value": "100 V: 8/4/2 W"
+        },
+        {
+          "key": "Frequency Response",
+          "value": "65-15000 Hz"
+        },
+        {
+          "key": "Sensitivity",
+          "value": "88 dB (1 W/1 m)"
+        },
+        {
+          "key": "Dimensions",
+          "value": "113 mm dia x 86 mm"
+        },
+        {
+          "key": "Weight",
+          "value": "0.45 kg"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-csx-3081t-ceiling-speaker/0.jpg",
+          "alt": "Ahuja CSX-3081T Ceiling Speaker"
+        },
+        {
+          "key": "catalog/ahuja-csx-3081t-ceiling-speaker/1.jpg",
+          "alt": "Ahuja CSX-3081T Ceiling Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-csx-3081t-ceiling-speaker/2.jpg",
+          "alt": "Ahuja CSX-3081T Ceiling Speaker view 3"
+        }
+      ],
+      "tags": [
+        "ceiling speaker",
+        "rimless",
+        "compact"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja CSX-3081T Ceiling Speaker | Ahuja PA World",
+        "description": "8 W RMS 3-inch rimless ceiling speaker with spring-clamp mounting."
+      }
+    },
+    {
+      "slug": "ahuja-csx-5081t-pa-ceiling-speaker",
+      "name": "Ahuja CSX-5081T Ceiling Speaker",
+      "modelNumber": "CSX-5081T",
+      "sku": "CSX-5081T",
+      "categorySlug": "ahuja-ceiling-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 1500,
+      "mrp": 1700,
+      "shortDescription": "8 W RMS 5-inch rimless ceiling speaker with spring-loaded clamps.",
+      "description": "The Ahuja CSX-5081T is an elegant 5 inch rimless ceiling speaker offering 8 W RMS with selectable 100 V taps (8/4/2 W). It delivers clear, intelligible sound across 80 to 15000 Hz at 92 dB sensitivity, with spring-loaded wing clamps for hassle-free installation in offices and hospitality spaces.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "8 W RMS"
+        },
+        {
+          "key": "Driver",
+          "value": "5 inch rimless"
+        },
+        {
+          "key": "Power Taps",
+          "value": "100 V: 8/4/2 W"
+        },
+        {
+          "key": "Frequency Response",
+          "value": "80-15000 Hz"
+        },
+        {
+          "key": "Sensitivity",
+          "value": "92 dB (1 W/1 m)"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-csx-5081t-pa-ceiling-speaker/0.jpg",
+          "alt": "Ahuja CSX-5081T Ceiling Speaker"
+        },
+        {
+          "key": "catalog/ahuja-csx-5081t-pa-ceiling-speaker/1.jpg",
+          "alt": "Ahuja CSX-5081T Ceiling Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-csx-5081t-pa-ceiling-speaker/2.jpg",
+          "alt": "Ahuja CSX-5081T Ceiling Speaker view 3"
+        }
+      ],
+      "tags": [
+        "ceiling speaker",
+        "rimless",
+        "100v line"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja CSX-5081T Ceiling Speaker | Ahuja PA World",
+        "description": "8 W RMS 5-inch rimless ceiling speaker with spring-loaded clamps."
+      }
+    },
+    {
+      "slug": "ahuja-csx-6101t-pa-ceiling-speaker",
+      "name": "Ahuja CSX-6101T Ceiling Speaker",
+      "modelNumber": "CSX-6101T",
+      "sku": "CSX-6101T",
+      "categorySlug": "ahuja-ceiling-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 1620,
+      "mrp": 1930,
+      "shortDescription": "10 W RMS 6-inch full-range rimless ceiling speaker with spring clamps.",
+      "description": "The Ahuja CSX-6101T is a sleek rimless 6 inch full-range ceiling speaker delivering 10 W RMS via selectable 100 V taps (10/5/2.5 W). With a wide 60 to 15000 Hz response, 92 dB sensitivity and quick spring-loaded wing-clamp mounting, it combines refined looks with reliable sound for upscale commercial interiors.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "10 W RMS"
+        },
+        {
+          "key": "Driver",
+          "value": "6 inch full-range rimless"
+        },
+        {
+          "key": "Power Taps",
+          "value": "100 V: 10/5/2.5 W"
+        },
+        {
+          "key": "Frequency Response",
+          "value": "60-15000 Hz"
+        },
+        {
+          "key": "Sensitivity",
+          "value": "92 dB (1 W/1 m)"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-csx-6101t-pa-ceiling-speaker/0.jpg",
+          "alt": "Ahuja CSX-6101T Ceiling Speaker"
+        },
+        {
+          "key": "catalog/ahuja-csx-6101t-pa-ceiling-speaker/1.jpg",
+          "alt": "Ahuja CSX-6101T Ceiling Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-csx-6101t-pa-ceiling-speaker/2.jpg",
+          "alt": "Ahuja CSX-6101T Ceiling Speaker view 3"
+        }
+      ],
+      "tags": [
+        "ceiling speaker",
+        "rimless",
+        "100v line"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja CSX-6101T Ceiling Speaker | Ahuja PA World",
+        "description": "10 W RMS 6-inch full-range rimless ceiling speaker with spring clamps."
+      }
+    },
+    {
+      "slug": "ahuja-bta-880-wireless-bluetooth-portable-speaker",
+      "name": "Ahuja BTA-880 Bluetooth Portable Speaker",
+      "modelNumber": "BTA-880",
+      "sku": "BTA-880",
+      "categorySlug": "bluetooth-portable-speakers",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 20500,
+      "mrp": 23720,
+      "shortDescription": "50 W 12-inch portable trolley speaker with wireless mic, Bluetooth and recording.",
+      "description": "The Ahuja BTA-880 is a 12 inch portable trolley speaker with a built-in MP3 player, Bluetooth and a recorder. Its moulded cabinet integrates a trolley system for easy transport, and wireless microphone support makes it well suited to events and outdoor use where powerful, portable sound is needed.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "50 W"
+        },
+        {
+          "key": "Woofer",
+          "value": "12 inch"
+        },
+        {
+          "key": "Player",
+          "value": "MP3, Bluetooth, Recorder"
+        },
+        {
+          "key": "Microphone",
+          "value": "Wireless"
+        },
+        {
+          "key": "Portability",
+          "value": "Trolley system"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-bta-880-wireless-bluetooth-portable-speaker/0.jpg",
+          "alt": "Ahuja BTA-880 Bluetooth Portable Speaker"
+        },
+        {
+          "key": "catalog/ahuja-bta-880-wireless-bluetooth-portable-speaker/1.jpg",
+          "alt": "Ahuja BTA-880 Bluetooth Portable Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-bta-880-wireless-bluetooth-portable-speaker/2.jpg",
+          "alt": "Ahuja BTA-880 Bluetooth Portable Speaker view 3"
+        }
+      ],
+      "tags": [
+        "portable",
+        "bluetooth",
+        "trolley",
+        "battery",
+        "events"
+      ],
+      "isFeatured": true,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja BTA-880 Bluetooth Portable Speaker | Ahuja PA World",
+        "description": "50 W 12-inch portable trolley speaker with wireless mic, Bluetooth and recording."
+      }
+    },
+    {
+      "slug": "ahuja-bta-660m-wireless-bluetooth-portable-speaker",
+      "name": "Ahuja BTA-660M Bluetooth Portable Speaker",
+      "modelNumber": "BTA-660M",
+      "sku": "BTA-660M",
+      "categorySlug": "bluetooth-portable-speakers",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 17500,
+      "mrp": 20300,
+      "shortDescription": "40 W portable battery speaker with two wireless mics, Bluetooth, USB and recording.",
+      "description": "The Ahuja BTA-660M is a portable speaker system with a built-in MP3 player supporting Bluetooth, USB, SD card and recording, plus a remote control. It includes two wireless microphones, two mic inputs and built-in digital echo effects, and is powered by a 12 V 7 Ah rechargeable battery for clear sound anywhere.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "40 W"
+        },
+        {
+          "key": "Player",
+          "value": "MP3, Bluetooth, USB, SD, Recording"
+        },
+        {
+          "key": "Microphones",
+          "value": "2 wireless, 2 mic inputs"
+        },
+        {
+          "key": "Battery",
+          "value": "12 V 7 Ah rechargeable"
+        },
+        {
+          "key": "Effects",
+          "value": "Digital echo"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-bta-660m-wireless-bluetooth-portable-speaker/0.jpg",
+          "alt": "Ahuja BTA-660M Bluetooth Portable Speaker"
+        },
+        {
+          "key": "catalog/ahuja-bta-660m-wireless-bluetooth-portable-speaker/1.jpg",
+          "alt": "Ahuja BTA-660M Bluetooth Portable Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-bta-660m-wireless-bluetooth-portable-speaker/2.jpg",
+          "alt": "Ahuja BTA-660M Bluetooth Portable Speaker view 3"
+        }
+      ],
+      "tags": [
+        "portable",
+        "bluetooth",
+        "trolley",
+        "battery"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja BTA-660M Bluetooth Portable Speaker | Ahuja PA World",
+        "description": "40 W portable battery speaker with two wireless mics, Bluetooth, USB and recording."
+      }
+    },
+    {
+      "slug": "ahuja-bta-550-wireless-bluetooth-portable-speaker",
+      "name": "Ahuja BTA-550 Bluetooth Portable Speaker",
+      "modelNumber": "BTA-550",
+      "sku": "BTA-550",
+      "categorySlug": "bluetooth-portable-speakers",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 12100,
+      "mrp": 13970,
+      "shortDescription": "30 W portable battery speaker with wireless mic, Bluetooth, USB and recording.",
+      "description": "The Ahuja BTA-550 is a portable speaker system with a built-in MP3 player featuring Bluetooth, USB, SD card, a recorder and remote control. It includes one wireless microphone, two mic inputs and digital echo effects, and runs on a built-in 12 V 7 Ah rechargeable battery for flexible use.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "30 W"
+        },
+        {
+          "key": "Player",
+          "value": "MP3, Bluetooth, USB, SD, Recording"
+        },
+        {
+          "key": "Microphone",
+          "value": "1 wireless, 2 mic inputs"
+        },
+        {
+          "key": "Battery",
+          "value": "12 V 7 Ah rechargeable"
+        },
+        {
+          "key": "Effects",
+          "value": "Digital echo"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-bta-550-wireless-bluetooth-portable-speaker/0.jpg",
+          "alt": "Ahuja BTA-550 Bluetooth Portable Speaker"
+        },
+        {
+          "key": "catalog/ahuja-bta-550-wireless-bluetooth-portable-speaker/1.jpg",
+          "alt": "Ahuja BTA-550 Bluetooth Portable Speaker view 2"
+        },
+        {
+          "key": "catalog/ahuja-bta-550-wireless-bluetooth-portable-speaker/2.jpg",
+          "alt": "Ahuja BTA-550 Bluetooth Portable Speaker view 3"
+        }
+      ],
+      "tags": [
+        "portable",
+        "bluetooth",
+        "trolley",
+        "battery"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja BTA-550 Bluetooth Portable Speaker | Ahuja PA World",
+        "description": "30 W portable battery speaker with wireless mic, Bluetooth, USB and recording."
+      }
+    },
+    {
+      "slug": "ahuja-wireless-neckband-nba-30wl",
+      "name": "Ahuja NBA-30WL Wireless Neckband PA System",
+      "modelNumber": "NBA-30WL",
+      "sku": "NBA-30WL",
+      "categorySlug": "classroom-teaching-systems",
+      "extraCategorySlugs": [
+        "neckband-speakers"
+      ],
+      "brandSlug": "ahuja",
+      "price": 5119,
+      "mrp": 5219,
+      "shortDescription": "10 W fully wireless neckband PA system with UHF headband mic, Bluetooth and recording.",
+      "description": "The Ahuja NBA-30WL is a fully wireless neckband PA system with 10 W output, Bluetooth audio, FM radio and MP3 playback from SD card. Its UHF headband microphone works at up to 30 m range, and recording, an optional AUX input and a rechargeable battery make it ideal for teachers, tour guides and presenters who need hands-free amplification.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "10 W"
+        },
+        {
+          "key": "Connectivity",
+          "value": "Bluetooth, FM, MP3 (SD)"
+        },
+        {
+          "key": "Microphone",
+          "value": "UHF headband, up to 30 m"
+        },
+        {
+          "key": "Recording",
+          "value": "Yes"
+        },
+        {
+          "key": "Battery",
+          "value": "Rechargeable"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-wireless-neckband-nba-30wl/0.jpg",
+          "alt": "Ahuja NBA-30WL Wireless Neckband PA System"
+        },
+        {
+          "key": "catalog/ahuja-wireless-neckband-nba-30wl/1.jpg",
+          "alt": "Ahuja NBA-30WL Wireless Neckband PA System view 2"
+        },
+        {
+          "key": "catalog/ahuja-wireless-neckband-nba-30wl/2.jpg",
+          "alt": "Ahuja NBA-30WL Wireless Neckband PA System view 3"
+        }
+      ],
+      "tags": [
+        "neckband",
+        "classroom",
+        "teaching",
+        "wireless",
+        "hands-free"
+      ],
+      "isFeatured": true,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja NBA-30WL Wireless Neckband PA System | Ahuja PA World",
+        "description": "10 W fully wireless neckband PA system with UHF headband mic, Bluetooth and recording."
+      }
+    },
+    {
+      "slug": "ahuja-nba-20dp-neckband-speaker-1",
+      "name": "Ahuja NBA-20DP Neckband PA System",
+      "modelNumber": "NBA-20DP",
+      "sku": "NBA-20DP",
+      "categorySlug": "classroom-teaching-systems",
+      "extraCategorySlugs": [
+        "neckband-speakers"
+      ],
+      "brandSlug": "ahuja",
+      "price": 3700,
+      "mrp": 4330,
+      "shortDescription": "12 W ultra-portable neckband PA system with MP3 player and rechargeable battery.",
+      "description": "The Ahuja NBA-20DP is an ultra-portable neckband PA amplifier delivering up to 12 W of clear audio. It has a built-in MP3 player supporting USB and TF cards, low-distortion circuitry, a rechargeable lithium-ion battery and a low-battery LED indicator. With mic and line inputs and a weight of about 0.34 kg, it suits teaching, tour guiding and fitness instruction.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "12 W"
+        },
+        {
+          "key": "Player",
+          "value": "MP3 (USB, TF card)"
+        },
+        {
+          "key": "Battery",
+          "value": "Rechargeable lithium-ion"
+        },
+        {
+          "key": "Inputs",
+          "value": "Mic and line"
+        },
+        {
+          "key": "Weight",
+          "value": "0.34 kg"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-nba-20dp-neckband-speaker-1/0.jpg",
+          "alt": "Ahuja NBA-20DP Neckband PA System"
+        },
+        {
+          "key": "catalog/ahuja-nba-20dp-neckband-speaker-1/1.jpg",
+          "alt": "Ahuja NBA-20DP Neckband PA System view 2"
+        },
+        {
+          "key": "catalog/ahuja-nba-20dp-neckband-speaker-1/2.jpg",
+          "alt": "Ahuja NBA-20DP Neckband PA System view 3"
+        }
+      ],
+      "tags": [
+        "neckband",
+        "classroom",
+        "teaching",
+        "portable"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja NBA-20DP Neckband PA System | Ahuja PA World",
+        "description": "12 W ultra-portable neckband PA system with MP3 player and rechargeable battery."
+      }
+    },
+    {
+      "slug": "ahuja-nba-15-neckband-speaker",
+      "name": "Ahuja NBA-15 Neckband PA System",
+      "modelNumber": "NBA-15",
+      "sku": "NBA-15",
+      "categorySlug": "classroom-teaching-systems",
+      "extraCategorySlugs": [
+        "neckband-speakers"
+      ],
+      "brandSlug": "ahuja",
+      "price": 2900,
+      "mrp": 3370,
+      "shortDescription": "12 W ultra-portable neckband PA system for hands-free speaking.",
+      "description": "The Ahuja NBA-15 is an ultra-portable 12 W neckband PA amplifier for hands-free public speaking. It offers low-distortion output from a built-in rechargeable lithium-ion battery with a low-battery LED indicator, 3.5 mm mic and line inputs, shoulder or waist mounting, and an 80 to 12000 Hz response suited to teaching, tours and instruction.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "12 W"
+        },
+        {
+          "key": "Battery",
+          "value": "Rechargeable lithium-ion"
+        },
+        {
+          "key": "Frequency Response",
+          "value": "80-12000 Hz"
+        },
+        {
+          "key": "Inputs",
+          "value": "3.5 mm mic and line"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-nba-15-neckband-speaker/0.jpg",
+          "alt": "Ahuja NBA-15 Neckband PA System"
+        },
+        {
+          "key": "catalog/ahuja-nba-15-neckband-speaker/1.jpg",
+          "alt": "Ahuja NBA-15 Neckband PA System view 2"
+        },
+        {
+          "key": "catalog/ahuja-nba-15-neckband-speaker/2.jpg",
+          "alt": "Ahuja NBA-15 Neckband PA System view 3"
+        }
+      ],
+      "tags": [
+        "neckband",
+        "classroom",
+        "teaching",
+        "portable"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja NBA-15 Neckband PA System | Ahuja PA World",
+        "description": "12 W ultra-portable neckband PA system for hands-free speaking."
+      }
+    },
+    {
+      "slug": "ahuja-at-06-6w-speaker-volume-control",
+      "name": "Ahuja AT-06 Speaker Volume Control",
+      "modelNumber": "AT-06",
+      "sku": "AT-06",
+      "categorySlug": "volume-controls",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 700,
+      "mrp": 750,
+      "shortDescription": "6 W rotary volume control for 100 V line speaker systems.",
+      "description": "The Ahuja AT-06 is a compact volume controller for 100 V line speaker systems in a sleek white plastic housing that installs onto walls or panels even after wiring. A rotary switch gives five positions (maximum, three attenuated steps in 3 dB increments, and off) and it handles up to 6 W, making it suitable for hotels, offices and similar zones.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "6 W"
+        },
+        {
+          "key": "Line",
+          "value": "100 V"
+        },
+        {
+          "key": "Positions",
+          "value": "5 (Max, three 3 dB steps, Off)"
+        },
+        {
+          "key": "Mounting",
+          "value": "Wall or panel"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-at-06-6w-speaker-volume-control/0.jpg",
+          "alt": "Ahuja AT-06 Speaker Volume Control"
+        },
+        {
+          "key": "catalog/ahuja-at-06-6w-speaker-volume-control/1.jpg",
+          "alt": "Ahuja AT-06 Speaker Volume Control view 2"
+        },
+        {
+          "key": "catalog/ahuja-at-06-6w-speaker-volume-control/2.jpg",
+          "alt": "Ahuja AT-06 Speaker Volume Control view 3"
+        }
+      ],
+      "tags": [
+        "volume control",
+        "attenuator",
+        "100v line",
+        "accessory"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja AT-06 Speaker Volume Control | Ahuja PA World",
+        "description": "6 W rotary volume control for 100 V line speaker systems."
+      }
+    },
+    {
+      "slug": "ahuja-awb-30-wall-mount-bracket-speaker-stands",
+      "name": "Ahuja AWB-30 Wall Mount Speaker Bracket",
+      "modelNumber": "AWB-30",
+      "sku": "AWB-30",
+      "categorySlug": "stands-and-brackets",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 2220,
+      "mrp": 2420,
+      "shortDescription": "Heavy-duty steel wall-mount bracket supporting speakers up to 40 kg.",
+      "description": "The Ahuja AWB-30 is a heavy-duty, colour-coated steel wall-mount bracket that securely supports speakers up to 40 kg. A rigid clamp and locking pin keep the mount stable while the durable finish resists corrosion, giving a neat and reliable speaker-mounting solution for venues and installations.",
+      "specs": [
+        {
+          "key": "Load Capacity",
+          "value": "Up to 40 kg"
+        },
+        {
+          "key": "Material",
+          "value": "Colour-coated steel"
+        },
+        {
+          "key": "Type",
+          "value": "Wall-mount bracket"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-awb-30-wall-mount-bracket-speaker-stands/0.jpg",
+          "alt": "Ahuja AWB-30 Wall Mount Speaker Bracket"
+        },
+        {
+          "key": "catalog/ahuja-awb-30-wall-mount-bracket-speaker-stands/1.jpg",
+          "alt": "Ahuja AWB-30 Wall Mount Speaker Bracket view 2"
+        },
+        {
+          "key": "catalog/ahuja-awb-30-wall-mount-bracket-speaker-stands/2.jpg",
+          "alt": "Ahuja AWB-30 Wall Mount Speaker Bracket view 3"
+        }
+      ],
+      "tags": [
+        "bracket",
+        "mount",
+        "accessory",
+        "steel"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja AWB-30 Wall Mount Speaker Bracket | Ahuja PA World",
+        "description": "Heavy-duty steel wall-mount bracket supporting speakers up to 40 kg."
+      }
+    },
+    {
+      "slug": "xpa-1520dp-pa-active-speakers",
+      "name": "Ahuja XPA-1520DP Active PA Speaker",
+      "modelNumber": "XPA-1520DP",
+      "sku": "XPA-1520DP",
+      "categorySlug": "portable-pa-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 20600,
+      "mrp": 23700,
+      "shortDescription": "175 W bi-amp active loudspeaker with multiple inputs for small to medium events.",
+      "description": "The Ahuja XPA-1520DP is a bi-amp active loudspeaker system with multiple inputs for a wide range of PA and musical programmes. It suits small and medium gatherings of around 100 people, covering music and vocal performances, conferences, lectures, presentations and religious gatherings.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "175 W"
+        },
+        {
+          "key": "Type",
+          "value": "Bi-amp active loudspeaker"
+        },
+        {
+          "key": "Audience",
+          "value": "Around 100 people"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/xpa-1520dp-pa-active-speakers/0.jpg",
+          "alt": "Ahuja XPA-1520DP Active PA Speaker"
+        },
+        {
+          "key": "catalog/xpa-1520dp-pa-active-speakers/1.jpg",
+          "alt": "Ahuja XPA-1520DP Active PA Speaker view 2"
+        },
+        {
+          "key": "catalog/xpa-1520dp-pa-active-speakers/2.jpg",
+          "alt": "Ahuja XPA-1520DP Active PA Speaker view 3"
+        }
+      ],
+      "tags": [
+        "active speaker",
+        "portable",
+        "events"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja XPA-1520DP Active PA Speaker | Ahuja PA World",
+        "description": "175 W bi-amp active loudspeaker with multiple inputs for small to medium events."
+      }
+    },
+    {
+      "slug": "xpa-3010dp-pa-active-speakers",
+      "name": "Ahuja XPA-3010DP Active PA Speaker",
+      "modelNumber": "XPA-3010DP",
+      "sku": "XPA-3010DP",
+      "categorySlug": "portable-pa-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 25999,
+      "mrp": 30080,
+      "shortDescription": "250 W active loudspeaker with built-in power amplifier for small to medium events.",
+      "description": "The Ahuja XPA-3010DP has a built-in power amplifier and multiple inputs for a wide range of PA and musical programmes. It is well suited to small and medium gatherings of around 200 people, including music and vocal performances, conferences, lectures, presentations, religious gatherings and stage monitoring.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "250 W"
+        },
+        {
+          "key": "Type",
+          "value": "Active loudspeaker with built-in amplifier"
+        },
+        {
+          "key": "Audience",
+          "value": "Around 200 people"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/xpa-3010dp-pa-active-speakers/0.jpg",
+          "alt": "Ahuja XPA-3010DP Active PA Speaker"
+        },
+        {
+          "key": "catalog/xpa-3010dp-pa-active-speakers/1.jpg",
+          "alt": "Ahuja XPA-3010DP Active PA Speaker view 2"
+        },
+        {
+          "key": "catalog/xpa-3010dp-pa-active-speakers/2.jpg",
+          "alt": "Ahuja XPA-3010DP Active PA Speaker view 3"
+        }
+      ],
+      "tags": [
+        "active speaker",
+        "portable",
+        "events"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja XPA-3010DP Active PA Speaker | Ahuja PA World",
+        "description": "250 W active loudspeaker with built-in power amplifier for small to medium events."
+      }
+    },
+    {
+      "slug": "viva-600-pa-active-speakers",
+      "name": "Ahuja VIVA-600 Active PA Speaker",
+      "modelNumber": "VIVA-600",
+      "sku": "VIVA-600",
+      "categorySlug": "portable-pa-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 42725,
+      "mrp": 49130,
+      "shortDescription": "525 W Class-D bi-amp active loudspeaker with preset equaliser modes.",
+      "description": "The Ahuja VIVA-600 is a compact Class-D bi-amp active loudspeaker with 400 W RMS for the low frequencies and 125 W RMS for the high frequencies. A built-in preset equaliser offers Normal, Jazz, Classic and Pop modes, making it suited to indoor live-music performance and small gatherings.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "525 W (400 W RMS LF, 125 W RMS HF)"
+        },
+        {
+          "key": "Type",
+          "value": "Class-D bi-amp active"
+        },
+        {
+          "key": "EQ Presets",
+          "value": "Normal, Jazz, Classic, Pop"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/viva-600-pa-active-speakers/0.png",
+          "alt": "Ahuja VIVA-600 Active PA Speaker"
+        }
+      ],
+      "tags": [
+        "active speaker",
+        "class-d",
+        "live music"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja VIVA-600 Active PA Speaker | Ahuja PA World",
+        "description": "525 W Class-D bi-amp active loudspeaker with preset equaliser modes."
+      }
+    },
+    {
+      "slug": "aba-4000-pa-active-speakers",
+      "name": "Ahuja ABA-4000 Active PA Speaker",
+      "modelNumber": "ABA-4000",
+      "sku": "ABA-4000",
+      "categorySlug": "portable-pa-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 22900,
+      "mrp": 26350,
+      "shortDescription": "325 W bi-amplifier active loudspeaker for professional and PA programmes.",
+      "description": "The Ahuja ABA-4000 has a built-in bi-amplifier that drives the woofer and HF driver separately for a wide range of professional and PA programmes. It suits professional music and vocal performance, touring PA, mini-theatres, pubs and bars, religious gatherings and stage-monitor duties.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "325 W"
+        },
+        {
+          "key": "Type",
+          "value": "Bi-amplifier active (separate woofer and HF)"
+        },
+        {
+          "key": "Application",
+          "value": "Professional and touring PA"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/aba-4000-pa-active-speakers/0.png",
+          "alt": "Ahuja ABA-4000 Active PA Speaker"
+        }
+      ],
+      "tags": [
+        "active speaker",
+        "professional",
+        "touring"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja ABA-4000 Active PA Speaker | Ahuja PA World",
+        "description": "325 W bi-amplifier active loudspeaker for professional and PA programmes."
+      }
+    },
+    {
+      "slug": "aba-5000-pa-active-speakers",
+      "name": "Ahuja ABA-5000 Active PA Speaker",
+      "modelNumber": "ABA-5000",
+      "sku": "ABA-5000",
+      "categorySlug": "portable-pa-speaker",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 28925,
+      "mrp": 32260,
+      "shortDescription": "400 W bi-amplifier active loudspeaker for professional and PA programmes.",
+      "description": "The Ahuja ABA-5000 has a built-in bi-amplifier driving the woofer and HF driver separately for a wide range of professional and PA programmes. It is suited to professional music and vocal performance, touring PA, mini-theatres, pubs and bars, religious gatherings and stage-monitor use.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "400 W"
+        },
+        {
+          "key": "Type",
+          "value": "Bi-amplifier active (separate woofer and HF)"
+        },
+        {
+          "key": "Application",
+          "value": "Professional and touring PA"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/aba-5000-pa-active-speakers/0.png",
+          "alt": "Ahuja ABA-5000 Active PA Speaker"
+        }
+      ],
+      "tags": [
+        "active speaker",
+        "professional",
+        "touring"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja ABA-5000 Active PA Speaker | Ahuja PA World",
+        "description": "400 W bi-amplifier active loudspeaker for professional and PA programmes."
+      }
+    },
+    {
+      "slug": "aud-54-ahuja-pa-wired-microphone",
+      "name": "Ahuja AUD-54 Wired Microphone",
+      "modelNumber": "AUD-54",
+      "sku": "AUD-54",
+      "categorySlug": "ahuja-pa-wired-microphones",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 650,
+      "mrp": 740,
+      "shortDescription": "Entry-level unidirectional dynamic microphone with 6.3 mm plug for PA and karaoke.",
+      "description": "The Ahuja AUD-54 is a reliable entry-level dynamic microphone for karaoke and PA systems, with a unidirectional pickup pattern and a 3 metre shielded cable terminated in a 6.3 mm phone plug. A 100 to 10000 Hz response, 2.0 mV/Pa sensitivity and 600 ohm impedance give clear, consistent vocal performance.",
+      "specs": [
+        {
+          "key": "Type",
+          "value": "Unidirectional dynamic"
+        },
+        {
+          "key": "Cable",
+          "value": "3 m shielded, 6.3 mm plug"
+        },
+        {
+          "key": "Frequency Response",
+          "value": "100-10000 Hz"
+        },
+        {
+          "key": "Sensitivity",
+          "value": "2.0 mV/Pa"
+        },
+        {
+          "key": "Impedance",
+          "value": "600 ohm"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/aud-54-ahuja-pa-wired-microphone/0.jpg",
+          "alt": "Ahuja AUD-54 Wired Microphone"
+        },
+        {
+          "key": "catalog/aud-54-ahuja-pa-wired-microphone/1.jpg",
+          "alt": "Ahuja AUD-54 Wired Microphone view 2"
+        },
+        {
+          "key": "catalog/aud-54-ahuja-pa-wired-microphone/2.jpg",
+          "alt": "Ahuja AUD-54 Wired Microphone view 3"
+        }
+      ],
+      "tags": [
+        "microphone",
+        "wired",
+        "dynamic",
+        "karaoke"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja AUD-54 Wired Microphone | Ahuja PA World",
+        "description": "Entry-level unidirectional dynamic microphone with 6.3 mm plug for PA and karaoke."
+      }
+    },
+    {
+      "slug": "aud-59xlr-ahuja-pa-wired-microphone",
+      "name": "Ahuja AUD-59XLR Wired Microphone",
+      "modelNumber": "AUD-59XLR",
+      "sku": "AUD-59XLR",
+      "categorySlug": "ahuja-pa-wired-microphones",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 1065,
+      "mrp": 1225,
+      "shortDescription": "Entry-level unidirectional dynamic microphone with 3-pin XLR connector.",
+      "description": "The Ahuja AUD-59XLR is an affordable entry-level unidirectional dynamic PA microphone. It comes with a 4.5 metre shielded cable, a 3-pin XLR connector and a quick-detachable holder for easy setup. Its 100 to 10000 Hz response, 2.5 mV/Pa sensitivity and 600 ohm impedance deliver clear vocal reproduction.",
+      "specs": [
+        {
+          "key": "Type",
+          "value": "Unidirectional dynamic"
+        },
+        {
+          "key": "Cable",
+          "value": "4.5 m shielded, 3-pin XLR"
+        },
+        {
+          "key": "Frequency Response",
+          "value": "100-10000 Hz"
+        },
+        {
+          "key": "Sensitivity",
+          "value": "2.5 mV/Pa"
+        },
+        {
+          "key": "Impedance",
+          "value": "600 ohm"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/aud-59xlr-ahuja-pa-wired-microphone/0.jpg",
+          "alt": "Ahuja AUD-59XLR Wired Microphone"
+        },
+        {
+          "key": "catalog/aud-59xlr-ahuja-pa-wired-microphone/1.jpg",
+          "alt": "Ahuja AUD-59XLR Wired Microphone view 2"
+        },
+        {
+          "key": "catalog/aud-59xlr-ahuja-pa-wired-microphone/2.jpg",
+          "alt": "Ahuja AUD-59XLR Wired Microphone view 3"
+        }
+      ],
+      "tags": [
+        "microphone",
+        "wired",
+        "dynamic",
+        "xlr"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja AUD-59XLR Wired Microphone | Ahuja PA World",
+        "description": "Entry-level unidirectional dynamic microphone with 3-pin XLR connector."
+      }
+    },
+    {
+      "slug": "ahuja-awm-495v1-microphone",
+      "name": "Ahuja AWM-495V1 Wireless Microphone",
+      "modelNumber": "AWM-495V1",
+      "sku": "AWM-495V1",
+      "categorySlug": "ahuja-pa-wireless-microphone",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 3675,
+      "mrp": 4200,
+      "shortDescription": "VHF wireless microphone system with a single handheld transmitter and receiver.",
+      "description": "The Ahuja AWM-495V1 is an affordable, high-performance VHF wireless microphone system. It consists of a single wireless handheld transmitter and a highly sensitive receiver, offering good sound quality and a long operating range for speech and performance.",
+      "specs": [
+        {
+          "key": "Type",
+          "value": "VHF wireless"
+        },
+        {
+          "key": "Configuration",
+          "value": "Single handheld transmitter and receiver"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-awm-495v1-microphone/0.jpg",
+          "alt": "Ahuja AWM-495V1 Wireless Microphone"
+        },
+        {
+          "key": "catalog/ahuja-awm-495v1-microphone/1.jpg",
+          "alt": "Ahuja AWM-495V1 Wireless Microphone view 2"
+        },
+        {
+          "key": "catalog/ahuja-awm-495v1-microphone/2.jpg",
+          "alt": "Ahuja AWM-495V1 Wireless Microphone view 3"
+        }
+      ],
+      "tags": [
+        "microphone",
+        "wireless",
+        "vhf",
+        "handheld"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja AWM-495V1 Wireless Microphone | Ahuja PA World",
+        "description": "VHF wireless microphone system with a single handheld transmitter and receiver."
+      }
+    },
+    {
+      "slug": "ahuja-awm-495v2-wireless-microphone",
+      "name": "Ahuja AWM-495V2 Dual Wireless Microphone",
+      "modelNumber": "AWM-495V2",
+      "sku": "AWM-495V2",
+      "categorySlug": "ahuja-pa-wireless-microphone",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 5175,
+      "mrp": 5950,
+      "shortDescription": "Dual-channel VHF wireless system with two handheld transmitters.",
+      "description": "The Ahuja AWM-495V2 is an affordable, high-performance VHF wireless microphone system with two wireless handheld transmitters and a highly sensitive dual-channel receiver. It offers good sound quality and a long operating range, suiting events that need two microphones at once.",
+      "specs": [
+        {
+          "key": "Type",
+          "value": "VHF wireless"
+        },
+        {
+          "key": "Configuration",
+          "value": "Two handheld transmitters, dual-channel receiver"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-awm-495v2-wireless-microphone/0.jpg",
+          "alt": "Ahuja AWM-495V2 Dual Wireless Microphone"
+        },
+        {
+          "key": "catalog/ahuja-awm-495v2-wireless-microphone/1.jpg",
+          "alt": "Ahuja AWM-495V2 Dual Wireless Microphone view 2"
+        },
+        {
+          "key": "catalog/ahuja-awm-495v2-wireless-microphone/2.jpg",
+          "alt": "Ahuja AWM-495V2 Dual Wireless Microphone view 3"
+        }
+      ],
+      "tags": [
+        "microphone",
+        "wireless",
+        "vhf",
+        "dual"
+      ],
+      "isFeatured": true,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja AWM-495V2 Dual Wireless Microphone | Ahuja PA World",
+        "description": "Dual-channel VHF wireless system with two handheld transmitters."
+      }
+    },
+    {
+      "slug": "ahuja-awm-495vl-microphone",
+      "name": "Ahuja AWM-495VL Wireless Headband Microphone",
+      "modelNumber": "AWM-495VL",
+      "sku": "AWM-495VL",
+      "categorySlug": "ahuja-pa-wireless-microphone",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 3675,
+      "mrp": 4205,
+      "shortDescription": "Single-channel VHF wireless headband microphone system.",
+      "description": "The Ahuja AWM-495VL is a compact, lightweight single-channel VHF wireless microphone system. It uses a dynamic cardioid transmitter with an internal antenna and a receiver with quartz-stabilised VHF reception. The system includes a headband microphone, runs on two AA batteries and delivers a clean 50 to 15000 Hz signal through a quarter-inch jack.",
+      "specs": [
+        {
+          "key": "Type",
+          "value": "VHF wireless headband"
+        },
+        {
+          "key": "Configuration",
+          "value": "Single channel, cardioid"
+        },
+        {
+          "key": "Power",
+          "value": "2 x AA batteries"
+        },
+        {
+          "key": "Frequency Response",
+          "value": "50-15000 Hz"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-awm-495vl-microphone/0.jpg",
+          "alt": "Ahuja AWM-495VL Wireless Headband Microphone"
+        },
+        {
+          "key": "catalog/ahuja-awm-495vl-microphone/1.jpg",
+          "alt": "Ahuja AWM-495VL Wireless Headband Microphone view 2"
+        },
+        {
+          "key": "catalog/ahuja-awm-495vl-microphone/2.jpg",
+          "alt": "Ahuja AWM-495VL Wireless Headband Microphone view 3"
+        }
+      ],
+      "tags": [
+        "microphone",
+        "wireless",
+        "headband",
+        "hands-free"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja AWM-495VL Wireless Headband Microphone | Ahuja PA World",
+        "description": "Single-channel VHF wireless headband microphone system."
+      }
+    },
+    {
+      "slug": "ahuja-am-22hsd-megaphone",
+      "name": "Ahuja AM-22HSD Megaphone",
+      "modelNumber": "AM-22HSD",
+      "sku": "AM-22HSD",
+      "categorySlug": "handheld-megaphones",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 4180,
+      "mrp": 4810,
+      "shortDescription": "22 W shoulder-sling megaphone with siren and long voice range.",
+      "description": "The Ahuja AM-22HSD is a rugged yet lightweight shoulder-sling megaphone with 22 W rated (28 W maximum) output and an ABS body. A power-efficient Class-D amplifier delivers clear sound up to about 400 m (500 m with siren). It runs on ten AA cells, a 12 to 14 V car battery or an optional lithium-ion pack and includes a built-in siren and volume control.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "22 W rated (28 W max)"
+        },
+        {
+          "key": "Type",
+          "value": "Shoulder-sling and hand-grip"
+        },
+        {
+          "key": "Range",
+          "value": "About 400 m (500 m with siren)"
+        },
+        {
+          "key": "Power Source",
+          "value": "10 x AA, 12-14 V, optional Li-ion"
+        },
+        {
+          "key": "Siren",
+          "value": "Built-in"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-am-22hsd-megaphone/0.jpg",
+          "alt": "Ahuja AM-22HSD Megaphone"
+        },
+        {
+          "key": "catalog/ahuja-am-22hsd-megaphone/1.jpg",
+          "alt": "Ahuja AM-22HSD Megaphone view 2"
+        },
+        {
+          "key": "catalog/ahuja-am-22hsd-megaphone/2.jpg",
+          "alt": "Ahuja AM-22HSD Megaphone view 3"
+        }
+      ],
+      "tags": [
+        "megaphone",
+        "siren",
+        "portable",
+        "crowd control"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja AM-22HSD Megaphone | Ahuja PA World",
+        "description": "22 W shoulder-sling megaphone with siren and long voice range."
+      }
+    },
+    {
+      "slug": "ahuja-am-25dpm-megaphone",
+      "name": "Ahuja AM-25DPM Megaphone",
+      "modelNumber": "AM-25DPM",
+      "sku": "AM-25DPM",
+      "categorySlug": "handheld-megaphones",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 4480,
+      "mrp": 5150,
+      "shortDescription": "25 W shoulder-sling and hand-grip megaphone with siren and recording.",
+      "description": "The Ahuja AM-25DPM is a versatile 25 W (maximum) shoulder-sling and hand-grip PA megaphone with a lightweight ABS body. It runs on ten AA batteries, a 12 to 14 V car connection or an optional 11.1 V lithium-ion pack. A high-efficiency Class-D amplifier extends battery life, and it adds a unidirectional mic, a built-in siren and a four-minute recording and playback feature.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "25 W max"
+        },
+        {
+          "key": "Type",
+          "value": "Shoulder-sling and hand-grip"
+        },
+        {
+          "key": "Power Source",
+          "value": "10 x AA, 12-14 V, optional Li-ion"
+        },
+        {
+          "key": "Recording",
+          "value": "4 minutes"
+        },
+        {
+          "key": "Siren",
+          "value": "Built-in"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-am-25dpm-megaphone/0.jpg",
+          "alt": "Ahuja AM-25DPM Megaphone"
+        },
+        {
+          "key": "catalog/ahuja-am-25dpm-megaphone/1.jpg",
+          "alt": "Ahuja AM-25DPM Megaphone view 2"
+        },
+        {
+          "key": "catalog/ahuja-am-25dpm-megaphone/2.jpg",
+          "alt": "Ahuja AM-25DPM Megaphone view 3"
+        }
+      ],
+      "tags": [
+        "megaphone",
+        "siren",
+        "recording",
+        "portable"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja AM-25DPM Megaphone | Ahuja PA World",
+        "description": "25 W shoulder-sling and hand-grip megaphone with siren and recording."
+      }
+    },
+    {
+      "slug": "ahuja-am-30ss-megaphone",
+      "name": "Ahuja AM-30SS Megaphone",
+      "modelNumber": "AM-30SS",
+      "sku": "AM-30SS",
+      "categorySlug": "handheld-megaphones",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 4675,
+      "mrp": 5380,
+      "shortDescription": "25 W shoulder-sling megaphone with three-level siren and long voice range.",
+      "description": "The Ahuja AM-30SS is a 25 W (30 W maximum) shoulder-sling and handheld megaphone with a lightweight yet sturdy ABS build. Powered by ten AA cells or a 12 to 14 V car battery, its Class-D amplifier improves efficiency and range. A three-level siren, unidirectional mic and volume control support a voice reach of about 400 m (500 m with siren).",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "25 W (30 W max)"
+        },
+        {
+          "key": "Type",
+          "value": "Shoulder-sling and handheld"
+        },
+        {
+          "key": "Range",
+          "value": "About 400 m (500 m with siren)"
+        },
+        {
+          "key": "Siren",
+          "value": "Three-level"
+        },
+        {
+          "key": "Power Source",
+          "value": "10 x AA, 12-14 V"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-am-30ss-megaphone/0.jpg",
+          "alt": "Ahuja AM-30SS Megaphone"
+        },
+        {
+          "key": "catalog/ahuja-am-30ss-megaphone/1.jpg",
+          "alt": "Ahuja AM-30SS Megaphone view 2"
+        },
+        {
+          "key": "catalog/ahuja-am-30ss-megaphone/2.jpg",
+          "alt": "Ahuja AM-30SS Megaphone view 3"
+        }
+      ],
+      "tags": [
+        "megaphone",
+        "siren",
+        "portable",
+        "crowd control"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja AM-30SS Megaphone | Ahuja PA World",
+        "description": "25 W shoulder-sling megaphone with three-level siren and long voice range."
+      }
+    },
+    {
+      "slug": "ahuja-dpa-370-mixer-amplifiers",
+      "name": "Ahuja DPA-370 Mixer Amplifier",
+      "modelNumber": "DPA-370",
+      "sku": "DPA-370",
+      "categorySlug": "digital-player-mixer-amplifier",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 6420,
+      "mrp": 7385,
+      "shortDescription": "30 W RMS mixer amplifier with built-in MP3 player and DC backup.",
+      "description": "The Ahuja DPA-370 delivers 30 W RMS (37 W maximum) with a built-in MP3 player featuring USB and remote control. It supports two mic and one Aux inputs, provides a line output for connecting a booster, and offers tone control plus seamless switching to DC car-battery power if the mains fails. Speaker outputs cover 4 ohm and 100 V, in a compact 4.5 kg chassis.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "30 W RMS (37 W max)"
+        },
+        {
+          "key": "Inputs",
+          "value": "2 mic, 1 Aux"
+        },
+        {
+          "key": "Player",
+          "value": "MP3 (USB), remote"
+        },
+        {
+          "key": "Outputs",
+          "value": "4 ohm, 100 V"
+        },
+        {
+          "key": "DC Backup",
+          "value": "Yes"
+        },
+        {
+          "key": "Weight",
+          "value": "4.5 kg"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-dpa-370-mixer-amplifiers/0.jpg",
+          "alt": "Ahuja DPA-370 Mixer Amplifier"
+        },
+        {
+          "key": "catalog/ahuja-dpa-370-mixer-amplifiers/1.jpg",
+          "alt": "Ahuja DPA-370 Mixer Amplifier view 2"
+        },
+        {
+          "key": "catalog/ahuja-dpa-370-mixer-amplifiers/2.jpg",
+          "alt": "Ahuja DPA-370 Mixer Amplifier view 3"
+        }
+      ],
+      "tags": [
+        "mixer amplifier",
+        "digital player",
+        "100v line"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja DPA-370 Mixer Amplifier | Ahuja PA World",
+        "description": "30 W RMS mixer amplifier with built-in MP3 player and DC backup."
+      }
+    },
+    {
+      "slug": "ahuja-dpa-570m-mixer-amplifier",
+      "name": "Ahuja DPA-570M Mixer Amplifier",
+      "modelNumber": "DPA-570M",
+      "sku": "DPA-570M",
+      "categorySlug": "digital-player-mixer-amplifier",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 9000,
+      "mrp": 10350,
+      "shortDescription": "50 W RMS mixer amplifier with MP3 player, Bluetooth and DC backup.",
+      "description": "The Ahuja DPA-570M delivers 50 W RMS (75 W peak) and includes a built-in MP3 player with USB, an SD/MMC reader, remote control and Bluetooth. It offers three mic and one aux input, bass and treble tone controls, a line output for boosting and seamless switching to DC car-battery power during mains failures.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "50 W RMS (75 W peak)"
+        },
+        {
+          "key": "Inputs",
+          "value": "3 mic, 1 aux"
+        },
+        {
+          "key": "Player",
+          "value": "MP3 (USB, SD/MMC), Bluetooth, remote"
+        },
+        {
+          "key": "Tone Control",
+          "value": "Bass and Treble"
+        },
+        {
+          "key": "DC Backup",
+          "value": "Yes"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-dpa-570m-mixer-amplifier/0.jpg",
+          "alt": "Ahuja DPA-570M Mixer Amplifier"
+        },
+        {
+          "key": "catalog/ahuja-dpa-570m-mixer-amplifier/1.jpg",
+          "alt": "Ahuja DPA-570M Mixer Amplifier view 2"
+        },
+        {
+          "key": "catalog/ahuja-dpa-570m-mixer-amplifier/2.jpg",
+          "alt": "Ahuja DPA-570M Mixer Amplifier view 3"
+        }
+      ],
+      "tags": [
+        "mixer amplifier",
+        "digital player",
+        "bluetooth",
+        "100v line"
+      ],
+      "isFeatured": true,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja DPA-570M Mixer Amplifier | Ahuja PA World",
+        "description": "50 W RMS mixer amplifier with MP3 player, Bluetooth and DC backup."
+      }
+    },
+    {
+      "slug": "ahuja-dpa-770m-mixer-amplifier",
+      "name": "Ahuja DPA-770M Mixer Amplifier",
+      "modelNumber": "DPA-770M",
+      "sku": "DPA-770M",
+      "categorySlug": "digital-player-mixer-amplifier",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 11575,
+      "mrp": 13310,
+      "shortDescription": "75 W RMS mixer amplifier with four mic channels, MP3 player and Bluetooth.",
+      "description": "The Ahuja DPA-770M delivers 75 W RMS (100 W maximum) with four mic and one aux channel, plus a built-in MP3 player (USB and remote) and Bluetooth support. It provides bass and treble tone control, a line output for booster connection and automatic switching to 12 V DC car power during mains failure.",
+      "specs": [
+        {
+          "key": "Power",
+          "value": "75 W RMS (100 W max)"
+        },
+        {
+          "key": "Inputs",
+          "value": "4 mic, 1 aux"
+        },
+        {
+          "key": "Player",
+          "value": "MP3 (USB), Bluetooth, remote"
+        },
+        {
+          "key": "Tone Control",
+          "value": "Bass and Treble"
+        },
+        {
+          "key": "DC Backup",
+          "value": "12 V"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-dpa-770m-mixer-amplifier/0.jpg",
+          "alt": "Ahuja DPA-770M Mixer Amplifier"
+        },
+        {
+          "key": "catalog/ahuja-dpa-770m-mixer-amplifier/1.jpg",
+          "alt": "Ahuja DPA-770M Mixer Amplifier view 2"
+        },
+        {
+          "key": "catalog/ahuja-dpa-770m-mixer-amplifier/2.jpg",
+          "alt": "Ahuja DPA-770M Mixer Amplifier view 3"
+        }
+      ],
+      "tags": [
+        "mixer amplifier",
+        "digital player",
+        "bluetooth",
+        "100v line"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja DPA-770M Mixer Amplifier | Ahuja PA World",
+        "description": "75 W RMS mixer amplifier with four mic channels, MP3 player and Bluetooth."
+      }
+    },
+    {
+      "slug": "ahuja-mixing-consoler-pmx-1032fx",
+      "name": "Ahuja PMX-1032FX Mixing Console",
+      "modelNumber": "PMX-1032FX",
+      "sku": "PMX-1032FX",
+      "categorySlug": "mixers",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 18060,
+      "mrp": 20770,
+      "shortDescription": "Analog mixing console with 8 mono and 1 stereo input, 48 V phantom and MP3 player.",
+      "description": "The Ahuja PMX-1032FX is a rugged analog mixer with eight balanced mono and one stereo input plus a built-in MP3 player with USB, SD and Bluetooth. It provides 48 V phantom power on four channels, onboard digital effects (delay, repeat and level), full channel EQ, slider faders, AUX sends and returns, headphone monitoring and multiple outputs.",
+      "specs": [
+        {
+          "key": "Channels",
+          "value": "8 mono, 1 stereo"
+        },
+        {
+          "key": "Phantom Power",
+          "value": "48 V on 4 channels"
+        },
+        {
+          "key": "Player",
+          "value": "MP3 (USB, SD), Bluetooth"
+        },
+        {
+          "key": "Effects",
+          "value": "Digital (delay, repeat, level)"
+        },
+        {
+          "key": "EQ",
+          "value": "Per channel"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-mixing-consoler-pmx-1032fx/0.jpg",
+          "alt": "Ahuja PMX-1032FX Mixing Console"
+        },
+        {
+          "key": "catalog/ahuja-mixing-consoler-pmx-1032fx/1.jpg",
+          "alt": "Ahuja PMX-1032FX Mixing Console view 2"
+        },
+        {
+          "key": "catalog/ahuja-mixing-consoler-pmx-1032fx/2.jpg",
+          "alt": "Ahuja PMX-1032FX Mixing Console view 3"
+        }
+      ],
+      "tags": [
+        "mixer",
+        "console",
+        "48v phantom",
+        "effects"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja PMX-1032FX Mixing Console | Ahuja PA World",
+        "description": "Analog mixing console with 8 mono and 1 stereo input, 48 V phantom and MP3 player."
+      }
+    },
+    {
+      "slug": "ahuja-promix-1442-mixer",
+      "name": "Ahuja PROMIX-1442 Mixing Console",
+      "modelNumber": "PROMIX-1442",
+      "sku": "PROMIX-1442",
+      "categorySlug": "mixers",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 29455,
+      "mrp": 33870,
+      "shortDescription": "Analog mixing console with 12 mic channels, 48 V phantom and 24 digital effects.",
+      "description": "The Ahuja PROMIX-1442 is a robust analog mixer with 12 balanced mic, 10 mono line and 2 stereo inputs. It includes a built-in MP3 recorder with USB playback and Bluetooth, 24 digital effects, an LCD display, switchable 48 V phantom power on all mic channels, multiple AUX and group sends and comprehensive output options.",
+      "specs": [
+        {
+          "key": "Channels",
+          "value": "12 mic, 10 mono line, 2 stereo"
+        },
+        {
+          "key": "Phantom Power",
+          "value": "48 V on all mic channels"
+        },
+        {
+          "key": "Player",
+          "value": "MP3 recorder (USB), Bluetooth"
+        },
+        {
+          "key": "Effects",
+          "value": "24 digital"
+        },
+        {
+          "key": "Display",
+          "value": "LCD"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-promix-1442-mixer/0.jpg",
+          "alt": "Ahuja PROMIX-1442 Mixing Console"
+        },
+        {
+          "key": "catalog/ahuja-promix-1442-mixer/1.jpg",
+          "alt": "Ahuja PROMIX-1442 Mixing Console view 2"
+        },
+        {
+          "key": "catalog/ahuja-promix-1442-mixer/2.jpg",
+          "alt": "Ahuja PROMIX-1442 Mixing Console view 3"
+        }
+      ],
+      "tags": [
+        "mixer",
+        "console",
+        "48v phantom",
+        "effects"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja PROMIX-1442 Mixing Console | Ahuja PA World",
+        "description": "Analog mixing console with 12 mic channels, 48 V phantom and 24 digital effects."
+      }
+    },
+    {
+      "slug": "ahuja-fmx-106dp-pa-mixer",
+      "name": "Ahuja FMX-106DP PA Mixer",
+      "modelNumber": "FMX-106DP",
+      "sku": "FMX-106DP",
+      "categorySlug": "mixers",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 6155,
+      "mrp": 7080,
+      "shortDescription": "Compact PA mixer with MP3 player, recording and digital effects.",
+      "description": "The Ahuja FMX-106DP is a compact, portable PA mixer with four mic/line inputs and one stereo input, each with gain, bass and treble controls. It includes a built-in MP3 player with recording (USB and Bluetooth), a digital effects processor (delay, repeat and level), signal and clip LEDs and stereo line outputs for streamlined live sound.",
+      "specs": [
+        {
+          "key": "Channels",
+          "value": "4 mic/line, 1 stereo"
+        },
+        {
+          "key": "Player",
+          "value": "MP3 with recording (USB), Bluetooth"
+        },
+        {
+          "key": "Effects",
+          "value": "Digital (delay, repeat, level)"
+        },
+        {
+          "key": "Outputs",
+          "value": "Stereo line"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-fmx-106dp-pa-mixer/0.jpg",
+          "alt": "Ahuja FMX-106DP PA Mixer"
+        },
+        {
+          "key": "catalog/ahuja-fmx-106dp-pa-mixer/1.jpg",
+          "alt": "Ahuja FMX-106DP PA Mixer view 2"
+        },
+        {
+          "key": "catalog/ahuja-fmx-106dp-pa-mixer/2.jpg",
+          "alt": "Ahuja FMX-106DP PA Mixer view 3"
+        }
+      ],
+      "tags": [
+        "mixer",
+        "compact",
+        "digital player",
+        "effects"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja FMX-106DP PA Mixer | Ahuja PA World",
+        "description": "Compact PA mixer with MP3 player, recording and digital effects."
+      }
+    },
+    {
+      "slug": "ahuja-ccs-2200-counter-communication-system",
+      "name": "Ahuja CCS-2200 Counter Communication System",
+      "modelNumber": "CCS-2200",
+      "sku": "CCS-2200",
+      "categorySlug": "counter-communication-systems",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 9220,
+      "mrp": 10600,
+      "shortDescription": "Two-way duplex counter communication system for ticket counters, banks and hospitals.",
+      "description": "The Ahuja CCS-2200 is a duplex communication system for use across glass barriers at ticket or enquiry counters, banks and hospitals. It includes an attendant unit with a gooseneck mic and an external unit with a condenser mic and speaker. Features include automatic voice priority, independent volume controls and recording and line outputs.",
+      "specs": [
+        {
+          "key": "Type",
+          "value": "Two-way duplex counter system"
+        },
+        {
+          "key": "Units",
+          "value": "Attendant gooseneck mic, external condenser mic and speaker"
+        },
+        {
+          "key": "Features",
+          "value": "Auto voice priority, independent volume, recording/line out"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-ccs-2200-counter-communication-system/0.jpg",
+          "alt": "Ahuja CCS-2200 Counter Communication System"
+        },
+        {
+          "key": "catalog/ahuja-ccs-2200-counter-communication-system/1.jpg",
+          "alt": "Ahuja CCS-2200 Counter Communication System view 2"
+        },
+        {
+          "key": "catalog/ahuja-ccs-2200-counter-communication-system/2.jpg",
+          "alt": "Ahuja CCS-2200 Counter Communication System view 3"
+        }
+      ],
+      "tags": [
+        "counter communication",
+        "bank",
+        "hospital",
+        "ticket counter"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja CCS-2200 Counter Communication System | Ahuja PA World",
+        "description": "Two-way duplex counter communication system for ticket counters, banks and hospitals."
+      }
+    },
+    {
+      "slug": "ahuja-ccs-2300-counter-communication-system",
+      "name": "Ahuja CCS-2300 Counter Communication System",
+      "modelNumber": "CCS-2300",
+      "sku": "CCS-2300",
+      "categorySlug": "counter-communication-systems",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 9400,
+      "mrp": 10800,
+      "shortDescription": "Two-way hands-free counter communication system with auto-mute and attendant priority.",
+      "description": "The Ahuja CCS-2300 is a two-way hands-free communication system for counters with transparent barriers. It includes a gooseneck attendant unit, a customer speaker-mic and a power supply. Features include adjustable talk and listen levels, auto-mute that silences an unused mic after about 30 seconds, attendant voice priority and an optional headband-mic input.",
+      "specs": [
+        {
+          "key": "Type",
+          "value": "Two-way hands-free counter system"
+        },
+        {
+          "key": "Units",
+          "value": "Gooseneck attendant, customer speaker-mic, power supply"
+        },
+        {
+          "key": "Features",
+          "value": "Auto-mute (~30 s), attendant priority, optional headband mic input"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-ccs-2300-counter-communication-system/0.jpg",
+          "alt": "Ahuja CCS-2300 Counter Communication System"
+        },
+        {
+          "key": "catalog/ahuja-ccs-2300-counter-communication-system/1.jpg",
+          "alt": "Ahuja CCS-2300 Counter Communication System view 2"
+        },
+        {
+          "key": "catalog/ahuja-ccs-2300-counter-communication-system/2.jpg",
+          "alt": "Ahuja CCS-2300 Counter Communication System view 3"
+        }
+      ],
+      "tags": [
+        "counter communication",
+        "bank",
+        "hospital",
+        "ticket counter"
+      ],
+      "isFeatured": true,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja CCS-2300 Counter Communication System | Ahuja PA World",
+        "description": "Two-way hands-free counter communication system with auto-mute and attendant priority."
+      }
+    },
+    {
+      "slug": "ahuja-ai-202-audio-interface",
+      "name": "Ahuja AI-202 Audio Interface",
+      "modelNumber": "AI-202",
+      "sku": "AI-202",
+      "categorySlug": "audio-interface",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 7195,
+      "mrp": 8275,
+      "shortDescription": "2x2 USB audio interface with two combo inputs and 48 V phantom power.",
+      "description": "The Ahuja AI-202 is a compact, bus-powered 2x2 USB audio interface offering 16-bit/48 kHz recording with low latency. It has two combo inputs (mic/line and instrument), switchable +48 V phantom power, dual line outputs, headphone monitoring and robust aluminium construction, suiting streaming, podcasting and home recording.",
+      "specs": [
+        {
+          "key": "Type",
+          "value": "2x2 USB audio interface"
+        },
+        {
+          "key": "Resolution",
+          "value": "16-bit / 48 kHz"
+        },
+        {
+          "key": "Inputs",
+          "value": "2 combo (mic/line, instrument)"
+        },
+        {
+          "key": "Phantom Power",
+          "value": "+48 V"
+        },
+        {
+          "key": "Outputs",
+          "value": "2 line, headphone"
+        },
+        {
+          "key": "Build",
+          "value": "Aluminium"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-ai-202-audio-interface/0.jpg",
+          "alt": "Ahuja AI-202 Audio Interface"
+        },
+        {
+          "key": "catalog/ahuja-ai-202-audio-interface/1.jpg",
+          "alt": "Ahuja AI-202 Audio Interface view 2"
+        },
+        {
+          "key": "catalog/ahuja-ai-202-audio-interface/2.jpg",
+          "alt": "Ahuja AI-202 Audio Interface view 3"
+        }
+      ],
+      "tags": [
+        "audio interface",
+        "usb",
+        "recording",
+        "podcast"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja AI-202 Audio Interface | Ahuja PA World",
+        "description": "2x2 USB audio interface with two combo inputs and 48 V phantom power."
+      }
+    },
+    {
+      "slug": "ahuja-bms-101-pa-microphone-stand",
+      "name": "Ahuja BMS-101 Microphone Stand",
+      "modelNumber": "BMS-101",
+      "sku": "BMS-101",
+      "categorySlug": "stands-and-brackets",
+      "extraCategorySlugs": [],
+      "brandSlug": "ahuja",
+      "price": 1800,
+      "mrp": 1899,
+      "shortDescription": "Chrome-plated boom microphone stand compatible with all Ahuja microphones.",
+      "description": "The Ahuja BMS-101 is a sturdy chrome-plated boom microphone stand with a height range of 1000 to 1700 mm and a 650 mm base. It weighs about 2.16 kg, has a reliable movement mechanism and a rust-resistant finish. The 5/8 inch 27 TPI thread fits all Ahuja microphones for stable, flexible positioning.",
+      "specs": [
+        {
+          "key": "Type",
+          "value": "Boom microphone stand"
+        },
+        {
+          "key": "Height",
+          "value": "1000-1700 mm"
+        },
+        {
+          "key": "Base",
+          "value": "650 mm"
+        },
+        {
+          "key": "Weight",
+          "value": "2.16 kg"
+        },
+        {
+          "key": "Thread",
+          "value": "5/8 inch 27 TPI"
+        },
+        {
+          "key": "Finish",
+          "value": "Chrome-plated"
+        }
+      ],
+      "images": [
+        {
+          "key": "catalog/ahuja-bms-101-pa-microphone-stand/0.jpg",
+          "alt": "Ahuja BMS-101 Microphone Stand"
+        },
+        {
+          "key": "catalog/ahuja-bms-101-pa-microphone-stand/1.jpg",
+          "alt": "Ahuja BMS-101 Microphone Stand view 2"
+        },
+        {
+          "key": "catalog/ahuja-bms-101-pa-microphone-stand/2.jpg",
+          "alt": "Ahuja BMS-101 Microphone Stand view 3"
+        }
+      ],
+      "tags": [
+        "mic stand",
+        "boom",
+        "accessory"
+      ],
+      "isFeatured": false,
+      "stock": 10,
+      "status": "ACTIVE",
+      "seo": {
+        "title": "Ahuja BMS-101 Microphone Stand | Ahuja PA World",
+        "description": "Chrome-plated boom microphone stand compatible with all Ahuja microphones."
+      }
+    }
+  ]
+}
