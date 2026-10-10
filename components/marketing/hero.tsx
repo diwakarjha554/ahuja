@@ -28,7 +28,7 @@ const HERO_BTN = "px-6 text-base font-semibold sm:min-w-[200px]"
  */
 export function Hero() {
   return (
-    <section data-whatsapp-hold="" className="relative overflow-hidden bg-brand text-white">
+    <section data-whatsapp-hold="" className="relative overflow-hidden bg-brand-deep text-white">
       <Container className="relative flex flex-col items-center pt-6 pb-12 text-center xl:block xl:h-[max(640px,calc(100svh-145px))] xl:py-0">
         <h1
           className={cn(

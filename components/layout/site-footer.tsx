@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/config/site"
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto border-t border-border bg-brand text-white">
+    <footer className="mt-auto border-t border-border bg-night text-white">
       <Container className="grid gap-10 py-12 md:grid-cols-2 lg:grid-cols-[1.1fr_0.7fr_0.9fr_1.3fr]">
         <div>
           <Logo variant="onDark" />

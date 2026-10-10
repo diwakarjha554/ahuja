@@ -6,10 +6,11 @@
    grafted with the parts-catalogue mechanics, IBM Plex Mono numerals and the
    borders-first elevation that the judges asked us to carry over.
 
-   THREE SURFACES:
-     1. Storefront  - LIGHT, cool near-white. Default (:root).
+   FOUR SURFACES:
+     1. Base - LIGHT, cool near-white. Default (:root); also the staff login.
      2. Admin console - LIGHT, WARM LINEN (the chosen console mode). [data-console]
      3. Admin console - optional operator DARK mode. .dark / [data-console].dark
+     4. Storefront - DARK, navy-black stage (the shop's house mode). [data-storefront]
 
    All contrast pairs verified with ./contrast_final.py (python -I). Every body
    pair >= 4.5:1, every large/non-text pair >= 3:1. Numbers are in BRAND_GUIDELINES.md.
@@ -114,6 +115,8 @@
   --border-hairline:       #D6DCE4;
   --border-strong:         #7E8896;
   --sidebar-muted:         #8294A6;  /* sidebar section labels */
+  --brand-deep:            #163B5C;  /* navy BAND surface (hero, nav bar); same as brand in light */
+  --night:                 #07101A;  /* always-dark surface for video and photo tiles, any mode */
 }
 
 /* ----------------------------------------------------------------------------
@@ -234,6 +237,64 @@
 }
 
 /* ----------------------------------------------------------------------------
+   4b. STOREFRONT (DARK) - the shop's house mode. Applied with data-storefront
+   on the marketing layout. A navy-black stage, near-white type and one loud
+   marigold. In this mode "brand" IS the marigold (buttons, links, the active
+   chip), because navy reads as nothing on black; navy lives on as --brand-deep
+   for the bands (hero, nav bar). --night stays the darkest surface, for video.
+   Pairs: ink on background 17.2:1, ink-muted on card 6.4:1, marigold on
+   background 9.0:1, brand-ink on marigold 8.6:1, input border on card 3.4:1.
+   ---------------------------------------------------------------------------- */
+[data-storefront] {
+  color-scheme: dark;
+  --background:            #070E16;
+  --foreground:            #EEF2F6;
+  --card:                  #0D1722;
+  --card-foreground:       #EEF2F6;
+  --popover:               #0F1A26;
+  --popover-foreground:    #EEF2F6;
+  --primary:               #F59E0B;
+  --primary-foreground:    #1A1203;
+  --secondary:             #13202D;
+  --secondary-foreground:  #EEF2F6;
+  --muted:                 #13202D;
+  --muted-foreground:      #93A2B2;
+  --accent:                #162534;  /* NEUTRAL hover surface (shadcn) */
+  --accent-foreground:     #EEF2F6;
+  --destructive:           #F0776B;
+  --destructive-foreground:#1A0C0A;
+  --border:                #1C2B3B;
+  --input:                 #5B6E83;  /* control border, meets 3:1 on card */
+  --ring:                  #FBBF24;
+
+  --surface-raised:        #112030;
+  --surface-sunken:        #0A131D;
+  --ink:                   #EEF2F6;
+  --ink-secondary:         #B7C3CF;
+  --ink-muted:             #8D9CAC;
+  --brand:                 #F59E0B;
+  --brand-hover:           #FBB23C;
+  --brand-ink:             #1A1203;
+  --brand-soft:            #2A1E08;
+  --brand-deep:            #0D2741;
+  --brand-accent:          #F59E0B;
+  --brand-accent-ink:      #1A1203;
+  --success:               #4ECB80;  --success-tint: #0F2619;
+  --warning:               #E7A93A;  --warning-tint: #2A2008;
+  --danger:                #F0776B;  --danger-tint:  #2C1310;
+  --info:                  #6FA8DC;  --info-tint:    #0F2233;
+  --border-hairline:       #172433;
+  --border-strong:         #3B4D61;
+  --night:                 #04080E;
+}
+
+/* The page behind the shop (overscroll, the strip under short pages) matches the stage. */
+html:has([data-storefront]) {
+  background-color: #070E16;
+  color-scheme: dark;
+}
+
+/* ----------------------------------------------------------------------------
    5. @theme inline - expose every raw var above as a Tailwind color utility.
    `inline` means the utilities resolve the vars at use-site, so they switch
    automatically under [data-console] and .dark. Nothing here holds a literal
@@ -283,6 +344,8 @@
   --color-brand-soft:       var(--brand-soft);
   --color-brand-accent:     var(--brand-accent);      /* MARIGOLD, fill only */
   --color-brand-accent-ink: var(--brand-accent-ink);
+  --color-brand-deep:       var(--brand-deep);        /* navy band surface */
+  --color-night:            var(--night);             /* always-dark surface */
   --color-success:          var(--success);
   --color-success-tint:     var(--success-tint);
   --color-warning:          var(--warning);
@@ -353,6 +416,16 @@
   --animate-marquee: marquee 48s linear infinite;
   --animate-pop: pop 260ms var(--ease-standard) both;
   --animate-orbit: orbit 90s linear infinite;
+}
+
+/* Condensed caps for poster-size lines: the home hero and the home section titles. */
+@utility type-poster {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 62.5%;
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: -0.005em;
 }
 
 /* Scroll reveal: hidden until the Reveal component marks it visible. */

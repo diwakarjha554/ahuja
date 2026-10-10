@@ -23,7 +23,7 @@ export async function SiteHeader() {
   const categories = await categoryTree()
   return (
     <>
-      <div className="bg-brand text-white">
+      <div className="border-b border-white/10 bg-night text-white">
         <Container className="flex h-9 items-center justify-between text-xs">
           <span className="truncate text-white/80">
             Authorised Ahuja dealer in Delhi. GST invoicing. Delivery across India.
@@ -38,7 +38,7 @@ export async function SiteHeader() {
       <HeaderChrome>
         <div className="border-b border-border bg-card">
           <Container className="flex h-16 items-center gap-4">
-            <Logo />
+            <Logo variant="onDark" />
             <div className="ml-auto hidden max-w-md flex-1 md:block">
               <SearchBox />
             </div>
@@ -54,7 +54,7 @@ export async function SiteHeader() {
           </Container>
         </div>
 
-        <div className="bg-brand">
+        <div className="bg-brand-deep">
           <Container className="flex h-11 items-center gap-6">
             <MegaMenu categories={categories} />
             {/* Nothing here may wrap: the bar is one line. Tablets get three quick links, desktops five. */}

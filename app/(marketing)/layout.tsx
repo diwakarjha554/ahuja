@@ -5,7 +5,8 @@ import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp"
 
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-dvh flex-col">
+    // The shop is dark: data-storefront swaps in the dark tokens (globals.css, block 4b).
+    <div data-storefront className="flex min-h-dvh flex-col bg-background text-foreground">
       {/* Without JavaScript the scroll-reveal must not hide content. */}
       <noscript>
         <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>

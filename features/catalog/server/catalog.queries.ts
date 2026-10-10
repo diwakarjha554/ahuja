@@ -18,6 +18,8 @@ export type ProductCard = {
   stock: number
   image: string | null
   imageAlt: string | null
+  /** The second photo, shown when the card is hovered. */
+  hoverImage: string | null
   categorySlug: string | null
   categoryName: string | null
   brandName: string | null
@@ -62,7 +64,7 @@ const CARD_SELECT = {
   stock: true,
   category: { select: { slug: true, name: true } },
   brand: { select: { name: true } },
-  images: { orderBy: { sort: "asc" }, take: 1, select: { key: true, alt: true } },
+  images: { orderBy: { sort: "asc" }, take: 2, select: { key: true, alt: true } },
 } as const
 
 function toCard(p: {
@@ -88,6 +90,7 @@ function toCard(p: {
     stock: p.stock,
     image: keyToSrc(img?.key),
     imageAlt: img?.alt ?? null,
+    hoverImage: keyToSrc(p.images[1]?.key),
     categorySlug: p.category?.slug ?? null,
     categoryName: p.category?.name ?? null,
     brandName: p.brand?.name ?? null,

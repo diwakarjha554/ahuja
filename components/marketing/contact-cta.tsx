@@ -1,8 +1,9 @@
-import { Phone } from "lucide-react"
+import Image from "next/image"
+import { ArrowUpRight } from "lucide-react"
 
 import { Container } from "@/components/shared/container"
 import { Reveal } from "@/components/shared/reveal"
-import { BTN, BTN_ACCENT } from "@/components/shared/button-styles"
+import { BTN } from "@/components/shared/button-styles"
 import { cn } from "@/lib/utils"
 import { siteConfig } from "@/lib/config/site"
 
@@ -14,39 +15,62 @@ function WhatsAppGlyph() {
   )
 }
 
-/** Closing band on the navy chrome: call either line or message on WhatsApp. */
+/**
+ * The closing block in marigold: the ask in poster caps, both phone lines set
+ * large as links, WhatsApp as the one button, and the megaphone cut-out from
+ * the shop's earlier site as a sticker in the corner.
+ */
 export function ContactCta() {
   const waHref = `https://wa.me/${siteConfig.whatsapp.number}?text=${encodeURIComponent(
     "Hi, I have a question about an Ahuja product.",
   )}`
 
   return (
-    <section className="bg-brand text-white">
-      <Container className="py-16 md:py-20">
-        <Reveal className="mx-auto max-w-3xl text-center">
-          <h2 className="font-display text-3xl font-bold tracking-[-0.01em] md:text-4xl">
-            Talk to the Delhi team before you buy
+    <section className="relative overflow-hidden bg-brand-accent text-brand-accent-ink">
+      <Image
+        src="/media/megaphone.png"
+        alt=""
+        width={579}
+        height={653}
+        sizes="(min-width: 1280px) 300px, 220px"
+        className="pointer-events-none absolute -right-10 -bottom-16 hidden w-[240px] rotate-[-14deg] drop-shadow-[0_18px_24px_rgba(28,20,7,0.35)] md:block xl:right-[2%] xl:w-[300px]"
+      />
+      <Container className="relative grid gap-10 py-16 md:py-24 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
+        <Reveal>
+          <h2 className="type-poster text-[clamp(56px,8.5vw,148px)]">
+            <span className="block">Talk to Delhi</span>
+            <span className="block">before you buy</span>
           </h2>
-          <p className="mt-4 text-lg text-white/75">
-            Tell us the room and we will size the amplifier, speakers and microphones, with a GST
-            quote. Call either line or message us on WhatsApp.
+          <p className="mt-6 max-w-xl text-[17px] leading-relaxed opacity-80 md:text-lg">
+            Tell us the room and we will size the amplifier, speakers and microphones, with a GST quote. Call either
+            line or message us on WhatsApp.
           </p>
-          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            {siteConfig.phones.map((phone) => (
-              <a
-                key={phone.tel}
-                href={`tel:${phone.tel}`}
-                className={cn(BTN, "border border-white/30 text-white hover:bg-white/10")}
-              >
-                <Phone className="h-[18px] w-[18px]" strokeWidth={1.75} aria-hidden />
-                {phone.display}
-              </a>
-            ))}
-            <a href={waHref} target="_blank" rel="noopener noreferrer" className={cn(BTN, BTN_ACCENT)}>
-              <WhatsAppGlyph />
-              WhatsApp {siteConfig.whatsapp.display}
+        </Reveal>
+
+        <Reveal delay={120} className="flex flex-col md:max-w-[440px] lg:mb-16">
+          {siteConfig.phones.map((phone) => (
+            <a
+              key={phone.tel}
+              href={`tel:${phone.tel}`}
+              className="group flex items-center justify-between gap-4 border-b-2 border-current/70 py-3 font-mono text-[clamp(30px,3.4vw,46px)] font-semibold tracking-[-0.02em] tabular-nums transition-colors duration-[160ms] ease-standard hover:text-white"
+            >
+              {phone.display}
+              <ArrowUpRight
+                className="h-8 w-8 shrink-0 transition-transform duration-[200ms] ease-standard group-hover:translate-x-1 group-hover:-translate-y-1"
+                strokeWidth={2}
+                aria-hidden
+              />
             </a>
-          </div>
+          ))}
+          <a
+            href={waHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(BTN, "mt-6 bg-brand-accent-ink px-6 text-base font-semibold text-white hover:-translate-y-0.5 hover:bg-brand-deep")}
+          >
+            <WhatsAppGlyph />
+            WhatsApp {siteConfig.whatsapp.display}
+          </a>
         </Reveal>
       </Container>
     </section>

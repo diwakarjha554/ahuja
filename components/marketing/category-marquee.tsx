@@ -2,32 +2,49 @@ import Link from "next/link"
 
 import type { CategoryNode } from "@/features/catalog/server/catalog.queries"
 
-/** A continuously scrolling strip of category chips under the hero. Pure CSS;
- *  pauses on hover, fades at the edges, and stops under reduced motion. */
+/** A top-level count includes its descendants, to match what the category page lists. */
+function totalProducts(node: CategoryNode): number {
+  return node.productCount + node.children.reduce((sum, child) => sum + totalProducts(child), 0)
+}
+
+/**
+ * The marigold ticker under the hero: every top-level category in poster
+ * caps, running sideways, each a link with its product count. Pure CSS; it
+ * pauses on hover, fades at the edges and stands still under reduced motion.
+ * The second copy, which makes the loop seamless, is hidden from screen
+ * readers and the tab order.
+ */
 export function CategoryMarquee({ categories }: { categories: CategoryNode[] }) {
-  const items = categories.flatMap((c) => [c, ...c.children]).filter((c) => c.productCount > 0 || c.children.length > 0)
+  const items = categories.map((c) => ({ slug: c.slug, name: c.name, count: totalProducts(c) })).filter((c) => c.count > 0)
   if (items.length === 0) return null
 
-  const chips = (suffix: string) =>
+  const run = (copy: "a" | "b") =>
     items.map((c) => (
-      <Link
-        key={`${c.slug}-${suffix}`}
-        href={`/categories/${c.slug}`}
-        className="flex h-11 shrink-0 items-center gap-2 rounded-sm border border-border bg-card px-4 text-sm font-medium whitespace-nowrap text-ink transition-colors duration-[120ms] ease-standard hover:border-brand hover:text-brand"
-      >
-        {c.name}
-        <span className="font-mono text-xs text-ink-muted tabular-nums">{c.productCount || ""}</span>
-      </Link>
+      <span key={`${c.slug}-${copy}`} className="flex shrink-0 items-center gap-8 pr-8 md:gap-12 md:pr-12">
+        <Link
+          href={`/categories/${c.slug}`}
+          tabIndex={copy === "b" ? -1 : undefined}
+          className="group flex items-start gap-1.5 whitespace-nowrap text-brand-accent-ink transition-colors duration-[160ms] ease-standard hover:text-brand-deep"
+        >
+          <span className="type-poster text-[clamp(40px,6vw,92px)]">{c.name}</span>
+          <span className="mt-1 font-mono text-[13px] font-semibold tabular-nums md:mt-2 md:text-[15px]">{c.count}</span>
+        </Link>
+        <span aria-hidden className="h-3 w-3 shrink-0 rotate-45 bg-brand-accent-ink md:h-4 md:w-4" />
+      </span>
     ))
 
   return (
-    <div className="border-b border-border bg-background py-4" aria-label="Browse by category">
+    <nav className="overflow-hidden bg-brand-accent py-4 md:py-6" aria-label="Browse by category">
       <div className="marquee">
-        <div className="marquee-track gap-3 px-1.5">
-          {chips("a")}
-          {chips("b")}
+        <div className="marquee-track">
+          {run("a")}
+          <span aria-hidden className="flex">
+            {run("b")}
+          </span>
         </div>
       </div>
-    </div>
+    </nav>
   )
 }
+
+export default CategoryMarquee

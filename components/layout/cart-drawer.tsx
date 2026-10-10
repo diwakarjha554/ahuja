@@ -224,7 +224,7 @@ export function CartDrawer() {
                   <Link
                     href={`/products/${l.productSlug}`}
                     onClick={hide}
-                    className="relative h-20 w-20 shrink-0 overflow-hidden rounded-sm border border-border bg-white"
+                    className="relative h-20 w-20 shrink-0 overflow-hidden rounded-sm border border-border bg-surface-sunken"
                   >
                     {l.image ? (
                       <Image src={l.image} alt={l.name} fill sizes="80px" className="object-contain p-2" />
