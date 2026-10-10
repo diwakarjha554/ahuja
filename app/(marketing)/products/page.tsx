@@ -1,15 +1,24 @@
 import { Suspense } from "react"
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ChevronLeft, ChevronRight, PackageSearch } from "lucide-react"
+import { PackageSearch } from "lucide-react"
 
 import { Container } from "@/components/shared/container"
-import { PageHeader } from "@/components/shared/page-header"
+import { Reveal } from "@/components/shared/reveal"
 import { EmptyState } from "@/components/shared/empty-state"
 import { Skeleton } from "@/components/ui/skeleton"
 import { BTN, BTN_SECONDARY } from "@/components/shared/button-styles"
 import { ProductCard } from "@/components/marketing/product-card"
 import { ProductFilters, type FilterCategory } from "@/components/marketing/product-filters"
+import {
+  CatalogCallout,
+  CatalogPager,
+  CategoryChips,
+  Crumbs,
+  totalProducts,
+  type Chip,
+  type Crumb,
+} from "@/components/marketing/category-grid"
 import {
   categoryTree,
   getCategoryBySlug,
@@ -85,7 +94,7 @@ export default async function ProductsPage({
   const flatCategories = flattenCategories(tree)
   const activeCategory = flatCategories.find((c) => c.slug === categorySlug)
 
-  const { items, total, totalPages, page: currentPage } = await listProducts({
+  const { items, total, totalPages, page: currentPage, pageSize } = await listProducts({
     categorySlug,
     q,
     sort,
@@ -132,64 +141,69 @@ export default async function ProductsPage({
     return query ? `/products?${query}` : "/products"
   }
 
-  const shownPage = Math.min(currentPage, totalPages)
-  const pagerBase =
-    "inline-flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-sm border border-border px-3 text-sm font-medium text-ink transition-colors"
+  // The quick jump row: every top-level category, the one holding the chosen category lit.
+  const activeRoot = categorySlug
+    ? tree.find((root) => root.slug === categorySlug || root.children.some((c) => c.slug === categorySlug))
+    : undefined
+  const chips: Chip[] = [
+    { href: "/products", label: "All", active: !categorySlug },
+    ...tree.map((root) => ({
+      href: `/products?category=${root.slug}`,
+      label: root.name,
+      count: totalProducts(root),
+      active: activeRoot?.slug === root.slug,
+    })),
+  ]
+
+  const crumbs: Crumb[] = [
+    { label: "Home", href: "/" },
+    q || activeCategory ? { label: "Products", href: "/products" } : { label: "Products" },
+    ...(q ? [{ label: "Search" }] : activeCategory ? [{ label: activeCategory.name }] : []),
+  ]
+
+  const from = total === 0 ? 0 : (Math.min(currentPage, totalPages) - 1) * pageSize + 1
+  const to = Math.min(total, from + items.length - 1)
 
   return (
-    <Container className="py-8 md:py-12">
-      <PageHeader title={heading} subtitle={subtitle} />
+    <>
+      <Container className="pt-6 pb-8 md:pt-8 md:pb-10">
+        <Crumbs items={crumbs} />
+        <div className="mt-6 grid gap-5 md:mt-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,400px)] lg:items-end lg:gap-12">
+          {/* The count rides after the last word in marigold mono; the meta line below says it in words. */}
+          <h1 className="type-poster animate-fade-up text-[clamp(60px,9.5vw,160px)] text-ink [overflow-wrap:anywhere]">
+            {heading}
+            <span aria-hidden className="ml-[0.1em] inline-block align-top font-mono text-[clamp(18px,2.2vw,34px)] leading-none font-bold tracking-normal text-brand-accent tabular-nums">
+              {total}
+            </span>
+          </h1>
+          <p className="max-w-2xl animate-fade-up text-[16px] leading-relaxed text-ink-muted [animation-delay:120ms] md:text-[17px] lg:pb-2">
+            {subtitle}
+          </p>
+        </div>
+      </Container>
 
-      {/* Quick jump to a top-level category. Not an eyebrow: these are links. */}
-      <nav aria-label="Product categories" className="mb-6 flex flex-wrap gap-2">
-        <Link
-          href="/products"
-          aria-current={!categorySlug ? "page" : undefined}
-          className={cn(
-            "inline-flex h-9 items-center rounded-sm border px-3 text-sm font-medium transition-colors",
-            !categorySlug
-              ? "border-brand bg-brand-soft text-brand"
-              : "border-border bg-card text-ink-secondary hover:border-border-strong hover:text-ink",
-          )}
-        >
-          All
-        </Link>
-        {tree.map((root) => {
-          const isActive = categorySlug === root.slug
-          return (
-            <Link
-              key={root.slug}
-              href={`/products?category=${root.slug}`}
-              aria-current={isActive ? "page" : undefined}
-              className={cn(
-                "inline-flex h-9 items-center rounded-sm border px-3 text-sm font-medium transition-colors",
-                isActive
-                  ? "border-brand bg-brand-soft text-brand"
-                  : "border-border bg-card text-ink-secondary hover:border-border-strong hover:text-ink",
-              )}
-            >
-              {root.name}
-            </Link>
-          )
-        })}
-      </nav>
+      <Container className="pb-16 md:pb-24">
+        <CategoryChips label="Product categories" items={chips} />
 
-      <div className="lg:grid lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start lg:gap-8">
-        <aside className="mb-6 lg:mb-0 lg:sticky lg:top-[152px]">
+        <div className="mt-5">
           <Suspense fallback={<FiltersSkeleton />}>
             <ProductFilters categories={flatCategories} current={current} />
           </Suspense>
-        </aside>
+        </div>
 
-        <section aria-label="Products">
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border pb-4">
-            <p className="text-sm text-ink-secondary">{countLabel}</p>
-            {totalPages > 1 ? (
-              <p className="text-sm text-ink-muted">
-                Page {shownPage} of {totalPages}
-              </p>
-            ) : null}
-          </div>
+        <section aria-label="Products" className="pt-5">
+          <p className="mb-5 text-[13px] text-ink-muted" aria-live="polite">
+            {total === 0 ? (
+              countLabel
+            ) : (
+              <>
+                Showing <span className="font-mono font-semibold text-ink tabular-nums">{from}</span> to{" "}
+                <span className="font-mono font-semibold text-ink tabular-nums">{to}</span> of{" "}
+                <span className="font-mono font-semibold text-ink tabular-nums">{total.toLocaleString("en-IN")}</span>{" "}
+                {total === 1 ? "product" : "products"}
+              </>
+            )}
+          </p>
 
           {items.length === 0 ? (
             <EmptyState
@@ -201,63 +215,33 @@ export default async function ProductsPage({
                   Clear filters
                 </Link>
               }
-              className="mt-6"
             />
           ) : (
-            <div className="mt-6 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-              {items.map((product) => (
-                <ProductCard key={product.slug} product={product} />
+            <div className="grid grid-cols-2 gap-3 md:gap-5 lg:grid-cols-3 xl:grid-cols-4">
+              {items.map((product, i) => (
+                <Reveal key={product.slug} delay={(i % 4) * 60} className="h-full">
+                  <ProductCard product={product} className="h-full" />
+                </Reveal>
               ))}
             </div>
           )}
 
-          {totalPages > 1 ? (
-            <nav
-              aria-label="Pagination"
-              className="mt-8 flex items-center justify-between gap-3 border-t border-border pt-5"
-            >
-              {currentPage > 1 ? (
-                <Link href={pageHref(currentPage - 1)} rel="prev" className={cn(pagerBase, "hover:bg-accent")}>
-                  <ChevronLeft className="h-[18px] w-[18px]" strokeWidth={1.75} />
-                  Previous
-                </Link>
-              ) : (
-                <span aria-disabled className={cn(pagerBase, "pointer-events-none opacity-50")}>
-                  <ChevronLeft className="h-[18px] w-[18px]" strokeWidth={1.75} />
-                  Previous
-                </span>
-              )}
-
-              <span className="text-sm text-ink-muted">
-                Page {shownPage} of {totalPages}
-              </span>
-
-              {currentPage < totalPages ? (
-                <Link href={pageHref(currentPage + 1)} rel="next" className={cn(pagerBase, "hover:bg-accent")}>
-                  Next
-                  <ChevronRight className="h-[18px] w-[18px]" strokeWidth={1.75} />
-                </Link>
-              ) : (
-                <span aria-disabled className={cn(pagerBase, "pointer-events-none opacity-50")}>
-                  Next
-                  <ChevronRight className="h-[18px] w-[18px]" strokeWidth={1.75} />
-                </span>
-              )}
-            </nav>
-          ) : null}
+          <CatalogPager page={currentPage} totalPages={totalPages} hrefFor={pageHref} />
         </section>
-      </div>
-    </Container>
+
+        <CatalogCallout className="mt-16 md:mt-24" />
+      </Container>
+    </>
   )
 }
 
+/** Holds the filter bar's place (one 44px row between two rules) while it loads. */
 function FiltersSkeleton() {
   return (
-    <div className="space-y-5 rounded-sm border border-border bg-card p-4">
-      <Skeleton className="h-6 w-20" />
-      <Skeleton className="h-11 w-full" />
-      <Skeleton className="h-11 w-full" />
-      <Skeleton className="h-11 w-full" />
+    <div className="flex gap-3 border-y border-border py-3">
+      <Skeleton className="h-11 w-28 lg:w-56" />
+      <Skeleton className="h-11 flex-1 lg:w-64 lg:flex-none" />
+      <Skeleton className="ml-auto hidden h-11 w-60 lg:block" />
     </div>
   )
 }

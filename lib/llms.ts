@@ -6,6 +6,8 @@ import "server-only"
 
 import { siteConfig, absoluteUrl } from "@/lib/config/site"
 import { categoryTree, listProducts, type CategoryNode } from "@/features/catalog/server/catalog.queries"
+import { hasDatabase } from "@/lib/env"
+import { productsForLlms } from "@/features/catalog/server/static-catalog"
 import { db } from "@/server/db"
 
 const KEY_PAGES: { path: string; label: string; desc: string }[] = [
@@ -63,11 +65,13 @@ async function productsSection(full: boolean): Promise<string> {
 
   // Full: add one block per product with its specs.
   const detail: string[] = ["", "## Product details", ""]
-  const full200 = await db.product.findMany({
-    where: { status: "ACTIVE" },
-    orderBy: { name: "asc" },
-    select: { slug: true, name: true, modelNumber: true, price: true, mrp: true, shortDesc: true, specs: true },
-  })
+  const full200 = !hasDatabase()
+    ? productsForLlms()
+    : await db.product.findMany({
+        where: { status: "ACTIVE" },
+        orderBy: { name: "asc" },
+        select: { slug: true, name: true, modelNumber: true, price: true, mrp: true, shortDesc: true, specs: true },
+      })
   for (const p of full200) {
     const url = absoluteUrl(`/products/${p.slug}`)
     detail.push(`### ${p.name}`)

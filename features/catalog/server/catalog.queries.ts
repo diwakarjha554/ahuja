@@ -1,10 +1,14 @@
 import "server-only"
 
 import { MAX_PAGE_SIZE, PAGE_SIZE } from "@/lib/constants"
+import { hasDatabase } from "@/lib/env"
+import * as fileCatalog from "@/features/catalog/server/static-catalog"
 import { db } from "@/server/db"
 
 // Reads shared by the storefront, the console and the SEO routes. Money is a
 // string on the wire; Decimal columns are stringified here, at the edge.
+// Without a database every read is answered from the catalogue file instead
+// (static-catalog.ts), with the same shapes, so the shop still runs.
 
 export type Money = string
 
@@ -38,6 +42,16 @@ export type ProductDetail = ProductCard & {
   rating: { average: number; count: number }
   seoTitle: string | null
   seoDesc: string | null
+}
+
+export type CategoryDetail = {
+  slug: string
+  name: string
+  description: string | null
+  seoTitle: string | null
+  seoDesc: string | null
+  parent: { slug: string; name: string } | null
+  children: { slug: string; name: string }[]
 }
 
 export type CategoryNode = {
@@ -117,6 +131,7 @@ export async function listProducts(input: ListProductsInput = {}): Promise<{
   pageSize: number
   totalPages: number
 }> {
+  if (!hasDatabase()) return fileCatalog.listProducts(input)
   const page = Math.max(1, input.page ?? 1)
   const pageSize = Math.min(MAX_PAGE_SIZE, Math.max(1, input.pageSize ?? PAGE_SIZE))
 
@@ -133,22 +148,28 @@ export async function listProducts(input: ListProductsInput = {}): Promise<{
     }
   }
 
+  // The category and the search are both ORs, so they go under AND: two OR keys
+  // in one object would overwrite each other and drop the category.
   const where = {
     status: "ACTIVE" as const,
-    ...(categoryIds
-      ? { OR: [{ categoryId: { in: categoryIds } }, { crossListings: { some: { categoryId: { in: categoryIds } } } }] }
-      : {}),
+    AND: [
+      ...(categoryIds
+        ? [{ OR: [{ categoryId: { in: categoryIds } }, { crossListings: { some: { categoryId: { in: categoryIds } } } }] }]
+        : []),
+      ...(input.q
+        ? [
+            {
+              OR: [
+                { name: { contains: input.q, mode: "insensitive" as const } },
+                { modelNumber: { contains: input.q, mode: "insensitive" as const } },
+                { sku: { contains: input.q, mode: "insensitive" as const } },
+                { description: { contains: input.q, mode: "insensitive" as const } },
+              ],
+            },
+          ]
+        : []),
+    ],
     ...(input.inStock ? { stock: { gt: 0 } } : {}),
-    ...(input.q
-      ? {
-          OR: [
-            { name: { contains: input.q, mode: "insensitive" as const } },
-            { modelNumber: { contains: input.q, mode: "insensitive" as const } },
-            { sku: { contains: input.q, mode: "insensitive" as const } },
-            { description: { contains: input.q, mode: "insensitive" as const } },
-          ],
-        }
-      : {}),
     ...(input.priceMin != null || input.priceMax != null
       ? {
           price: {
@@ -185,6 +206,7 @@ export async function listProducts(input: ListProductsInput = {}): Promise<{
 }
 
 export async function listFeaturedProducts(limit = 8): Promise<ProductCard[]> {
+  if (!hasDatabase()) return fileCatalog.listFeaturedProducts(limit)
   const rows = await db.product.findMany({
     where: { status: "ACTIVE", featured: true },
     orderBy: { createdAt: "desc" },
@@ -195,6 +217,7 @@ export async function listFeaturedProducts(limit = 8): Promise<ProductCard[]> {
 }
 
 export async function getProductBySlug(slug: string): Promise<ProductDetail | null> {
+  if (!hasDatabase()) return fileCatalog.getProductBySlug(slug)
   const p = await db.product.findFirst({
     where: { slug, status: "ACTIVE" },
     select: {
@@ -237,6 +260,7 @@ export async function getProductBySlug(slug: string): Promise<ProductDetail | nu
 }
 
 export async function relatedProducts(slug: string, limit = 4): Promise<ProductCard[]> {
+  if (!hasDatabase()) return fileCatalog.relatedProducts(slug, limit)
   const p = await db.product.findUnique({ where: { slug }, select: { id: true, categoryId: true } })
   if (!p?.categoryId) return []
   const rows = await db.product.findMany({
@@ -248,7 +272,8 @@ export async function relatedProducts(slug: string, limit = 4): Promise<ProductC
   return rows.map(toCard)
 }
 
-export async function getCategoryBySlug(slug: string) {
+export async function getCategoryBySlug(slug: string): Promise<CategoryDetail | null> {
+  if (!hasDatabase()) return fileCatalog.getCategoryBySlug(slug)
   const cat = await db.category.findUnique({
     where: { slug },
     select: {
@@ -265,6 +290,7 @@ export async function getCategoryBySlug(slug: string) {
 }
 
 export async function categoryTree(): Promise<CategoryNode[]> {
+  if (!hasDatabase()) return fileCatalog.categoryTree()
   const [cats, reps] = await Promise.all([
     db.category.findMany({
       orderBy: { sort: "asc" },
@@ -318,9 +344,11 @@ export async function categoryTree(): Promise<CategoryNode[]> {
 }
 
 export async function allProductSlugs(): Promise<{ slug: string; updatedAt: Date }[]> {
+  if (!hasDatabase()) return fileCatalog.allProductSlugs()
   return db.product.findMany({ where: { status: "ACTIVE" }, select: { slug: true, updatedAt: true } })
 }
 
 export async function allCategorySlugs(): Promise<{ slug: string; updatedAt: Date }[]> {
+  if (!hasDatabase()) return fileCatalog.allCategorySlugs()
   return db.category.findMany({ select: { slug: true, updatedAt: true } })
 }

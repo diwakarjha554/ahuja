@@ -4,6 +4,8 @@ import { NextResponse, type NextRequest } from "next/server"
 import { ZodError, flattenError } from "zod"
 
 import { AppError } from "@/lib/errors"
+import { siteConfig } from "@/lib/config/site"
+import { NoDatabaseError } from "@/server/db"
 import { validationMessage } from "@/lib/validation-message"
 import "@/server/zod-messages"
 
@@ -57,6 +59,21 @@ export function withErrorHandler<P = Record<string, never>>(handler: Handler<P>)
             error: { code: err.code, message: err.message, details: err.details },
           },
           { status: err.status },
+        )
+      }
+
+      if (err instanceof NoDatabaseError) {
+        // Running from the catalogue file: nothing can be saved, so hand the customer to a person.
+        const phone = siteConfig.phones[0].display
+        return NextResponse.json(
+          {
+            success: false,
+            error: {
+              code: "NO_DATABASE",
+              message: `We are not taking this online yet. Call ${phone} or WhatsApp ${siteConfig.whatsapp.display} and we will sort it out with you.`,
+            },
+          },
+          { status: 503 },
         )
       }
 

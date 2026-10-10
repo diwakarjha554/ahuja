@@ -1,9 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { ArrowRight, ArrowUpRight } from "lucide-react"
 
 import { Container } from "@/components/shared/container"
+import { BTN } from "@/components/shared/button-styles"
 import { siteConfig } from "@/lib/config/site"
+import { cn } from "@/lib/utils"
 
 type Policy = {
   title: string
@@ -176,7 +179,7 @@ const POLICIES: Record<Slug, Policy> = {
       {
         heading: "Cancellation, returns and refunds",
         paragraphs: [
-          "Cancellations, returns and refunds are covered in our shipping and returns policies, linked in the footer.",
+          "Cancellations, returns and refunds are covered in our cancellation and refunds policy, and delivery in our shipping policy.",
         ],
       },
       {
@@ -214,46 +217,192 @@ export async function generateMetadata({
   }
 }
 
+/** Short names for the switcher between the four policies. */
+const NAV: { slug: Slug; label: string }[] = [
+  { slug: "shipping", label: "Shipping" },
+  { slug: "returns", label: "Returns" },
+  { slug: "privacy", label: "Privacy" },
+  { slug: "terms", label: "Terms" },
+]
+
+/** Phrases in the policy text that become links, in marigold. */
+const LINKS: Record<string, string> = Object.fromEntries([
+  [siteConfig.email, `mailto:${siteConfig.email}`],
+  [siteConfig.supportEmail, `mailto:${siteConfig.supportEmail}`],
+  [siteConfig.grievanceEmail, `mailto:${siteConfig.grievanceEmail}`],
+  [phone, `tel:${siteConfig.phones[0].tel}`],
+  ["shipping policy", "/policies/shipping"],
+  ["cancellation and refunds policy", "/policies/returns"],
+])
+const LINK_RE = new RegExp(
+  `(${Object.keys(LINKS)
+    .sort((a, b) => b.length - a.length)
+    .map((k) => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .join("|")})`,
+)
+
+const LINK_CLASS =
+  "font-medium text-brand underline decoration-brand/50 decoration-2 underline-offset-4 transition-colors hover:decoration-brand"
+
+function withLinks(text: string) {
+  return text.split(LINK_RE).map((part, i) => {
+    const href = LINKS[part]
+    if (!href) return part
+    if (href.startsWith("/"))
+      return (
+        <Link key={i} href={href} className={LINK_CLASS}>
+          {part}
+        </Link>
+      )
+    return (
+      <a key={i} href={href} className={cn(LINK_CLASS, href.startsWith("tel:") && "font-mono")}>
+        {part}
+      </a>
+    )
+  })
+}
+
+const anchor = (heading: string) =>
+  heading
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")
+
 export default async function PolicyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const policy = POLICIES[slug as Slug]
   if (!policy) notFound()
 
   return (
-    <Container className="py-10 md:py-14">
-      <article className="max-w-[720px]">
-        <h1 className="font-display text-3xl text-ink md:text-4xl">{policy.title}</h1>
-        <p className="mt-2 text-sm text-ink-muted">Last updated {UPDATED}</p>
-        <p className="mt-4 text-ink-secondary">{policy.intro}</p>
+    <>
+      <section className="border-b border-border bg-background">
+        <Container className="pt-10 pb-10 md:pt-16 md:pb-14">
+          <h1 className="type-poster max-w-[16ch] animate-fade-up text-[clamp(48px,8vw,128px)] text-balance text-ink">
+            {policy.title}
+          </h1>
+          <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+            <div className="animate-fade-up [animation-delay:100ms]">
+              <p className="max-w-[62ch] text-[17px] leading-relaxed text-ink-secondary md:text-lg">{policy.intro}</p>
+              <p className="mt-4 font-mono text-[13px] text-ink-muted">Last updated {UPDATED}</p>
+            </div>
+            <nav aria-label="Policies" className="grid animate-fade-up grid-cols-4 gap-2 [animation-delay:160ms] sm:flex">
+              {NAV.map((n) => {
+                const active = n.slug === slug
+                return (
+                  <Link
+                    key={n.slug}
+                    href={`/policies/${n.slug}`}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      BTN,
+                      "px-2 font-semibold sm:px-4",
+                      active
+                        ? "bg-brand-accent text-brand-accent-ink"
+                        : "border border-border-strong text-ink-secondary hover:border-ink hover:text-ink",
+                    )}
+                  >
+                    {n.label}
+                  </Link>
+                )
+              })}
+            </nav>
+          </div>
+        </Container>
+      </section>
 
-        {policy.sections.map((s) => (
-          <section key={s.heading}>
-            <h2 className="mt-10 font-display text-xl text-ink">{s.heading}</h2>
-            {s.paragraphs.map((p, i) => (
-              <p key={i} className="mt-3 text-ink-secondary">
-                {p}
-              </p>
+      <section className="bg-background py-12 md:py-16">
+        <Container className="grid gap-10 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-x-14 xl:grid-cols-[200px_minmax(0,62ch)_minmax(320px,1fr)] xl:gap-x-12 2xl:grid-cols-[240px_minmax(0,68ch)_minmax(360px,1fr)] 2xl:gap-x-16">
+          {/* The sections, numbered, kept in view on wide screens. */}
+          <nav aria-label="On this page" className="hidden lg:row-span-2 lg:block xl:row-span-1">
+            <div className="sticky top-[136px]">
+              <h2 className="text-[15px] font-semibold text-ink">On this page</h2>
+              <ol className="mt-4 border-l border-border">
+                {policy.sections.map((s, i) => (
+                  <li key={s.heading}>
+                    <a
+                      href={`#${anchor(s.heading)}`}
+                      className="-ml-px flex gap-3 border-l-2 border-transparent py-2 pl-4 text-[15px] text-ink-muted transition-colors hover:border-brand-accent hover:text-ink"
+                    >
+                      <span className="font-mono text-[13px] leading-[22px] text-brand-accent tabular-nums">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      {s.heading}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </nav>
+
+          <article className="max-w-[68ch]">
+            {policy.sections.map((s, i) => (
+              <section
+                key={s.heading}
+                id={anchor(s.heading)}
+                className="scroll-mt-[140px] border-t border-border pt-8 pb-10 first:border-t-0 first:pt-0 md:pb-12"
+              >
+                <h2 className="flex items-baseline gap-4 text-ink">
+                  <span className="font-mono text-[15px] font-semibold text-brand-accent tabular-nums">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="type-poster text-[clamp(32px,3vw,44px)]">{s.heading}</span>
+                </h2>
+                {s.paragraphs.map((p, j) => (
+                  <p key={j} className="mt-4 text-[17px] leading-[1.75] text-pretty text-ink-secondary">
+                    {withLinks(p)}
+                  </p>
+                ))}
+              </section>
             ))}
-          </section>
-        ))}
 
-        <p className="mt-10 text-sm text-ink-muted">
-          Questions about this policy? Email{" "}
-          <a href={`mailto:${siteConfig.supportEmail}`} className="text-brand hover:underline">
-            {siteConfig.supportEmail}
-          </a>{" "}
-          or call{" "}
-          <a href={`tel:${siteConfig.phones[0].tel}`} className="text-brand hover:underline">
-            {phone}
-          </a>
-          .
-        </p>
-        <div className="mt-8 border-t border-border pt-6 text-sm">
-          <Link href="/contact" className="text-brand hover:underline">
-            Contact us
-          </Link>
-        </div>
-      </article>
-    </Container>
+          </article>
+
+          {/* Who to ask: under the text, or a rail beside it on wide screens. */}
+          <aside className="max-w-[68ch] lg:col-start-2 xl:col-start-3 xl:row-start-1">
+            <div className="rounded-sm bg-brand-deep p-6 text-white md:p-8 xl:sticky xl:top-[136px]">
+              <h2 className="type-poster text-[clamp(36px,3.4vw,52px)]">Ask about this policy</h2>
+              <p className="mt-3 text-[15px] text-white/75">
+                We reply to email within {promise.supportReply}, and the Delhi lines take calls.
+              </p>
+              <div className="mt-6 flex flex-col gap-1">
+                <a
+                  href={`mailto:${siteConfig.supportEmail}`}
+                  className="group flex min-h-11 items-center justify-between gap-4 border-b-2 border-white/25 py-2 text-[clamp(17px,1.5vw,20px)] font-semibold break-all transition-colors hover:border-brand-accent hover:text-brand-accent"
+                >
+                  {siteConfig.supportEmail}
+                  <ArrowUpRight
+                    className="h-6 w-6 shrink-0 transition-transform duration-[200ms] ease-standard group-hover:translate-x-1 group-hover:-translate-y-1"
+                    strokeWidth={2}
+                    aria-hidden
+                  />
+                </a>
+                <a
+                  href={`tel:${siteConfig.phones[0].tel}`}
+                  className="group flex min-h-11 items-center justify-between gap-4 border-b-2 border-white/25 py-2 font-mono text-[clamp(24px,2.2vw,32px)] font-semibold whitespace-nowrap tracking-[-0.02em] tabular-nums transition-colors hover:border-brand-accent hover:text-brand-accent"
+                >
+                  {phone}
+                  <ArrowUpRight
+                    className="h-6 w-6 shrink-0 transition-transform duration-[200ms] ease-standard group-hover:translate-x-1 group-hover:-translate-y-1"
+                    strokeWidth={2}
+                    aria-hidden
+                  />
+                </a>
+              </div>
+              <Link
+                href="/contact"
+                className="group mt-6 inline-flex h-11 items-center gap-2 text-[15px] font-semibold text-white transition-colors hover:text-brand-accent"
+              >
+                All the ways to reach us
+                <ArrowRight
+                  className="h-4 w-4 transition-transform duration-[200ms] ease-standard group-hover:translate-x-1"
+                  strokeWidth={2}
+                  aria-hidden
+                />
+              </Link>
+            </div>
+          </aside>
+        </Container>
+      </section>
+    </>
   )
 }

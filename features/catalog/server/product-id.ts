@@ -1,5 +1,7 @@
 import "server-only"
 
+import { hasDatabase } from "@/lib/env"
+import * as fileCatalog from "@/features/catalog/server/static-catalog"
 import { db } from "@/server/db"
 
 // The PDP needs the product id to build a cart line and to place an order, but
@@ -7,6 +9,7 @@ import { db } from "@/server/db"
 // This is the one tiny read that resolves a slug to its id, kept beside the
 // other catalogue reads so the main query stays untouched.
 export async function getProductIdBySlug(slug: string): Promise<string | null> {
+  if (!hasDatabase()) return fileCatalog.getProductIdBySlug(slug)
   const product = await db.product.findFirst({
     where: { slug, status: "ACTIVE" },
     select: { id: true },

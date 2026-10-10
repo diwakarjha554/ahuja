@@ -47,6 +47,26 @@ before writing code. Verified gotchas on this project:
 *schema* named `ahuja` inside a shared local database, because the local role
 cannot create databases. Production uses a dedicated database (see `.env.example`).
 
+## Running without a database
+
+The shop deploys and runs with no database at all. `hasDatabase()` (lib/env.ts)
+is false when `DATABASE_URL` is unset, or when it points at this machine on
+Vercel (a copied local .env). Then:
+
+- every storefront read in `features/catalog/server/catalog.queries.ts`,
+  `product-id.ts`, cart pricing and `lib/llms.ts` is answered from
+  `prisma/seed-data/catalog.json` by `static-catalog.ts`, same shapes, with a
+  product's slug as its id;
+- anything that saves (orders, contact, quote, newsletter, reviews, coupons)
+  hits `NoDatabaseError` (server/db.ts), which `withErrorHandler` turns into a
+  503 `NO_DATABASE` naming the phone and WhatsApp; checkout then offers
+  "Send order on WhatsApp" with the whole order prefilled;
+- the staff console is closed: /login says it is not connected, and without
+  `AUTH_SECRET` the proxy answers /admin with a 404.
+
+New storefront reads must keep working this way: branch on `hasDatabase()`
+and add the file-backed version to `static-catalog.ts`.
+
 ## Read before writing any UI: the client's hard rules
 
 These are rules, not suggestions. Build agents must self-check against them.

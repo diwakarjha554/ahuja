@@ -18,7 +18,8 @@ function WhatsAppGlyph() {
 /**
  * The closing block in marigold: the ask in poster caps, both phone lines set
  * large as links, WhatsApp as the one button, and the megaphone cut-out from
- * the shop's earlier site as a sticker in the corner.
+ * the shop's earlier site slapped across the block's top edge like a sticker.
+ * The phone column sits low, clear of it.
  */
 export function ContactCta() {
   const waHref = `https://wa.me/${siteConfig.whatsapp.number}?text=${encodeURIComponent(
@@ -26,16 +27,16 @@ export function ContactCta() {
   )}`
 
   return (
-    <section className="relative overflow-hidden bg-brand-accent text-brand-accent-ink">
+    <section className="relative overflow-x-clip bg-brand-accent text-brand-accent-ink">
       <Image
         src="/media/megaphone.png"
         alt=""
         width={579}
         height={653}
         sizes="(min-width: 1280px) 300px, 220px"
-        className="pointer-events-none absolute -right-10 -bottom-16 hidden w-[240px] rotate-[-14deg] drop-shadow-[0_18px_24px_rgba(28,20,7,0.35)] md:block xl:right-[2%] xl:w-[300px]"
+        className="pointer-events-none absolute -top-16 right-[3%] z-10 hidden w-[180px] rotate-[-10deg] drop-shadow-[0_18px_24px_rgba(28,20,7,0.35)] md:block lg:-top-20 xl:w-[230px]"
       />
-      <Container className="relative grid gap-10 py-16 md:py-24 lg:grid-cols-[1.25fr_0.75fr] lg:items-center">
+      <Container className="relative grid gap-10 py-16 md:pt-32 md:pb-24 lg:grid-cols-[1.25fr_0.75fr] lg:items-end lg:pt-24">
         <Reveal>
           <h2 className="type-poster text-[clamp(56px,8.5vw,148px)]">
             <span className="block">Talk to Delhi</span>
@@ -47,7 +48,7 @@ export function ContactCta() {
           </p>
         </Reveal>
 
-        <Reveal delay={120} className="flex flex-col md:max-w-[440px] lg:mb-16">
+        <Reveal delay={120} className="flex flex-col md:max-w-[440px]">
           {siteConfig.phones.map((phone) => (
             <a
               key={phone.tel}

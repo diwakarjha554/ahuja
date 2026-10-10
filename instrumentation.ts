@@ -7,7 +7,7 @@ export async function register() {
 
   if (!hasDatabase()) {
     console.warn(
-      "[BOOT] DATABASE_URL is not set - the storefront runs from the catalogue registry, and any database-backed route will answer 503.",
+      "[BOOT] No database (DATABASE_URL unset, or local-only on Vercel): the storefront runs from prisma/seed-data/catalog.json, anything that saves answers 503 NO_DATABASE, and checkout hands orders over on WhatsApp.",
     )
   }
 

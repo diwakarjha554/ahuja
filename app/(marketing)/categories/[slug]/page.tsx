@@ -2,15 +2,25 @@ import { Suspense } from "react"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound, redirect } from "next/navigation"
-import { ChevronLeft, ChevronRight, PackageSearch } from "lucide-react"
+import { PackageSearch } from "lucide-react"
 
 import { BTN, BTN_PRIMARY, BTN_SECONDARY } from "@/components/shared/button-styles"
 import { Container } from "@/components/shared/container"
 import { EmptyState } from "@/components/shared/empty-state"
-import { PageHeader } from "@/components/shared/page-header"
+import { Reveal } from "@/components/shared/reveal"
 import { Skeleton } from "@/components/ui/skeleton"
 import { ProductCard } from "@/components/marketing/product-card"
 import { ProductFilters, type FilterCategory } from "@/components/marketing/product-filters"
+import {
+  CatalogCallout,
+  CatalogPager,
+  CategoryBand,
+  CategoryChips,
+  CategoryGrid,
+  totalProducts,
+  type Chip,
+  type Crumb,
+} from "@/components/marketing/category-grid"
 import {
   categoryTree,
   getCategoryBySlug,
@@ -135,6 +145,8 @@ export default async function CategoryPage({
     maxPrice: maxPriceStr,
   }
 
+  // A search, the stock toggle or a price range narrows the count; a sort only reorders it.
+  const narrowed = Boolean(q) || inStock || Boolean(minPriceStr) || Boolean(maxPriceStr)
   const hasActiveFilters =
     Boolean(q) || inStock || Boolean(minPriceStr) || Boolean(maxPriceStr) || sort !== "relevance"
 
@@ -156,9 +168,6 @@ export default async function CategoryPage({
     const query = spp.toString()
     return query ? `${categoryPath}?${query}` : categoryPath
   }
-
-  const pagerBase =
-    "inline-flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-sm border border-border px-3 text-sm font-medium text-ink transition-colors"
 
   const trail = [
     { name: "Home", url: absoluteUrl("/") },
@@ -186,151 +195,158 @@ export default async function CategoryPage({
     })),
   }
 
+  // The tree carries each range's count and photo: tiles for a parent, the sibling row for a range.
+  const node = findNode(tree, category.slug)
+  const parentNode = category.parent ? findNode(tree, category.parent.slug) : undefined
+  const ranges = (node?.children ?? []).filter((child) => totalProducts(child) > 0)
+  const siblings: Chip[] = parentNode
+    ? [
+        {
+          href: `/categories/${parentNode.slug}`,
+          label: `All ${parentNode.name.toLowerCase()}`,
+          count: totalProducts(parentNode),
+        },
+        ...parentNode.children
+          .filter((child) => child.slug === category.slug || totalProducts(child) > 0)
+          .map((child) => ({
+            href: `/categories/${child.slug}`,
+            label: child.name,
+            count: totalProducts(child),
+            active: child.slug === category.slug,
+          })),
+      ]
+    : []
+
+  const crumbs: Crumb[] = [
+    { label: "Home", href: "/" },
+    { label: "Categories", href: "/categories" },
+    ...(category.parent ? [{ label: category.parent.name, href: `/categories/${category.parent.slug}` }] : []),
+    { label: category.name },
+  ]
+
+  const from = total === 0 ? 0 : (shownPage - 1) * pageSize + 1
+  const to = Math.min(total, from + items.length - 1)
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ldJson(breadcrumbLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ldJson(itemListLd) }} />
-      <Container className="py-8 md:py-12">
-        <nav aria-label="Breadcrumb" className="mb-4 flex flex-wrap items-center gap-2 text-[13px] text-ink-muted">
-          <Link href="/" className="text-brand hover:underline">
-            Home
-          </Link>
-          <ChevronRight className="h-3.5 w-3.5 shrink-0" strokeWidth={1.75} aria-hidden />
-          <Link href="/categories" className="text-brand hover:underline">
-            Categories
-          </Link>
-          {category.parent && (
-            <>
-              <ChevronRight className="h-3.5 w-3.5 shrink-0" strokeWidth={1.75} aria-hidden />
-              <Link href={`/categories/${category.parent.slug}`} className="text-brand hover:underline">
-                {category.parent.name}
-              </Link>
-            </>
-          )}
-          <ChevronRight className="h-3.5 w-3.5 shrink-0" strokeWidth={1.75} aria-hidden />
-          <span className="text-ink">{category.name}</span>
-        </nav>
 
-        <PageHeader title={category.name} subtitle={subtitle} />
+      <CategoryBand
+        name={category.name}
+        description={subtitle}
+        count={total}
+        countLabel={narrowed ? (total === 1 ? "match" : "matches") : total === 1 ? "product" : "products"}
+        slug={category.slug}
+        parentSlug={category.parent?.slug}
+        image={node?.image}
+        crumbs={crumbs}
+      />
 
-        {category.children.length > 0 && (
-          <nav aria-label={`Sub-categories of ${category.name}`} className="mb-6 flex flex-wrap gap-2">
-            {category.children.map((child) => (
-              <Link
-                key={child.slug}
-                href={`/categories/${child.slug}`}
-                className="inline-flex h-11 items-center rounded-sm border border-border bg-card px-4 text-sm font-medium text-ink-secondary transition-colors hover:border-border-strong hover:text-ink"
-              >
-                {child.name}
-              </Link>
-            ))}
-          </nav>
+      {ranges.length > 0 && (
+        <section aria-labelledby="ranges-title" className="border-b border-border bg-card py-10 md:py-14">
+          <Container>
+            <Reveal className="mb-6 flex flex-wrap items-end justify-between gap-x-6 gap-y-2 md:mb-8">
+              <h2 id="ranges-title" className="type-poster text-[clamp(40px,5vw,80px)] text-ink">
+                {category.name} by type
+              </h2>
+              <p className="text-[15px] text-ink-muted">
+                <span className="font-mono font-semibold text-ink tabular-nums">{ranges.length}</span> ranges
+              </p>
+            </Reveal>
+            <CategoryGrid categories={ranges} />
+          </Container>
+        </section>
+      )}
+
+      <Container className="pt-10 pb-16 md:pt-14 md:pb-24">
+        {siblings.length > 0 && (
+          <CategoryChips label={`Other ${parentNode?.name ?? ""} ranges`} items={siblings} className="mb-5" />
         )}
 
-        <div className="lg:grid lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start lg:gap-8">
-          <aside className="mb-6 lg:mb-0 lg:sticky lg:top-[152px]">
-            <Suspense fallback={<FiltersSkeleton />}>
-              <ProductFilters categories={flatCategories} current={current} />
-            </Suspense>
-          </aside>
+        <Suspense fallback={<FiltersSkeleton />}>
+          <ProductFilters categories={flatCategories} current={current} categoryFromPath />
+        </Suspense>
 
-          <section aria-label={`Products in ${category.name}`}>
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border pb-4">
-              <p className="text-sm text-ink-secondary">{countLabel}</p>
-              {totalPages > 1 ? (
-                <p className="text-sm text-ink-muted">
-                  Page {shownPage} of {totalPages}
-                </p>
-              ) : null}
-            </div>
-
-            {items.length === 0 ? (
-              hasActiveFilters ? (
-                <EmptyState
-                  icon={PackageSearch}
-                  title="No products match these filters"
-                  description={`Try removing a filter or clearing the price range. You can also call ${phone.display} and we will help you find the right Ahuja model.`}
-                  action={
-                    <Link href={`/categories/${category.slug}`} className={cn(BTN, BTN_SECONDARY)}>
-                      Clear filters
-                    </Link>
-                  }
-                  className="mt-6"
-                />
-              ) : (
-                <EmptyState
-                  icon={PackageSearch}
-                  title="No products in this category yet"
-                  description={`We are adding stock to ${category.name}. Browse all products, or call ${phone.display} and we will help you find the right Ahuja model.`}
-                  action={
-                    <div className="flex flex-wrap items-center justify-center gap-2">
-                      <Link href="/products" className={cn(BTN, BTN_PRIMARY)}>
-                        Browse all products
-                      </Link>
-                      <a href={`tel:${phone.tel}`} className={cn(BTN, BTN_SECONDARY)}>
-                        Call {phone.display}
-                      </a>
-                    </div>
-                  }
-                  className="mt-6"
-                />
-              )
+        <section aria-label={`Products in ${category.name}`} className="pt-5">
+          <p className="mb-5 text-[13px] text-ink-muted" aria-live="polite">
+            {total === 0 ? (
+              countLabel
             ) : (
-              <div className="mt-6 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-                {items.map((product) => (
-                  <ProductCard key={product.slug} product={product} />
-                ))}
-              </div>
+              <>
+                Showing <span className="font-mono font-semibold text-ink tabular-nums">{from}</span> to{" "}
+                <span className="font-mono font-semibold text-ink tabular-nums">{to}</span> of{" "}
+                <span className="font-mono font-semibold text-ink tabular-nums">{total.toLocaleString("en-IN")}</span>{" "}
+                {total === 1 ? "product" : "products"}
+              </>
             )}
+          </p>
 
-            {totalPages > 1 ? (
-              <nav
-                aria-label="Pagination"
-                className="mt-8 flex items-center justify-between gap-3 border-t border-border pt-5"
-              >
-                {currentPage > 1 ? (
-                  <Link href={pageHref(currentPage - 1)} rel="prev" className={cn(pagerBase, "hover:bg-accent")}>
-                    <ChevronLeft className="h-[18px] w-[18px]" strokeWidth={1.75} aria-hidden />
-                    Previous
+          {items.length === 0 ? (
+            hasActiveFilters ? (
+              <EmptyState
+                icon={PackageSearch}
+                title="No products match these filters"
+                description={`Try removing a filter or clearing the price range. You can also call ${phone.display} and we will help you find the right Ahuja model.`}
+                action={
+                  <Link href={`/categories/${category.slug}`} className={cn(BTN, BTN_SECONDARY)}>
+                    Clear filters
                   </Link>
-                ) : (
-                  <span aria-disabled className={cn(pagerBase, "pointer-events-none opacity-50")}>
-                    <ChevronLeft className="h-[18px] w-[18px]" strokeWidth={1.75} aria-hidden />
-                    Previous
-                  </span>
-                )}
+                }
+              />
+            ) : (
+              <EmptyState
+                icon={PackageSearch}
+                title="No products in this category yet"
+                description={`We are adding stock to ${category.name}. Browse all products, or call ${phone.display} and we will help you find the right Ahuja model.`}
+                action={
+                  <div className="flex flex-wrap items-center justify-center gap-2">
+                    <Link href="/products" className={cn(BTN, BTN_PRIMARY)}>
+                      Browse all products
+                    </Link>
+                    <a href={`tel:${phone.tel}`} className={cn(BTN, BTN_SECONDARY)}>
+                      Call {phone.display}
+                    </a>
+                  </div>
+                }
+              />
+            )
+          ) : (
+            <div className="grid grid-cols-2 gap-3 md:gap-5 lg:grid-cols-3 xl:grid-cols-4">
+              {items.map((product, i) => (
+                <Reveal key={product.slug} delay={(i % 4) * 60} className="h-full">
+                  <ProductCard product={product} className="h-full" />
+                </Reveal>
+              ))}
+            </div>
+          )}
 
-                <span className="text-sm text-ink-muted">
-                  Page {shownPage} of {totalPages}
-                </span>
+          <CatalogPager page={currentPage} totalPages={totalPages} hrefFor={pageHref} />
+        </section>
 
-                {currentPage < totalPages ? (
-                  <Link href={pageHref(currentPage + 1)} rel="next" className={cn(pagerBase, "hover:bg-accent")}>
-                    Next
-                    <ChevronRight className="h-[18px] w-[18px]" strokeWidth={1.75} aria-hidden />
-                  </Link>
-                ) : (
-                  <span aria-disabled className={cn(pagerBase, "pointer-events-none opacity-50")}>
-                    Next
-                    <ChevronRight className="h-[18px] w-[18px]" strokeWidth={1.75} aria-hidden />
-                  </span>
-                )}
-              </nav>
-            ) : null}
-          </section>
-        </div>
+        <CatalogCallout className="mt-16 md:mt-24" />
       </Container>
     </>
   )
 }
 
+/** Find a category anywhere in the tree by slug. */
+function findNode(nodes: CategoryNode[], slug: string): CategoryNode | undefined {
+  for (const node of nodes) {
+    if (node.slug === slug) return node
+    const hit = findNode(node.children, slug)
+    if (hit) return hit
+  }
+  return undefined
+}
+
+/** Holds the filter bar's place (one 44px row between two rules) while it loads. */
 function FiltersSkeleton() {
   return (
-    <div className="space-y-5 rounded-sm border border-border bg-card p-4">
-      <Skeleton className="h-6 w-20" />
-      <Skeleton className="h-11 w-full" />
-      <Skeleton className="h-11 w-full" />
-      <Skeleton className="h-11 w-full" />
+    <div className="flex gap-3 border-y border-border py-3">
+      <Skeleton className="h-11 w-28 lg:w-56" />
+      <Skeleton className="h-11 flex-1 lg:w-64 lg:flex-none" />
+      <Skeleton className="ml-auto hidden h-11 w-60 lg:block" />
     </div>
   )
 }

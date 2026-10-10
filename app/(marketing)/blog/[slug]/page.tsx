@@ -2,10 +2,13 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { ArrowLeft, ArrowRight, Phone } from "lucide-react"
 
 import { PostBody } from "@/components/marketing/post-body"
 import { Container } from "@/components/shared/container"
+import { BTN, BTN_ACCENT, BTN_BLOCK } from "@/components/shared/button-styles"
 import { absoluteUrl, siteConfig } from "@/lib/config/site"
+import { cn } from "@/lib/utils"
 import { db } from "@/server/db"
 
 // Reads a published post from the database, so render per request.
@@ -81,26 +84,76 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
 
   return (
-    <Container className="py-10 md:py-14">
+    <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <article className="max-w-[720px]">
-        <Link href="/blog" className="text-sm text-brand hover:underline">
-          Back to guides
-        </Link>
-        <h1 className="mt-3 font-display text-3xl text-ink md:text-4xl">{post.title}</h1>
-        <p className="mt-3 text-sm text-ink-muted">
-          {post.authorName}
-          {post.publishedAt ? `, ${fmtDate(post.publishedAt)}` : ""}
-        </p>
-        {cover && (
-          <div className="relative mt-6 aspect-[16/9] overflow-hidden rounded-sm border border-border bg-card">
-            <Image src={cover} alt={post.title} fill sizes="(min-width:768px) 720px, 100vw" className="object-cover" priority />
+
+      <section className="border-b border-border bg-background">
+        <Container className="pt-8 pb-10 md:pt-12 md:pb-14">
+          <Link
+            href="/blog"
+            className="group inline-flex h-11 items-center gap-2 text-[15px] font-semibold text-ink-secondary transition-colors hover:text-brand-accent"
+          >
+            <ArrowLeft
+              className="h-4 w-4 transition-transform duration-[200ms] ease-standard group-hover:-translate-x-1"
+              strokeWidth={2}
+              aria-hidden
+            />
+            All guides
+          </Link>
+          <h1 className="type-poster mt-4 max-w-[18ch] animate-fade-up text-[clamp(44px,6.4vw,104px)] text-ink">
+            {post.title}
+          </h1>
+          {post.excerpt && (
+            <p className="mt-6 max-w-[62ch] animate-fade-up text-[17px] leading-relaxed text-ink-secondary [animation-delay:100ms] md:text-lg">
+              {post.excerpt}
+            </p>
+          )}
+          <p className="mt-6 animate-fade-up font-mono text-[13px] text-ink-muted [animation-delay:160ms]">
+            {post.authorName}
+            {post.publishedAt ? `, ${fmtDate(post.publishedAt)}` : ""}
+          </p>
+        </Container>
+      </section>
+
+      <section className="bg-background py-10 md:py-14">
+        <Container>
+          {cover && (
+            <div className="relative mb-10 aspect-[16/9] overflow-hidden rounded-sm bg-surface-sunken md:mb-14 lg:aspect-[21/9]">
+              <Image src={cover} alt={post.title} fill sizes="(min-width:1600px) 1520px, 100vw" className="object-cover" priority />
+            </div>
+          )}
+          <article className="mx-auto max-w-[68ch]">
+            <PostBody value={post.body} />
+          </article>
+        </Container>
+      </section>
+
+      {/* After the guide: the next step, as on the home page's closing block. */}
+      <section className="border-t border-border bg-card py-12 md:py-16">
+        <Container className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <h2 className="type-poster text-[clamp(44px,5.6vw,88px)] text-ink">
+            <span className="block">Room size in,</span>
+            <span className="block text-brand-accent">parts list out</span>
+          </h2>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Link href="/bulk-quote" className={cn(BTN, BTN_ACCENT, BTN_BLOCK, "px-6 font-semibold hover:-translate-y-0.5")}>
+              Get a bulk quote
+              <ArrowRight className="h-[18px] w-[18px]" strokeWidth={2} aria-hidden />
+            </Link>
+            <a
+              href={`tel:${siteConfig.phones[0].tel}`}
+              className={cn(
+                BTN,
+                BTN_BLOCK,
+                "border border-border-strong px-6 font-mono font-semibold text-ink hover:-translate-y-0.5 hover:border-ink",
+              )}
+            >
+              <Phone className="h-[18px] w-[18px]" strokeWidth={2} aria-hidden />
+              {siteConfig.phones[0].display}
+            </a>
           </div>
-        )}
-        <div className="mt-8">
-          <PostBody value={post.body} />
-        </div>
-      </article>
-    </Container>
+        </Container>
+      </section>
+    </>
   )
 }

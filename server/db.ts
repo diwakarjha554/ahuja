@@ -2,6 +2,22 @@
 import { PrismaPg } from "@prisma/adapter-pg"
 import { PrismaClient } from "@prisma/client"
 
+import { hasDatabase } from "@/lib/env"
+
+/**
+ * Thrown on the first database call when there is no database (see
+ * hasDatabase). API routes answer it with a 503 that gives the shop's phone
+ * and WhatsApp; the storefront's reads never reach it, they use the
+ * catalogue file instead.
+ */
+export class NoDatabaseError extends Error {
+  readonly code = "NO_DATABASE"
+  constructor() {
+    super("No database is configured (DATABASE_URL is unset or points at this machine).")
+    this.name = "NoDatabaseError"
+  }
+}
+
 // The pg driver adapter does NOT read the URL's `?schema=` for generated queries
 // (only Prisma Migrate does), so a non-public schema must be passed as the
 // adapter's `schema` option, or every query targets `public` and 404s.
@@ -18,9 +34,7 @@ function schemaName(connectionString: string): string | undefined {
 // which would throw at load without DATABASE_URL.
 function createClient() {
   const connectionString = process.env.DATABASE_URL
-  if (!connectionString) {
-    throw new Error("DATABASE_URL is not set. Set it in .env, pointing at your Postgres instance.")
-  }
+  if (!connectionString || !hasDatabase()) throw new NoDatabaseError()
 
   const schema = schemaName(connectionString)
 

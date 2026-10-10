@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Star } from "lucide-react"
+import { ArrowRight, Star } from "lucide-react"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
@@ -64,7 +64,7 @@ export function ReviewForm({
   }
 
   return (
-    <form onSubmit={submit} className={cn("space-y-4", className)} noValidate>
+    <form onSubmit={submit} className={cn("space-y-5", className)} noValidate>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Your name" htmlFor="rv-name" error={errors.authorName}>
           <Input
@@ -92,31 +92,37 @@ export function ReviewForm({
       </div>
 
       <Field label="Your rating" error={errors.rating}>
-        <div role="radiogroup" aria-label="Your rating" className="flex items-center gap-1">
-          {[1, 2, 3, 4, 5].map((n) => (
-            <button
-              key={n}
-              type="button"
-              role="radio"
-              aria-checked={rating === n}
-              aria-label={`${n} ${n === 1 ? "star" : "stars"}`}
-              onClick={() => setRating(n)}
-              onMouseEnter={() => setHover(n)}
-              onMouseLeave={() => setHover(0)}
-              className={cn(BTN_ICON, "hover:bg-accent")}
-            >
-              <Star
+        <div className="flex items-center gap-3">
+          <div role="radiogroup" aria-label="Your rating" className="-ml-2.5 flex items-center" onMouseLeave={() => setHover(0)}>
+            {[1, 2, 3, 4, 5].map((n) => (
+              <button
+                key={n}
+                type="button"
+                role="radio"
+                aria-checked={rating === n}
+                aria-label={`${n} ${n === 1 ? "star" : "stars"}`}
+                onClick={() => setRating(n)}
+                onMouseEnter={() => setHover(n)}
                 className={cn(
-                  "h-5 w-5",
-                  (hover || rating) >= n
-                    ? "fill-brand-accent text-brand-accent"
-                    : "text-border-strong",
+                  BTN_ICON,
+                  "transition-transform duration-[140ms] ease-standard hover:-translate-y-0.5 hover:scale-110",
+                  "focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring",
                 )}
-                strokeWidth={1.75}
-                aria-hidden
-              />
-            </button>
-          ))}
+              >
+                <Star
+                  className={cn(
+                    "h-7 w-7 transition-colors duration-[140ms]",
+                    (hover || rating) >= n ? "fill-brand-accent text-brand-accent" : "text-ink-muted",
+                  )}
+                  strokeWidth={1.75}
+                  aria-hidden
+                />
+              </button>
+            ))}
+          </div>
+          <span className="font-mono text-[15px] text-ink-muted tabular-nums" aria-hidden>
+            <span className={cn((hover || rating) > 0 && "text-ink")}>{hover || rating}</span> / 5
+          </span>
         </div>
       </Field>
 
@@ -143,8 +149,20 @@ export function ReviewForm({
         />
       </Field>
 
-      <Button type="submit" variant="primary" disabled={busy}>
+      <Button
+        type="submit"
+        variant="accent"
+        disabled={busy}
+        className="group w-full px-6 font-semibold hover:-translate-y-0.5 sm:w-auto"
+      >
         {busy ? "Submitting..." : "Submit review"}
+        {!busy && (
+          <ArrowRight
+            className="h-[18px] w-[18px] transition-transform duration-200 ease-standard group-hover:translate-x-1"
+            strokeWidth={2}
+            aria-hidden
+          />
+        )}
       </Button>
     </form>
   )

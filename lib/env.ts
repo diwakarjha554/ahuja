@@ -110,6 +110,24 @@ export function getEnv(): Env {
 }
 
 /** Guards the DB-backed paths. */
+/**
+ * Whether there is a database to use. Without one the storefront runs from
+ * the catalogue file (features/catalog/server/static-catalog.ts) and anything
+ * that saves answers with a phone number instead (NoDatabaseError).
+ * A loopback DATABASE_URL on Vercel counts as none: it is a copied local .env,
+ * and nothing on a Vercel machine listens there.
+ */
 export function hasDatabase(): boolean {
-  return Boolean(process.env.DATABASE_URL?.trim())
+  const url = process.env.DATABASE_URL?.trim()
+  if (!url) return false
+  if (process.env.VERCEL && isLoopback(url)) return false
+  return true
+}
+
+function isLoopback(url: string): boolean {
+  try {
+    return ["localhost", "127.0.0.1", "::1", "[::1]", "0.0.0.0"].includes(new URL(url).hostname)
+  } catch {
+    return false
+  }
 }

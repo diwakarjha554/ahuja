@@ -2,6 +2,8 @@ import "server-only"
 
 import type { CartLineInput } from "@/features/cart/schemas/cart.schema"
 import { shippingFor } from "@/lib/config/shipping"
+import { hasDatabase } from "@/lib/env"
+import { pricingRows } from "@/features/catalog/server/static-catalog"
 import { db } from "@/server/db"
 
 // The authoritative money path. The browser sends only {productId, variantId?,
@@ -32,21 +34,35 @@ export type PricedCart = {
 
 const num = (v: unknown) => Number(v ?? 0)
 
+/** One product as pricing reads it, from the database or, without one, the catalogue file. */
+type PricingRow = {
+  id: string
+  slug: string
+  name: string
+  sku: string | null
+  price: unknown
+  stock: number
+  images: { key: string }[]
+  variants: { id: string; name: string; sku: string | null; price: unknown; stock: number }[]
+}
+
 export async function priceCart(items: CartLineInput[]): Promise<PricedCart> {
   const productIds = [...new Set(items.map((i) => i.productId))]
-  const products = await db.product.findMany({
-    where: { id: { in: productIds }, status: "ACTIVE" },
-    select: {
-      id: true,
-      slug: true,
-      name: true,
-      sku: true,
-      price: true,
-      stock: true,
-      images: { orderBy: { sort: "asc" }, take: 1, select: { key: true } },
-      variants: { select: { id: true, name: true, sku: true, price: true, stock: true } },
-    },
-  })
+  const products: PricingRow[] = !hasDatabase()
+    ? pricingRows(productIds)
+    : await db.product.findMany({
+        where: { id: { in: productIds }, status: "ACTIVE" },
+        select: {
+          id: true,
+          slug: true,
+          name: true,
+          sku: true,
+          price: true,
+          stock: true,
+          images: { orderBy: { sort: "asc" }, take: 1, select: { key: true } },
+          variants: { select: { id: true, name: true, sku: true, price: true, stock: true } },
+        },
+      })
   const byId = new Map(products.map((p) => [p.id, p]))
 
   const lines: PricedLine[] = []
@@ -110,7 +126,12 @@ export function computeTotals(subtotal: number, discount: number): OrderTotals {
   const d = Math.min(subtotal, Math.max(0, Math.round(discount * 100) / 100))
   const afterDiscount = subtotal - d
   const shipping = shippingFor(afterDiscount)
-  return { subtotal, discount: d, shipping, total: Math.round((afterDiscount + shipping) * 100) / 100 }
+  return {
+    subtotal,
+    discount: d,
+    shipping,
+    total: Math.round((afterDiscount + shipping) * 100) / 100,
+  }
 }
 
 /** The map the storefront's syncPrices expects: `productId:variantId` -> price string. */
